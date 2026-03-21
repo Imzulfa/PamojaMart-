@@ -4,12 +4,106 @@
     <title>PamojaMart - Pi Marketplace</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            text-align: center;
+        }
+        .header {
+            background: #ff8c00;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .product {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #e07c00;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>🛒 PamojaMart</h1>
-    <p>Soko la Pi Network kwa Afrika</p>
-    <p>Nunua na uuze kwa usalama kwa Pi coins</p>
+    <div class="header">
+        <h1>🛒 PamojaMart</h1>
+        <p>Soko la Pi Network kwa Afrika</p>
+    </div>
     
-    <button>Nunua kwa Pi</button>
+    <div class="product">
+        <h3>Bidhaa ya Majaribio</h3>
+        <p>Bei: 1 Test-Pi</p>
+        <button onclick="makePayment()">Nunua kwa Pi</button>
+    </div>
+    
+    <div id="status"></div>
+
+    <script>
+        function makePayment() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = 'Inaendelea...';
+            
+            Pi.createPayment({
+                amount: 1,
+                memo: 'Nunua bidhaa kwenye PamojaMart',
+                metadata: { product: 'Test Product' }
+            }, {
+                onReadyForServerApproval: function(paymentId) {
+                    statusDiv.innerHTML = '✅ Malipo yanachakatwa...';
+                    approvePayment(paymentId);
+                },
+                onReadyForServerCompletion: function(paymentId) {
+                    statusDiv.innerHTML = '🎉 Malipo yamekamilika! Asante kwa kununua.';
+                },
+                onCancel: function() {
+                    statusDiv.innerHTML = '❌ Malipo yalighairiwa.';
+                },
+                onError: function(error) {
+                    statusDiv.innerHTML = '❌ Hitilafu: ' + error.message;
+                }
+            });
+        }
+        
+        async function approvePayment(paymentId) {
+            try {
+                const response = await fetch('/api/approve-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ paymentId: paymentId })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    Pi.completePayment(paymentId);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        Pi.init();
+    </script>
 </body>
 </html>
