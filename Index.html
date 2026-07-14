@@ -1,109 +1,1810 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>PamojaMart - Pi Marketplace</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-            text-align: center;
-        }
-        .header {
-            background: #ff8c00;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        .product {
-            background: white;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        button {
-            background: #ff8c00;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background: #e07c00;
-        }
-        #status {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>MSALINA Hub - Version 7</title>
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <style>
+    :root{
+      --purple:#7c2cff;
+      --purple-dark:#5d1fe0;
+      --purple-soft:#efe4ff;
+      --purple-soft-2:#f7efff;
+      --bg:#f5f3ff;
+      --card:#ffffff;
+      --text:#222222;
+      --muted:#6b6b6b;
+      --border:#eadbff;
+      --success:#14a44d;
+      --danger:#d93025;
+      --shadow:0 12px 30px rgba(124,44,255,.16);
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --radius-sm:12px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      -webkit-tap-highlight-color:transparent;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--text);
+      padding-bottom:110px;
+    }
+
+    .app{
+      width:100%;
+      max-width:100%;
+      overflow-x:hidden;
+    }
+
+    .top-shell{
+      background:#fff;
+      padding:12px 14px 8px;
+      position:sticky;
+      top:0;
+      z-index:40;
+    }
+
+    .fake-address{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#f2f2f7;
+      border-radius:18px;
+      padding:12px 14px;
+      font-size:18px;
+      color:#222;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.03);
+    }
+
+    .fake-address .left-logo{
+      font-weight:700;
+      color:#111;
+      font-size:20px;
+      flex-shrink:0;
+    }
+
+    .fake-address .title{
+      flex:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .fake-address .right-icons{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size:18px;
+      color:#333;
+      flex-shrink:0;
+    }
+
+    .mini-bar{
+      margin-top:12px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:#f2f2f7;
+      border-radius:18px;
+      padding:12px 14px;
+      color:#222;
+      font-size:18px;
+    }
+
+    .mini-icon{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      border:4px solid #16a085;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:15px;
+      background:#fff;
+      flex-shrink:0;
+    }
+
+    .mini-title{
+      flex:1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .mini-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink:0;
+    }
+
+    .hero{
+      margin-top:0;
+      background:linear-gradient(135deg, var(--purple-dark), #9b36ff);
+      color:#fff;
+      padding:34px 20px 72px;
+      border-bottom-left-radius:42px;
+      border-bottom-right-radius:42px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero h1{
+      text-align:center;
+      font-size:34px;
+      font-weight:800;
+      margin-bottom:12px;
+      letter-spacing:.2px;
+    }
+
+    .hero p{
+      text-align:center;
+      font-size:18px;
+      opacity:.95;
+      line-height:1.5;
+    }
+
+    .search-wrap{
+      margin:-42px 18px 0;
+      position:relative;
+      z-index:5;
+    }
+
+    .search-input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:#fff;
+      border-radius:24px;
+      padding:18px 20px;
+      font-size:18px;
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+      color:#222;
+    }
+
+    .page{
+      display:none;
+      padding:18px;
+    }
+
+    .page.active-page{
+      display:block;
+    }
+
+    .section-title{
+      font-size:26px;
+      font-weight:800;
+      color:var(--purple);
+      margin:14px 0 16px;
+    }
+
+    .grid-two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .quick-card,
+    .card,
+    .stat-card,
+    .help-box{
+      background:var(--card);
+      border-radius:var(--radius-xl);
+      box-shadow:0 10px 28px rgba(70,30,120,.08);
+    }
+
+    .quick-card{
+      min-height:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      font-weight:700;
+      text-align:center;
+      padding:16px;
+      cursor:pointer;
+    }
+
+    .card{
+      padding:26px;
+      margin-bottom:18px;
+    }
+
+    .product-title{
+      font-size:25px;
+      color:var(--purple);
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .product-desc{
+      font-size:18px;
+      color:#444;
+      line-height:1.55;
+      margin-bottom:18px;
+    }
+
+    .product-price{
+      font-size:22px;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:18px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:#f2ddff;
+      color:var(--purple);
+      font-size:16px;
+      font-weight:700;
+      padding:14px 22px;
+      border-radius:999px;
+      margin-bottom:18px;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      border-radius:20px;
+      padding:16px 26px;
+      font-size:17px;
+      font-weight:800;
+      transition:.2s ease;
+    }
+
+    .btn:active{
+      transform:scale(.98);
+    }
+
+    .btn-soft{
+      background:#f4e6ff;
+      color:var(--purple);
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg, var(--purple-dark), #a62fff);
+      box-shadow:0 14px 26px rgba(124,44,255,.25);
+    }
+
+    .btn-full{
+      width:100%;
+      justify-content:center;
+      display:flex;
+      align-items:center;
+      text-align:center;
+      font-size:18px;
+      padding:18px 22px;
+      border-radius:22px;
+    }
+
+    .info-box{
+      background:var(--purple-soft-2);
+      border-radius:24px;
+      padding:22px;
+      margin-top:18px;
+    }
+
+    .info-step{
+      background:#f8f0ff;
+      border-radius:22px;
+      padding:24px;
+      margin-top:18px;
+      font-size:17px;
+      line-height:1.55;
+    }
+
+    .info-step strong{
+      display:block;
+      font-size:19px;
+      margin-bottom:8px;
+    }
+
+    .support-grid{
+      display:grid;
+      gap:18px;
+    }
+
+    .support-card{
+      background:#fff;
+      border-radius:30px;
+      padding:26px;
+      box-shadow:0 10px 28px rgba(70,30,120,.08);
+    }
+
+    .support-title{
+      font-size:24px;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:14px;
+    }
+
+    .support-text{
+      font-size:18px;
+      color:#444;
+      line-height:1.6;
+      margin-bottom:20px;
+    }
+
+    .help-box{
+      padding:24px;
+      background:#f4e1ff;
+      margin-top:18px;
+    }
+
+    .help-box h3{
+      color:var(--purple);
+      font-size:23px;
+      margin-bottom:12px;
+    }
+
+    .help-box p{
+      font-size:18px;
+      line-height:1.6;
+      color:#555;
+    }
+
+    .profile-box{
+      background:#fff;
+      border-radius:30px;
+      padding:26px;
+      box-shadow:0 10px 28px rgba(70,30,120,.08);
+      margin-bottom:18px;
+    }
+
+    .profile-name{
+      font-size:25px;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:10px;
+    }
+
+    .profile-sub{
+      font-size:18px;
+      color:#555;
+      margin-bottom:22px;
+      line-height:1.5;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .stat-card{
+      padding:28px 18px;
+      text-align:center;
+      background:#fbf4ff;
+    }
+
+    .stat-number{
+      font-size:28px;
+      font-weight:800;
+      color:var(--purple);
+      margin-bottom:8px;
+    }
+
+    .stat-label{
+      font-size:17px;
+      color:#555;
+      line-height:1.4;
+    }
+
+    .bottom-nav{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:#fff;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      padding:14px 8px calc(14px + env(safe-area-inset-bottom));
+      box-shadow:0 -6px 24px rgba(0,0,0,.08);
+      z-index:50;
+      border-top-left-radius:24px;
+      border-top-right-radius:24px;
+    }
+
+    .nav-item{
+      flex:1;
+      text-align:center;
+      color:#7b7b7b;
+      font-size:17px;
+      font-weight:700;
+      cursor:pointer;
+      padding:8px 4px;
+    }
+
+    .nav-item.active{
+      color:var(--purple);
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:120;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:100%;
+      max-width:650px;
+      max-height:92vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:34px;
+      padding:28px;
+      position:relative;
+      box-shadow:0 20px 60px rgba(0,0,0,.2);
+    }
+
+    .close-btn{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:62px;
+      height:62px;
+      border:none;
+      border-radius:50%;
+      background:#f5ddff;
+      color:var(--purple);
+      font-size:24px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .modal-title{
+      font-size:28px;
+      color:var(--purple);
+      font-weight:800;
+      margin-bottom:24px;
+      padding-right:70px;
+    }
+
+    .form-group{
+      margin-bottom:18px;
+    }
+
+    .form-group label{
+      display:block;
+      font-size:17px;
+      font-weight:800;
+      margin-bottom:10px;
+      color:#333;
+    }
+
+    .form-control{
+      width:100%;
+      border:2px solid #eee7ff;
+      background:#fff;
+      border-radius:22px;
+      padding:18px 18px;
+      font-size:17px;
+      outline:none;
+      color:#222;
+    }
+
+    .form-control:focus{
+      border-color:#d5b8ff;
+    }
+
+    textarea.form-control{
+      min-height:130px;
+      resize:vertical;
+    }
+
+    .readonly{
+      background:#fff;
+      color:#222;
+    }
+
+    .chat-box{
+      border:2px solid #f0e7ff;
+      border-radius:24px;
+      padding:18px;
+      min-height:230px;
+      max-height:340px;
+      overflow:auto;
+      background:#fff;
+      margin-bottom:18px;
+    }
+
+    .chat-bubble{
+      background:#f3f4f8;
+      padding:18px;
+      border-radius:22px;
+      margin-bottom:14px;
+      font-size:17px;
+      line-height:1.6;
+      color:#333;
+      width:fit-content;
+      max-width:100%;
+    }
+
+    .chat-bubble.user{
+      margin-left:auto;
+      background:#efe4ff;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:110px;
+      min-width:250px;
+      max-width:90%;
+      background:#1f1f1f;
+      color:#fff;
+      padding:16px 20px;
+      border-radius:16px;
+      z-index:200;
+      display:none;
+      font-size:16px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,.25);
+    }
+
+    .toast.show{
+      display:block;
+    }
+
+    .empty-state{
+      background:#fff;
+      border-radius:26px;
+      padding:24px;
+      text-align:center;
+      color:#666;
+      font-size:18px;
+      box-shadow:0 10px 28px rgba(70,30,120,.08);
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    @media (max-width:420px){
+      .hero h1{font-size:30px;}
+      .section-title{font-size:24px;}
+      .product-title{font-size:22px;}
+      .btn{padding:15px 20px;}
+      .modal-box{padding:24px 20px;}
+      .close-btn{
+        width:56px;
+        height:56px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🛒 PamojaMart</h1>
-        <p>Soko la Pi Network kwa Afrika</p>
+  <div class="app">
+
+    <div class="top-shell">
+      <div class="fake-address">
+        <div class="left-logo">⟪⟫</div>
+        <div class="title">MSALINA Hub - Version 7</div>
+        <div class="right-icons">
+          <span>↻</span>
+          <span>⋮</span>
+        </div>
+      </div>
+
+      <div class="mini-bar">
+        <div class="mini-icon">&lt;/&gt;</div>
+        <div class="mini-title">MSALINA Hub - Version 7</div>
+        <div class="mini-actions">
+          <span>◔</span>
+          <span>⋮</span>
+        </div>
+      </div>
     </div>
-    
-    <div class="product">
-        <h3>Bidhaa ya Majaribio</h3>
-        <p>Bei: 1 Test-Pi</p>
-        <button onclick="makePayment()">Nunua kwa Pi</button>
+
+    <!-- HOME PAGE -->
+    <section id="homePage" class="page active-page">
+      <div class="hero">
+        <h1>MSALINA Hub</h1>
+        <p>Secure shopping • Escrow payments • AI support</p>
+      </div>
+
+      <div class="search-wrap">
+        <input
+          id="globalSearch"
+          class="search-input"
+          type="text"
+          placeholder="Search products, services or support..."
+          oninput="handleGlobalSearch()"
+        />
+      </div>
+
+      <h2 class="section-title">Quick Actions</h2>
+      <div class="grid-two">
+        <div class="quick-card" onclick="showPage('marketPage','nav-market')">Apps</div>
+        <div class="quick-card" onclick="openPaymentsInfo()">Payments</div>
+        <div class="quick-card" onclick="showPage('marketPage','nav-market')">Market</div>
+        <div class="quick-card" onclick="showPage('chatPage','nav-chat')">Chat</div>
+      </div>
+
+      <h2 class="section-title">Connected Services</h2>
+
+      <div class="card">
+        <div class="product-title" style="font-size:22px;">Connected Ecosystem Apps</div>
+        <div class="product-desc">
+          Approved partner apps connected to MSALINA Hub will appear here.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="product-title" style="font-size:22px;">Merchant Services</div>
+        <div class="product-desc">
+          Shopping, orders, escrow protection and service delivery tools in one place.
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET PAGE -->
+    <section id="marketPage" class="page">
+      <div id="marketList"></div>
+      <div id="marketEmpty" class="empty-state hidden">
+        No products matched your search.
+      </div>
+    </section>
+
+    <!-- ESCROW PAGE -->
+    <section id="escrowPage" class="page">
+      <div class="hero" style="margin:-18px -18px 0; border-radius:0 0 42px 42px;">
+        <h1 style="font-size:30px;">MSALINA Hub</h1>
+        <p>Secure shopping • Escrow payments • AI support</p>
+      </div>
+
+      <div class="search-wrap">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search products, services or support..."
+          onfocus="showPage('marketPage','nav-market')"
+        />
+      </div>
+
+      <h2 class="section-title">Escrow Protection</h2>
+
+      <div class="card">
+        <div class="product-title">Secure payment flow</div>
+        <div class="product-desc">
+          MSALINA Hub can hold buyer payment until the order is delivered or confirmed,
+          helping reduce risk between buyer and seller.
+        </div>
+
+        <div class="info-step">
+          <strong>1. Buyer places order</strong>
+          Payment is initiated for the selected product or service.
+        </div>
+
+        <div class="info-step">
+          <strong>2. Funds are held</strong>
+          The amount stays protected while the seller prepares delivery.
+        </div>
+
+        <div class="info-step">
+          <strong>3. Buyer confirms delivery</strong>
+          After receiving the item/service, the buyer approves release.
+        </div>
+
+        <div class="info-step">
+          <strong>4. Seller gets paid</strong>
+          The escrow releases funds to the seller after confirmation.
+        </div>
+      </div>
+    </section>
+    <!-- CHAT PAGE -->
+    <section id="chatPage" class="page">
+      <div class="hero" style="margin:-18px -18px 0; border-radius:0 0 42px 42px;">
+        <h1 style="font-size:30px;">MSALINA Hub</h1>
+        <p>Secure shopping • Escrow payments • AI support</p>
+      </div>
+
+      <div class="search-wrap">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search products, services or support..."
+          onfocus="showPage('marketPage','nav-market')"
+        />
+      </div>
+
+      <h2 class="section-title">Support Chat</h2>
+
+      <div class="support-grid">
+        <div class="support-card">
+          <div class="support-title">AI Assistant</div>
+          <div class="support-text">
+            Ask about payments, orders, escrow steps, merchant support and general platform guidance.
+          </div>
+          <button class="btn btn-primary" onclick="openAiChat()">Start AI Chat</button>
+        </div>
+
+        <div class="support-card">
+          <div class="support-title">Admin Support</div>
+          <div class="support-text">
+            Contact MSALINA support team for disputes, account help, order follow-up or merchant assistance.
+          </div>
+          <button class="btn btn-primary" onclick="openAdminSupport()">Contact Admin</button>
+        </div>
+      </div>
+
+      <div class="help-box">
+        <h3>Common Help Topics</h3>
+        <p>
+          Payment confirmation, delayed delivery, escrow release, merchant complaints and app connection support.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROFILE PAGE -->
+    <section id="profilePage" class="page">
+      <div class="hero" style="margin:-18px -18px 0; border-radius:0 0 42px 42px;">
+        <h1 style="font-size:30px;">MSALINA Hub</h1>
+        <p>Secure shopping • Escrow payments • AI support</p>
+      </div>
+
+      <div class="search-wrap">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search products, services or support..."
+          onfocus="showPage('marketPage','nav-market')"
+        />
+      </div>
+
+      <h2 class="section-title">Profile</h2>
+<div class="card" id="adminDashboard" style="margin-top:15px;">
+    <div class="product-title" style="font-size:22px;">Admin Dashboard</div>
+
+    <div class="product-desc">
+        Manage all orders, escrow requests and support messages.
     </div>
-    
-    <div id="status"></div>
+
+<button class="btn btn-primary btn-full" onclick="adminAction='orders';openModal('adminLoginModal')">
+    View All Orders
+</button>
+    <button class="btn btn-primary btn-full" style="margin-top:10px;" onclick="adminAction='escrow';openModal('adminLoginModal')">
+    View Escrow Requests
+</button>
+<button class="btn btn-primary btn-full" style="margin-top:10px;" onclick="adminAction='support';openModal('adminLoginModal')">
+    View Support Messages
+</button>
+<button class="btn btn-primary btn-full"
+style="margin-top:10px;"
+onclick="openMerchantDashboard()">
+My Merchant Dashboard
+</button>
+</div>
+      <div class="profile-box">
+        <div class="profile-name">MSALINA User</div>
+        <div class="profile-sub">Hub ID: MSA-1024 • Ecosystem member</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="statOrders">3</div>
+            <div class="stat-label">Orders</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number" id="statEscrow">2</div>
+            <div class="stat-label">Escrow Cases</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number" id="statApps">4</div>
+            <div class="stat-label">Connected Apps</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number" id="statMerchant">1</div>
+            <div class="stat-label">Merchant Requests</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="product-title" style="font-size:22px;">Account Tools</div>
+        <div class="product-desc">
+          View orders, manage support history, connected services and future payment records from one place.
+  </div>
+<button class="btn btn-primary btn-full" onclick="openOrdersHistory()">View Orders</button>
+</div>
+    </section>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <div id="nav-home" class="nav-item active" onclick="showPage('homePage','nav-home')">Home</div>
+      <div id="nav-market" class="nav-item" onclick="showPage('marketPage','nav-market')">Market</div>
+      <div id="nav-escrow" class="nav-item" onclick="showPage('escrowPage','nav-escrow')">Escrow</div>
+      <div id="nav-chat" class="nav-item" onclick="showPage('chatPage','nav-chat')">Chat</div>
+      <div id="nav-profile" class="nav-item" onclick="showPage('profilePage','nav-profile')">Profile</div>
+    </nav>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div id="productModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('productModal')">×</button>
+        <div class="modal-title">Product Details</div>
+
+        <div class="product-title" id="modalProductTitle">Rice 25kg</div>
+        <div class="product-desc" id="modalProductDesc">High quality rice from trusted merchants.</div>
+        <div class="product-price" id="modalProductPrice">Price: 45 Pi</div>
+        <div class="tag" id="modalProductTag">Escrow Available</div>
+      </div>
+    </div>
+<!-- ORDERS HISTORY MODAL -->
+<div id="ordersHistoryModal" class="modal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('ordersHistoryModal')">×</button>
+        <div class="modal-title">Orders History</div>
+
+        <div id="ordersHistoryList" class="product-desc">
+            No orders yet.
+        </div>
+    </div>
+</div>
+    <!-- BUY MODAL -->
+    <div id="buyModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('buyModal')">×</button>
+        <div class="modal-title">Buy Product</div>
+
+        <div class="form-group">
+          <label>Product</label>
+          <input type="text" id="buyProduct" class="form-control readonly" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Price</label>
+          <input type="text" id="buyPrice" class="form-control readonly" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Buyer Name</label>
+          <input type="text" id="buyerName" class="form-control" placeholder="Enter buyer name" />
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" id="buyerPhone" class="form-control" placeholder="Enter phone number" />
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="buyerAddress" class="form-control" placeholder="Enter delivery address"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" id="buyQty" class="form-control" placeholder="Enter quantity" min="1" />
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="submitBuyOrder()">Submit Order</button>
+      </div>
+    </div>
+
+    <!-- ESCROW MODAL -->
+    <div id="escrowModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('escrowModal')">×</button>
+        <div class="modal-title">Escrow Request</div>
+
+        <div class="form-group">
+          <label>Product / Case</label>
+          <input type="text" id="escrowProduct" class="form-control readonly" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="text" id="escrowAmount" class="form-control readonly" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Buyer Name</label>
+          <input type="text" id="escrowBuyer" class="form-control" placeholder="Buyer name" />
+        </div>
+
+        <div class="form-group">
+          <label>Seller Name</label>
+          <input type="text" id="escrowSeller" class="form-control" placeholder="Seller name" />
+        </div>
+
+        <div class="form-group">
+          <label>Reason / Note</label>
+          <textarea id="escrowNote" class="form-control" placeholder="Describe order, dispute or escrow note"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="submitEscrowRequest()">Submit Escrow Request</button>
+      </div>
+    </div>
+<!-- ESCROW HISTORY MODAL -->
+<div id="escrowHistoryModal" class="modal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('escrowHistoryModal')">×</button>
+
+        <div class="modal-title">Escrow History</div>
+
+        <div id="escrowHistoryList" class="product-desc">
+            No escrow requests yet.
+        </div>
+    </div>
+</div>
+<!-- SUPPORT HISTORY MODAL -->
+<div id="supportHistoryModal" class="modal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('supportHistoryModal')">×</button>
+
+        <div class="modal-title">Support Messages</div>
+
+        <div id="supportHistoryList" class="product-desc">
+            No support messages yet.
+        </div>
+    </div>
+</div>
+    <!-- AI CHAT MODAL -->
+    <div id="aiModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('aiModal')">×</button>
+        <div class="modal-title">MSALINA AI Assistant</div>
+
+        <div id="aiChatBox" class="chat-box">
+          <div class="chat-bubble">
+            Hello 👋 I can help with orders, escrow, payments and merchant support.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your Question</label>
+          <textarea id="aiQuestion" class="form-control" placeholder="Type your question here"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="sendAiMessage()">Send</button>
+      </div>
+    </div>
+<!-- ADMIN LOGIN MODAL -->
+<div id="adminLoginModal" class="modal">
+    <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('adminLoginModal')">×</button>
+
+        <div class="modal-title">Admin Login</div>
+
+        <div class="form-group">
+            <label>Admin Password</label>
+            <input
+                type="password"
+                id="adminPassword"
+                class="form-control"
+                placeholder="Enter admin password"
+            />
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="loginAdmin()">
+            Login
+        </button>
+    </div>
+</div>
+    <!-- ADMIN SUPPORT MODAL -->
+    <div id="adminModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('adminModal')">×</button>
+        <div class="modal-title">Contact Admin</div>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="adminName" class="form-control" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+          <label>Issue Type</label>
+          <input type="text" id="adminIssue" class="form-control" placeholder="Payment, escrow, order, merchant..." />
+        </div>
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="adminMessage" class="form-control" placeholder="Write your support message"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="submitAdminRequest()">Send to Admin</button>
+      </div>
+    </div>
+</div>
+</div>
+
+<div id="merchantDashboardModal" class="modal">
+  <div class="modal-box">
+    <button class="close-btn"
+      onclick="closeModal('merchantDashboardModal')">×</button>
+
+    <div class="modal-title">Merchant Dashboard</div>
+
+    <div class="card">
+      <h3>Store Overview</h3>
+      <p>Total Products: <span id="merchantProducts">0</span></p>
+      <p>Total Orders: <span id="merchantOrders">0</span></p>
+      <p>Total Revenue: <span id="merchantRevenue">0 Pi</span></p>
+      <h3 style="margin-top:20px;">My Products</h3>
+<h3 style="margin-top:20px;">Add Product</h3>
+
+<input id="newProductName" class="form-control" placeholder="Product Name">
+
+<input id="newProductPrice" class="form-control" type="number" placeholder="Price (TSh)" style="margin-top:10px;">
+
+<textarea id="newProductDesc" class="form-control" placeholder="Description" style="margin-top:10px;"></textarea>
+
+<input id="newProductTag" class="form-control" placeholder="Tag (Example: Escrow Available)" style="margin-top:10px;">
+
+<button class="btn btn-primary btn-full" style="margin-top:15px;" onclick="addProduct()">
+Add Product
+</button>
+
+<h3 style="margin-top:25px;">My Products</h3>
+
+<div id="merchantProductsList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENTS INFO MODAL -->
+<div id="paymentsModal" class="modal">
+      <div class="modal-box">
+        <button class="close-btn" onclick="closeModal('paymentsModal')">×</button>
+        <div class="modal-title">Payments</div>
+
+        <div class="product-desc" style="margin-bottom:14px;">
+          MSALINA Hub supports direct buying, protected escrow requests and support follow-up for payment issues.
+        </div>
+
+        <div class="info-step">
+          <strong>Direct Buy</strong>
+          Use the Buy button on a product to submit your order details.
+        </div>
+
+        <div class="info-step">
+          <strong>Escrow Payment</strong>
+          Use Use Escrow to open a protected case between buyer and seller.
+        </div>
+
+        <div class="info-step">
+          <strong>Support Follow-up</strong>
+          Use AI Chat or Contact Admin for payment or delivery issues.
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
 
     <script>
-        function makePayment() {
-            const statusDiv = document.getElementById('status');
-            statusDiv.innerHTML = 'Inaendelea...';
-            
-            Pi.createPayment({
-                amount: 1,
-                memo: 'Nunua bidhaa kwenye PamojaMart',
-                metadata: { product: 'Test Product' }
-            }, {
-                onReadyForServerApproval: function(paymentId) {
-                    statusDiv.innerHTML = '✅ Malipo yanachakatwa...';
-                    approvePayment(paymentId);
-                },
-                onReadyForServerCompletion: function(paymentId) {
-                    statusDiv.innerHTML = '🎉 Malipo yamekamilika! Asante kwa kununua.';
-                },
-                onCancel: function() {
-                    statusDiv.innerHTML = '❌ Malipo yalighairiwa.';
-                },
-                onError: function(error) {
-                    statusDiv.innerHTML = '❌ Hitilafu: ' + error.message;
-                }
-            });
+      const PI_VALUE_USD = 314159;
+const USD_TO_TZS = 2600;
+
+function piFromTzs(tzs) {
+    return (tzs / (PI_VALUE_USD * USD_TO_TZS)).toFixed(8);
+}
+      let products = JSON.parse(localStorage.getItem("msalina_products")) || [
+        {
+          name: "Rice 25kg",
+          price: 4000,
+          desc: "High quality rice from trusted merchants.",
+          tag: "Escrow Available"
+        },
+        {
+          name: "Cooking Oil",
+          price: 30000,
+          desc: "Essential household supply with merchant delivery option.",
+          tag: "Protected Order"
+        },
+        {
+          name: "Phone Accessories",
+          price: 12000,
+          desc: "Chargers, earphones, cables and more from approved sellers.",
+          tag: "Merchant Verified"
+        },
+        {
+          name: "Home Cleaning Service",
+          price: 150000,
+          desc: "Book trusted cleaning support for home or office spaces.",
+          tag: "Service Booking"
         }
-        
-        async function approvePayment(paymentId) {
-            try {
-                const response = await fetch('/api/approve-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ paymentId: paymentId })
-                });
-                const result = await response.json();
-                if (result.success) {
-                    Pi.completePayment(paymentId);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+      ];
+localStorage.setItem("msalina_products", JSON.stringify(products));
+let currentProduct = "";
+let currentPrice = "";
+let currentTag = "";
+let currentDesc = "";
+
+let orders = JSON.parse(localStorage.getItem("msalina_orders")) || [];
+let escrowCases = JSON.parse(localStorage.getItem("msalina_escrows")) || [];
+let adminRequests = JSON.parse(localStorage.getItem("msalina_admin_requests")) || [];
+let isAdmin = false;
+let adminAction = "";
+let orderCount = orders.length;
+let escrowCount = escrowCases.length;
+let merchantRequestCount = adminRequests.length;
+let connectedAppsCount = 4;
+
+function saveOrders(){
+  localStorage.setItem("msalina_orders", JSON.stringify(orders));
+}
+
+function saveEscrows(){
+  localStorage.setItem("msalina_escrows", JSON.stringify(escrowCases));
+}
+
+function saveAdminRequests(){
+  localStorage.setItem("msalina_admin_requests", JSON.stringify(adminRequests));
+}
+function openOrdersHistory(){
+    const box = document.getElementById("ordersHistoryList");
+
+    if(!orders.length){
+        box.innerHTML = "No orders yet.";
+    } else {
+        box.innerHTML = orders.map((order, index) => `
+    <div class="card" style="margin-bottom:12px;">
+        <div><strong>#${index + 1}</strong> ${order.product}</div>
+        <div>Price: ${order.price}</div>
+        <div>Buyer: ${order.buyerName}</div>
+        <div>Phone: ${order.buyerPhone}</div>
+        <div>Address: ${order.buyerAddress}</div>
+        <div>Quantity: ${order.quantity}</div>
+        <div>Status: ${order.status || "Pending"}</div>
+        <div style="margin-top:10px;">
+    <button class="btn btn-primary" onclick="updateOrderStatus(${index}, 'Processing')">
+        Processing
+    </button>
+
+    <button class="btn btn-primary" onclick="updateOrderStatus(${index}, 'Completed')">
+        Completed
+    </button>
+</div>
+        <div style="font-size:13px;opacity:.8;">${order.createdAt}</div>
+    </div>
+`).join("");
+    }
+
+    openModal("ordersHistoryModal");
+}
+function openMerchantDashboard(){
+    updateMerchantStats();
+    openModal("merchantDashboardModal");
+}
+function addProduct(){
+
+    const name = document.getElementById("newProductName").value.trim();
+    const price = Number(document.getElementById("newProductPrice").value);
+    const desc = document.getElementById("newProductDesc").value.trim();
+    const tag = document.getElementById("newProductTag").value.trim();
+
+    if(!name || !price || !desc || !tag){
+        alert("Please fill all fields.");
+        return;
+    }
+if (editingProductIndex >= 0) {
+
+    products[editingProductIndex] = {
+        name: name,
+        price: price,
+        desc: desc,
+        tag: tag
+    };
+
+    editingProductIndex = -1;
+
+} else {
+    products.push({
+        name: name,
+        price: price,
+        desc: desc,
+        tag: tag
+    });
+}
+    localStorage.setItem("msalina_products", JSON.stringify(products));
+
+    document.getElementById("newProductName").value = "";
+    document.getElementById("newProductPrice").value = "";
+    document.getElementById("newProductDesc").value = "";
+    document.getElementById("newProductTag").value = "";
+
+    updateMerchantStats();
+    renderProducts();
+
+    alert("Product added successfully!");
+}
+function openEscrowHistory(){
+    const box = document.getElementById("escrowHistoryList");
+
+    if(!escrowCases.length){
+        box.innerHTML = "No escrow requests yet.";
+    } else {
+        box.innerHTML = escrowCases.map((item, index) => `
+            <div class="card" style="margin-bottom:12px;">
+                <div><strong>#${index + 1}</strong> ${item.product}</div>
+                <div>Amount: ${item.amount}</div>
+                <div>Buyer: ${item.buyer}</div>
+                <div>Seller: ${item.seller}</div>
+                <div>Reason: ${item.note}</div>
+                <div>Status: ${item.status || "Pending"}</div>
+                <div style="font-size:13px;opacity:.8;">${item.createdAt}</div>
+                <div style="margin-top:10px;">
+    <button class="btn btn-primary"
+        onclick="updateEscrowStatus(${index}, 'Approved')">
+        Approve
+    </button>
+
+    <button class="btn btn-success"
+        onclick="updateEscrowStatus(${index}, 'Released')">
+        Release Pi
+    </button>
+</div>
+            </div>
+        `).join("");
+    }
+
+    openModal("escrowHistoryModal");
+}
+
+function openAdminRequestsHistory(){
+    const box = document.getElementById("supportHistoryList");
+
+    if(!adminRequests.length){
+        box.innerHTML = "No support messages yet.";
+    } else {
+        box.innerHTML = adminRequests.map((item, index) => `
+            <div class="card" style="margin-bottom:12px;">
+                <div><strong>#${index + 1}</strong></div>
+                <div>Name: ${item.name}</div>
+                <div>Issue: ${item.issue}</div>
+                <div>Message: ${item.message}</div>
+                <div style="font-size:13px;opacity:.8;">${item.createdAt}</div>
+            <div style="margin-top:10px;">
+    <button class="btn btn-primary"
+        onclick="updateSupportStatus(${index}, 'Read')">
+        Mark Read
+    </button>
+
+    <button class="btn btn-success"
+        onclick="updateSupportStatus(${index}, 'Resolved')">
+        Resolve
+    </button>
+</div>
+        `).join("");
+    }
+
+    openModal("supportHistoryModal");
+}
+function updateSupportStatus(index, status){
+    adminRequests[index].status = status;
+    saveAdminRequests();
+    updateProfileStats();
+    openAdminRequestsHistory();
+}
+function updateProfileStats(){
+  const orderEl = document.getElementById("statOrders");
+  const escrowEl = document.getElementById("statEscrow");
+  const appsEl = document.getElementById("statApps");
+  const merchantEl = document.getElementById("statMerchant");
+
+  if(orderEl) orderEl.innerText = orders.length;
+  if(escrowEl) escrowEl.innerText = escrowCases.length;
+  if(appsEl) appsEl.innerText = connectedAppsCount;
+  if(merchantEl) merchantEl.innerText = adminRequests.length;
+}
+function updateMerchantStats(){
+    document.getElementById("merchantProducts").innerText = products.length;
+
+    document.getElementById("merchantOrders").innerText = orders.length;
+
+    document.getElementById("merchantRevenue").innerText =
+        orders.length * 45 + " Pi";
+        const list = document.getElementById("merchantProductsList");
+
+if (list) {
+    list.innerHTML = products.map((p, i) => `
+        <div class="card" style="margin-top:10px;">
+            <b>${i + 1}. ${p.name}</b><br>
+            Price: ${(p.price / 314159).toFixed(6)} Pi
+<br><small>(${p.price.toLocaleString()} TSh)</small>
+<br><br>
+
+<button class="btn btn-primary"
+onclick="deleteProduct(${i})"
+style="background:#e53935;">
+Delete
+</button>
+<button
+class="btn btn-soft"
+style="margin-left:10px;"
+onclick="editProduct(${i})">
+Edit
+</button>
+</div>
+        </div>
+    `).join("");
+}
+}
+function deleteProduct(index){
+
+    if(!confirm("Delete this product?")){
+        return;
+    }
+
+    products.splice(index,1);
+
+    localStorage.setItem(
+        "msalina_products",
+        JSON.stringify(products)
+    );
+
+    updateMerchantStats();
+    renderMarket();
+}
+function editProduct(index){
+
+    const p = products[index];
+
+    document.getElementById("newProductName").value = p.name;
+    document.getElementById("newProductPrice").value = p.price;
+    document.getElementById("newProductDesc").value = p.desc;
+    document.getElementById("newProductTag").value = p.tag;
+
+    editingProductIndex = index;
+}
+function submitBuyOrder(){
+    const product = document.getElementById("buyProduct").value.trim();
+    const price = document.getElementById("buyPrice").value.trim();
+    const buyerName = document.getElementById("buyerName").value.trim();
+    const buyerPhone = document.getElementById("buyerPhone").value.trim();
+    const buyerAddress = document.getElementById("buyerAddress").value.trim();
+    const quantity = document.getElementById("buyQty").value.trim();
+
+    if(!buyerName || !buyerPhone || !buyerAddress || !quantity){
+        alert("Please fill all order fields.");
+        return;
+    }
+
+    const order = {
+    product,
+    price,
+    buyerName,
+    buyerPhone,
+    buyerAddress,
+    quantity,
+    status: "Pending",
+    createdAt: new Date().toLocaleString()
+};
+
+    orders.push(order);
+    saveOrders();
+    updateProfileStats();
+
+    alert("Order submitted successfully.");
+
+    document.getElementById("buyerName").value = "";
+    document.getElementById("buyerPhone").value = "";
+    document.getElementById("buyerAddress").value = "";
+    document.getElementById("buyQty").value = "";
+
+    closeModal("buyModal");
+}
+
+function submitEscrowRequest(){
+    const product = document.getElementById("escrowProduct").value.trim();
+    const amount = document.getElementById("escrowAmount").value.trim();
+    const buyer = document.getElementById("escrowBuyer").value.trim();
+    const seller = document.getElementById("escrowSeller").value.trim();
+    const note = document.getElementById("escrowNote").value.trim();
+
+    if(!buyer || !seller || !note){
+        alert("Please complete escrow request form.");
+        return;
+    }
+
+    const escrow = {
+        product,
+        amount,
+        buyer,
+        seller,
+        note,
+        createdAt: new Date().toLocaleString()
+    };
+
+    escrowCases.push(escrow);
+    saveEscrows();
+    updateProfileStats();
+
+    alert("Escrow request submitted.");
+
+    document.getElementById("escrowBuyer").value = "";
+    document.getElementById("escrowSeller").value = "";
+    document.getElementById("escrowNote").value = "";
+
+    closeModal("escrowModal");
+}
+
+function submitAdminRequest(){
+    const text = document.getElementById("adminMessage").value.trim();
+
+    if(!text){
+        alert("Please enter your admin support message.");
+        return;
+    }
+
+    const request = {
+    name: "MSALINA User",
+    issue: "General Support",
+    message: text,
+    status: "New",
+    createdAt: new Date().toLocaleString()
+};
+
+    adminRequests.push(request);
+    saveAdminRequests();
+    updateProfileStats();
+
+    alert("Admin support request sent.");
+
+    document.getElementById("adminMessage").value = "";
+    closeModal("adminModal");
+}
+
+      function hideAllPages(){
+        document.getElementById("homePage").classList.remove("active-page");
+        document.getElementById("marketPage").classList.remove("active-page");
+        document.getElementById("escrowPage").classList.remove("active-page");
+        document.getElementById("chatPage").classList.remove("active-page");
+        document.getElementById("profilePage").classList.remove("active-page");
+      }
+
+      function clearNav(){
+        document.getElementById("nav-home").classList.remove("active");
+        document.getElementById("nav-market").classList.remove("active");
+        document.getElementById("nav-escrow").classList.remove("active");
+        document.getElementById("nav-chat").classList.remove("active");
+        document.getElementById("nav-profile").classList.remove("active");
+      }
+
+      function showPage(pageId, navId){
+        hideAllPages();
+        clearNav();
+        document.getElementById(pageId).classList.add("active-page");
+        document.getElementById(navId).classList.add("active");
+
+        if(pageId === "marketPage"){
+          renderProducts(document.getElementById("globalSearch").value || "");
         }
-        
-        Pi.init();
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function renderProducts(searchTerm = ""){
+        const marketList = document.getElementById("marketList");
+        const marketEmpty = document.getElementById("marketEmpty");
+        const term = searchTerm.trim().toLowerCase();
+
+        let filtered = products.filter((item) => {
+          return (
+            item.name.toLowerCase().includes(term) ||
+            item.desc.toLowerCase().includes(term) ||
+            item.tag.toLowerCase().includes(term)
+          );
+        });
+
+        marketList.innerHTML = "";
+
+        if(filtered.length === 0){
+          marketEmpty.classList.remove("hidden");
+          return;
+        }
+
+        marketEmpty.classList.add("hidden");
+
+        filtered.forEach((item) => {
+          marketList.innerHTML += `
+            <div class="card">
+              <div class="product-title">${item.name}</div>
+              <div class="product-desc">${item.desc}</div>
+              <div class="product-price">Price: Pi ${(item.price / 314159).toFixed(6)}<br><small>(${item.price.toLocaleString()} TSh)</small></div>
+              <div class="tag">${item.tag}</div>
+
+              <div class="btn-row">
+                <button class="btn btn-soft"
+onclick="openProduct('${escapeQuotes(item.name)}', ${item.price}, '${escapeQuotes(item.tag)}', '${escapeQuotes(item.desc)}')">
+View
+</button>
+
+<button class="btn btn-soft"
+onclick="openBuy('${escapeQuotes(item.name)}', ${item.price})">
+Buy
+</button>
+
+<button class="btn btn-primary"
+onclick="openEscrow('${escapeQuotes(item.name)}', ${item.price})">
+Use Escrow
+</button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      function escapeQuotes(text){
+        return String(text).replace(/'/g, "\\'");
+      }
+
+      function handleGlobalSearch(){
+        const term = document.getElementById("globalSearch").value || "";
+        renderProducts(term);
+      }
+      function openProduct(name, price, tag, desc){
+        currentProduct = name;
+        currentPrice = price;
+        currentTag = tag;
+        currentDesc = desc;
+
+        document.getElementById("modalProductTitle").innerText = name;
+        const piValue = (price / 314159).toFixed(6);
+document.getElementById("modalProductPrice").innerText =
+"Price: Pi " + piValue + " (" + price.toLocaleString() + " TSh)";
+        document.getElementById("modalProductTag").innerText = tag;
+        document.getElementById("modalProductDesc").innerText = desc;
+
+        openModal("productModal");
+      }
+
+      function openBuy(name, price){
+        currentProduct = name;
+        currentPrice = price;
+
+        document.getElementById("buyProduct").value = name;
+        document.getElementById("buyPrice").value = price;
+        document.getElementById("buyerName").value = "";
+        document.getElementById("buyerPhone").value = "";
+        document.getElementById("buyerAddress").value = "";
+        document.getElementById("buyQty").value = "";
+
+        openModal("buyModal");
+      }
+
+      function openEscrow(name, price){
+        currentProduct = name;
+        currentPrice = price;
+
+        document.getElementById("escrowProduct").value = name;
+        document.getElementById("escrowAmount").value = price;
+        document.getElementById("escrowBuyer").value = "";
+        document.getElementById("escrowSeller").value = "";
+        document.getElementById("escrowNote").value = "";
+
+        openModal("escrowModal");
+      }
+
+      function openAiChat(){
+        openModal("aiModal");
+      }
+
+      function openAdminSupport(){
+        openModal("adminModal");
+      }
+
+      function openPayments(){
+        openModal("paymentsModal");
+      }
+
+      function openModal(id){
+        document.getElementById(id).classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(id){
+        document.getElementById(id).classList.remove("show");
+        document.body.style.overflow = "auto";
+      }
+
+      function closeAllModals(){
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach((m) => m.classList.remove("show"));
+        document.body.style.overflow = "auto";
+      }
+
+      function showToast(message){
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2600);
+      }
+
+      function submitOrder(){
+        const buyerName = document.getElementById("buyerName").value.trim();
+        const buyerPhone = document.getElementById("buyerPhone").value.trim();
+        const buyerAddress = document.getElementById("buyerAddress").value.trim();
+        const buyQty = document.getElementById("buyQty").value.trim();
+
+        if(!buyerName || !buyerPhone || !buyerAddress || !buyQty){
+          showToast("Please fill all order fields");
+          return;
+        }
+
+        orderCount += 1;
+        document.getElementById("statOrders").innerText = orderCount;
+
+        closeModal("buyModal");
+        showToast("Order submitted successfully");
+      }
+
+      function submitEscrow(){
+        const buyer = document.getElementById("escrowBuyer").value.trim();
+        const seller = document.getElementById("escrowSeller").value.trim();
+        const note = document.getElementById("escrowNote").value.trim();
+
+        if(!buyer || !seller || !note){
+          showToast("Please complete escrow form");
+          return;
+        }
+        const escrow = {
+    product: note,
+    amount: "45 Pi",
+    buyer: buyer,
+    seller: seller,
+    note: note,
+    status: "Pending",
+    createdAt: new Date().toLocaleString()
+};
+
+escrowCases.push(escrow);
+saveEscrows();
+updateProfileStats();
+
+        escrowCount += 1;
+        document.getElementById("statEscrow").innerText = escrowCount;
+
+        closeModal("escrowModal");
+        showToast("Escrow request submitted");
+      }
+
+      function sendAiMessage(){
+        const question = document.getElementById("aiQuestion").value.trim();
+        if(!question){
+          showToast("Type your question first");
+          return;
+        }
+
+        const box = document.getElementById("aiChatBox");
+
+        const userBubble = document.createElement("div");
+        userBubble.className = "chat-bubble user";
+        userBubble.innerText = question;
+        box.appendChild(userBubble);
+
+        const reply = generateAiReply(question);
+
+        const botBubble = document.createElement("div");
+        botBubble.className = "chat-bubble";
+        botBubble.innerText = reply;
+        box.appendChild(botBubble);
+
+        document.getElementById("aiQuestion").value = "";
+        box.scrollTop = box.scrollHeight;
+      }
+
+      function generateAiReply(text){
+        const q = text.toLowerCase();
+
+        if(q.includes("escrow")){
+          return "Escrow helps protect both buyer and seller. Funds are held until delivery is confirmed, then released to the seller.";
+        }
+
+        if(q.includes("payment") || q.includes("pay")){
+          return "For payments, you can either place a direct order using Buy or create a protected transaction using Use Escrow.";
+        }
+
+        if(q.includes("order")){
+          return "To place an order, open a product and tap Buy. Fill your buyer details, delivery address and quantity, then submit.";
+        }
+
+        if(q.includes("merchant") || q.includes("seller")){
+          return "For merchant issues, use Contact Admin and include the product, seller name and a short explanation of the problem.";
+        }
+
+        if(q.includes("delivery")){
+          return "If delivery is delayed, contact the seller first. If the issue continues, open an escrow/support case with details of the order.";
+        }
+
+        return "I can help with orders, payments, escrow protection, merchant support and delivery guidance. Please explain your issue in a bit more detail.";
+      }
+
+      function submitAdminMessage(){
+        const name = document.getElementById("adminName").value.trim();
+        const issue = document.getElementById("adminIssue").value.trim();
+        const message = document.getElementById("adminMessage").value.trim();
+
+        if(!name || !issue || !message){
+          showToast("Please complete admin support form");
+          return;
+        }
+
+        closeModal("adminModal");
+        showToast("Support message sent to admin");
+      }
+function updateOrderStatus(index, status){
+    orders[index].status = status;
+    saveOrders();
+    updateProfileStats();
+    openOrdersHistory();
+}
+function updateEscrowStatus(index, status){
+    escrowCases[index].status = status;
+    saveEscrows();
+    updateProfileStats();
+    openEscrowHistory();
+}
+function loginAdmin(){
+
+    const password = document.getElementById("adminPassword").value;
+
+    if(password === "MSALINA2026"){
+        isAdmin = true;
+        closeModal("adminLoginModal");
+        showToast("Admin login successful");
+        if(adminAction === "orders"){
+    openOrdersHistory();
+}else if(adminAction === "escrow"){
+    openEscrowHistory();
+}else if(adminAction === "support"){
+    openAdminRequestsHistory();
+}
+    }else{
+        alert("Wrong admin password");
+    }
+
+}
+      window.onclick = function(event){
+        const modals = ["productModal","buyModal","escrowModal","aiModal","adminModal","paymentsModal"];
+        modals.forEach((id) => {
+          const modal = document.getElementById(id);
+          if(event.target === modal){
+            closeModal(id);
+          }
+        });
+      };
+
+      renderProducts();
+      showPage("homePage","nav-home");
     </script>
-</body>
+  </body>
 </html>
