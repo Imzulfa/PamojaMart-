@@ -649,7 +649,7 @@
       <h2 class="section-title">Quick Actions</h2>
       <div class="grid-two">
         <div class="quick-card" onclick="showPage('marketPage','nav-market')">Apps</div>
-        <div class="quick-card" onclick="openPaymentsInfo()">Payments</div>
+        <div class="quick-card" onclick="buyWithPi()">Payments</div>
         <div class="quick-card" onclick="showPage('marketPage','nav-market')">Market</div>
         <div class="quick-card" onclick="showPage('chatPage','nav-chat')">Chat</div>
       </div>
@@ -1805,6 +1805,32 @@ function loginAdmin(){
 
       renderProducts();
       showPage("homePage","nav-home");
+      function buyWithPi() {
+  Pi.createPayment(
+    {
+      amount: 1,
+      memo: "MSALINA Hub Test Payment",
+      metadata: {
+        type: "test"
+      }
+    },
+    {
+      onReadyForServerApproval: function(paymentId) {
+        console.log("Approve:", paymentId);
+      },
+      onReadyForServerCompletion: function(paymentId) {
+        Pi.completePayment(paymentId);
+      },
+      onCancel: function() {
+        alert("Payment cancelled");
+      },
+      onError: function(error) {
+        console.log(error);
+        alert("Payment failed");
+      }
+    }
+  );
+      }
     </script>
   </body>
 </html>
