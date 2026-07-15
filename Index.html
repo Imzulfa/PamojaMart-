@@ -1805,6 +1805,12 @@ function loginAdmin(){
 
       renderProducts();
       showPage("homePage","nav-home");
+      const Pi = window.Pi;
+
+Pi.init({
+  version: "2.0",
+  sandbox: false
+});
       function buyWithPi() {
   Pi.createPayment(
     {
