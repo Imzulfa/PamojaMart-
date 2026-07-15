@@ -1815,22 +1815,58 @@ function loginAdmin(){
       }
     },
     {
-      onReadyForServerApproval: function(paymentId) {
-        console.log("Approve:", paymentId);
+      onReadyForServerApproval: async function(paymentId) {
+        try {
+          const response = await fetch("/.netlify/functions/approve", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ paymentId: paymentId })
+          });
+
+          const data = await response.json();
+          console.log("Payment approved:", data);
+        } catch (error) {
+          console.error("Approval failed:", error);
+          alert("Payment approval failed");
+        }
       },
-      onReadyForServerCompletion: function(paymentId) {
-        Pi.completePayment(paymentId);
+
+      onReadyForServerCompletion: async function(paymentId, txid) {
+        try {
+          const response = await fetch("/.netlify/functions/complete", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              paymentId: paymentId,
+              txid: txid
+            })
+          });
+
+          const data = await response.json();
+          console.log("Payment completed:", data);
+          alert("Payment completed successfully");
+        } catch (error) {
+          console.error("Completion failed:", error);
+          alert("Payment completion failed");
+        }
       },
-      onCancel: function() {
+
+      onCancel: function(paymentId) {
+        console.log("Payment cancelled:", paymentId);
         alert("Payment cancelled");
       },
-      onError: function(error) {
-        console.log(error);
+
+      onError: function(error, payment) {
+        console.error("Payment error:", error, payment);
         alert("Payment failed");
       }
     }
   );
-      }
+}
     </script>
   </body>
 </html>
