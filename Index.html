@@ -1546,7 +1546,7 @@ View
 </button>
 
 <button class="btn btn-soft"
-onclick="openBuy('${escapeQuotes(item.name)}', ${item.price})">
+onclick="openBuy('${escapeQuotes(item.name)}', ${(item.price / 314159).toFixed(6)})"
 Buy
 </button>
 
