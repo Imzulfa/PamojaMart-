@@ -1830,9 +1830,11 @@ Pi.init({
   await authenticatePiUser();
         const priceText = document.getElementById("buyPrice").value;
 const piAmount = parseFloat(priceText.replace("Pi", "").trim());
+        const quantity = parseInt(document.getElementById("buyQty").value) || 1;
+const totalPiAmount = piAmount * quantity;
   Pi.createPayment(
     {
-      amount: piAmount,
+      amount: totalPiAmount,
       memo: "MSALINA Hub Test Payment",
       metadata: {
         type: "test"
