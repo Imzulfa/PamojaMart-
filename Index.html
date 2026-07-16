@@ -1180,6 +1180,7 @@ function openOrdersHistory(){
         <div>Phone: ${order.buyerPhone}</div>
         <div>Address: ${order.buyerAddress}</div>
         <div>Quantity: ${order.quantity}</div>
+        <div>Total Price: ${order.totalPrice || order.price}</div>
         <div>Status: ${order.status || "Pending"}</div>
         <div style="margin-top:10px;">
     <button class="btn btn-primary" onclick="updateOrderStatus(${index}, 'Processing')">
