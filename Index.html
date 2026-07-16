@@ -1389,7 +1389,7 @@ function submitBuyOrder(){
     const buyerPhone = document.getElementById("buyerPhone").value.trim();
     const buyerAddress = document.getElementById("buyerAddress").value.trim();
     const quantity = document.getElementById("buyQty").value.trim();
-
+const totalPrice = parseFloat(price.replace("Pi", "").trim()) * parseInt(quantity);
     if(!buyerName || !buyerPhone || !buyerAddress || !quantity){
         alert("Please fill all order fields.");
         return;
@@ -1402,6 +1402,7 @@ function submitBuyOrder(){
     buyerPhone,
     buyerAddress,
     quantity,
+    totalPrice,
     status: "Pending",
     createdAt: new Date().toLocaleString()
 };
