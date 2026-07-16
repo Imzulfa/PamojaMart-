@@ -1871,6 +1871,7 @@ Pi.init({
           const data = await response.json();
           console.log("Payment completed:", data);
           alert("Payment completed successfully");
+          submitBuyOrder();
         } catch (error) {
           console.error("Completion failed:", error);
           alert("Payment completion failed");
