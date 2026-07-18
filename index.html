@@ -1538,7 +1538,7 @@ function submitAdminRequest(){
             <div class="card">
               <div class="product-title">${item.name}</div>
               <div class="product-desc">${item.desc}</div>
-              <div class="product-price">Price: Pi ${(item.price / 314159).toFixed(6)}<br><small>(${item.price.toLocaleString()} TSh)</small></div>
+              <div class="product-price">Price: Pi ${(item.price / 2600 / 314159).toFixed(9)}<br><small>(${item.price.toLocaleString()} TSh)</small></div>
               <div class="tag">${item.tag}</div>
 
               <div class="btn-row">
@@ -1546,7 +1546,7 @@ function submitAdminRequest(){
 onclick="openProduct('${escapeQuotes(item.name)}', ${item.price}, '${escapeQuotes(item.tag)}', '${escapeQuotes(item.desc)}')">
 View
 </button>
-<button class="btn btn-primary" onclick="openBuy('${escapeQuotes(item.name)}', '${(item.price / 314159).toFixed(6)}')">Buy</button>
+<button class="btn btn-primary" onclick="openBuy('${escapeQuotes(item.name)}', '${(item.price / 2600 / 314159).toFixed(9)}')">Buy</button>
 </button>
 
 <button class="btn btn-primary"
