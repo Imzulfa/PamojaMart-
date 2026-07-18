@@ -1546,10 +1546,7 @@ function submitAdminRequest(){
 onclick="openProduct('${escapeQuotes(item.name)}', ${item.price}, '${escapeQuotes(item.tag)}', '${escapeQuotes(item.desc)}')">
 View
 </button>
-
-<button class="btn btn-soft" style="color:#7b2cff; font-weight:700;"
-onclick="openBuy('${escapeQuotes(item.name)}', ${(item.price / 314159).toFixed(6)})"
-Buy
+<button class="btn btn-primary" onclick="openBuy('${escapeQuotes(item.name)}', '${(item.price / 314159).toFixed(6)}')">Buy</button>
 </button>
 
 <button class="btn btn-primary"
