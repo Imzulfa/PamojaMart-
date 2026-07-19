@@ -1842,7 +1842,7 @@ const totalPiAmount = piAmount * quantity;
     {
       onReadyForServerApproval: async function(paymentId) {
         try {
-          const response = await fetch("/.netlify/functions/approve", {
+          const response = await fetch("/api/approve", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
