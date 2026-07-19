@@ -1879,7 +1879,7 @@ if (!response.ok) {
 
 console.log("Payment completed:", data);
 alert("Payment completed successfully");
-submitBuyOrder();
+submitBuyOrder(paymentId, txid);
         } catch (error) {
           console.error("Completion failed:", error);
           alert("Payment completion failed");
