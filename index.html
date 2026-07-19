@@ -1383,7 +1383,7 @@ function editProduct(index){
 
     editingProductIndex = index;
 }
-function submitBuyOrder(){
+function submitBuyOrder(paymentId, txid){
     const product = document.getElementById("buyProduct").value.trim();
     const price = document.getElementById("buyPrice").value.trim();
     const buyerName = document.getElementById("buyerName").value.trim();
@@ -1405,6 +1405,8 @@ const totalPrice = parseFloat(price.replace("Pi", "").trim()) * parseInt(quantit
     quantity,
     totalPrice,
     status: "Paid",
+    paymentId: paymentId,
+txid: txid, 
     createdAt: new Date().toLocaleString()
 };
 
