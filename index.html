@@ -1872,9 +1872,14 @@ const totalPiAmount = piAmount * quantity;
           });
 
           const data = await response.json();
-          console.log("Payment completed:", data);
-          alert("Payment completed successfully");
-          submitBuyOrder();
+
+if (!response.ok) {
+  throw new Error(data.error || "Payment completion failed");
+}
+
+console.log("Payment completed:", data);
+alert("Payment completed successfully");
+submitBuyOrder();
         } catch (error) {
           console.error("Completion failed:", error);
           alert("Payment completion failed");
