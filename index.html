@@ -1204,47 +1204,39 @@ function openMerchantDashboard(){
     updateMerchantStats();
     openModal("merchantDashboardModal");
 }
-function addProduct(){
-
+function addProduct() {
     const name = document.getElementById("newProductName").value.trim();
     const price = Number(document.getElementById("newProductPrice").value);
     const desc = document.getElementById("newProductDesc").value.trim();
     const tag = document.getElementById("newProductTag").value.trim();
 
-    if(!name || !price || !desc || !tag){
+    if (!name || !price || !desc || !tag) {
         alert("Please fill all fields.");
         return;
     }
-if (editingProductIndex >= 0) {
 
-    products[editingProductIndex] = {
+    const newProduct = {
         name: name,
         price: price,
         desc: desc,
         tag: tag
     };
 
-    editingProductIndex = -1;
+    products.push(newProduct);
 
-} else {
-    products.push({
-        name: name,
-        price: price,
-        desc: desc,
-        tag: tag
-    });
-}
-    localStorage.setItem("msalina_products", JSON.stringify(products));
+    localStorage.setItem(
+        "msalina_products",
+        JSON.stringify(products)
+    );
 
     document.getElementById("newProductName").value = "";
     document.getElementById("newProductPrice").value = "";
     document.getElementById("newProductDesc").value = "";
     document.getElementById("newProductTag").value = "";
 
-    updateMerchantStats();
-    renderProducts("");
-
     alert("Product added successfully!");
+
+    updateMerchantStats();
 }
 function openEscrowHistory(){
     const box = document.getElementById("escrowHistoryList");
