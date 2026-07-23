@@ -1826,6 +1826,30 @@ Pi.init({
     throw error;
   }
       }
+      async function signInWithPi() {
+  try {
+    const auth = await authenticatePiUser();
+
+    if (auth && auth.user) {
+      const profileName = document.querySelector(".profile-name");
+
+      if (profileName) {
+        profileName.innerText = auth.user.username;
+      }
+
+      const loginBtn = document.getElementById("piLoginBtn");
+
+      if (loginBtn) {
+        loginBtn.innerText = "Signed in as @" + auth.user.username;
+        loginBtn.disabled = true;
+      }
+
+      alert("Signed in with Pi successfully!");
+    }
+  } catch (error) {
+    console.error("Pi Sign-In error:", error);
+  }
+}
       async function buyWithPi() {
   await authenticatePiUser();
         const priceText = document.getElementById("buyPrice").value;
