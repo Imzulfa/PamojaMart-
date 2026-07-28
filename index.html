@@ -1829,7 +1829,7 @@ Pi.init({
       async function signInWithPi() {
   try {
     const auth = await authenticatePiUser();
-
+alert(JSON.stringify(auth));
     if (auth && auth.user) {
       const profileName = document.querySelector(".profile-name");
 
