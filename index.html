@@ -1135,6 +1135,19 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 window.db = db;
+   async function saveProductToFirebase(product) {
+    await addDoc(collection(db, "products"), product);
+}
+
+async function loadProductsFromFirebase() {
+    const snapshot = await getDocs(collection(db, "products"));
+
+    products = [];
+
+    snapshot.forEach((doc) => {
+        products.push(doc.data());
+    });
+}   
       const PI_VALUE_USD = 314159;
 const USD_TO_TZS = 2600;
 
