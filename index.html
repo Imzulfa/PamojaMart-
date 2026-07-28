@@ -1246,7 +1246,7 @@ function openMerchantDashboard(){
     updateMerchantStats();
     openModal("merchantDashboardModal");
 }
-function addProduct() {
+async function addProduct() {
     const name = document.getElementById("newProductName").value.trim();
     const price = Number(document.getElementById("newProductPrice").value);
     const desc = document.getElementById("newProductDesc").value.trim();
@@ -1264,12 +1264,11 @@ function addProduct() {
         tag: tag
     };
 
-    products.push(newProduct);
+    await saveProductToFirebase(newProduct);
 
-    localStorage.setItem(
-        "msalina_products",
-        JSON.stringify(products)
-    );
+await loadProductsFromFirebase();
+
+renderMarket();
 
     document.getElementById("newProductName").value = "";
     document.getElementById("newProductPrice").value = "";
