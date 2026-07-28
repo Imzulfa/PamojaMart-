@@ -1109,7 +1109,24 @@ Add Product
 
     <div id="toast" class="toast"></div>
 
-    <script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBCULqCCrfvQeEn8_pdhAH-vwiOJ4YvWlc",
+  authDomain: "msalina-hub.firebaseapp.com",
+  projectId: "msalina-hub",
+  storageBucket: "msalina-hub.firebasestorage.app",
+  messagingSenderId: "362030048997",
+  appId: "1:362030048997:web:91f7f9cdbf95cb58f6d60c",
+  measurementId: "G-7NSSECHMYL"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
       const PI_VALUE_USD = 314159;
 const USD_TO_TZS = 2600;
 
