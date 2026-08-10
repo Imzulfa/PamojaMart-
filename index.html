@@ -1789,7 +1789,14 @@ document.getElementById("modalProductPrice").innerText =
       function openAiChat(){
         openModal("aiModal");
       }
+function openApp(url){
+    if(!url || url === "#"){
+        alert("App link haijawekwa bado.");
+        return;
+    }
 
+    window.open(url, "_blank");
+}
       function openAdminSupport(){
         openModal("adminModal");
       }
