@@ -1144,7 +1144,12 @@ async function loadProductsFromFirebase() {
 
     products = [];
 
-    snapshot.forEach((doc) => {
+    snapshot.forEach((d) => {
+    products.push({
+        id: d.id,
+        ...d.data()
+    });
+});
         products.push(doc.data());
     });
 }   
