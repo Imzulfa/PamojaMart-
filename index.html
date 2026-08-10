@@ -1849,10 +1849,9 @@ function loginAdmin(){
         });
       };
 
-      loadProductsFromFirebase().then(() => {
-  renderProducts();
-  showPage("homePage", "nav-home");
-});
+      loadProductsFromFirebase();
+renderProducts();
+showPage("homePage", "nav-home");
       const Pi = window.Pi;
 
 Pi.init({
