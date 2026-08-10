@@ -1853,11 +1853,22 @@ function loginAdmin(){
 renderProducts();
 showPage("homePage", "nav-home");
       const Pi = window.Pi;
+if (Pi) {
+  Pi.init({
+    version: "2.0",
+    sandbox: true
+  });
+}
+Itaonekana hivi:
+const Pi = window.Pi;
 
-Pi.init({
-  version: "2.0",
-  sandbox: true
-});
+if (Pi) {
+  Pi.init({
+    version: "2.0",
+    sandbox: true
+  });
+}
+
       async function authenticatePiUser() {
   try {
     const scopes = ["payments"];
