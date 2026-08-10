@@ -630,46 +630,95 @@
     </div>
 
     <!-- HOME PAGE -->
-    <section id="homePage" class="page active-page">
-      <div class="hero">
-        <h1>MSALINA HUB</h1>
-        <p>Secure shopping • Escrow payments • AI support</p>
-      </div>
+<!-- HOME PAGE -->
+<section id="homePage" class="page active-page">
 
-      <div class="search-wrap">
-        <input
-          id="globalSearch"
-          class="search-input"
-          type="text"
-          placeholder="Search products, services or support..."
-          oninput="handleGlobalSearch()"
-        />
-      </div>
+  <div class="hero">
+    <h1>MSALINA HUB</h1>
+    <p>Discover • Connect • Explore East African Apps</p>
+  </div>
 
-      <h2 class="section-title">Quick Actions</h2>
-      <div class="grid-two">
-        <div class="quick-card" onclick="showPage('marketPage','nav-market')">Apps</div>
-        <div class="quick-card" onclick="buyWithPi()">Payments</div>
-        <div class="quick-card" onclick="showPage('marketPage','nav-market')">Market</div>
-        <div class="quick-card" onclick="showPage('chatPage','nav-chat')">Chat</div>
-      </div>
+  <div class="search-wrap">
+    <input
+      id="globalSearch"
+      class="search-input"
+      type="text"
+      placeholder="Search apps..."
+    />
+  </div>
 
-      <h2 class="section-title">Connected Services</h2>
+  <h2 class="section-title">Explore Apps</h2>
 
-      <div class="card">
-        <div class="product-title" style="font-size:22px;">Connected Ecosystem Apps</div>
-        <div class="product-desc">
-          Approved partner apps connected to MSALINA Hub will appear here.
-        </div>
-      </div>
+  <div class="grid-two">
 
-      <div class="card">
-        <div class="product-title" style="font-size:22px;">Merchant Services</div>
-        <div class="product-desc">
-          Shopping, orders, escrow protection and service delivery tools in one place.
-        </div>
-      </div>
-    </section>
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      🇹🇿 Tanzania
+    </div>
+
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      🌍 East Africa
+    </div>
+
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      💰 Finance
+    </div>
+
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      🛒 Shopping
+    </div>
+
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      🚕 Transport
+    </div>
+
+    <div class="quick-card"
+      onclick="showPage('marketPage','nav-market')">
+      🎓 Education
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Featured Apps</h2>
+
+  <div class="card">
+    <div class="product-title" style="font-size:22px;">
+      🇹🇿 Tanzania Apps
+    </div>
+
+    <div class="product-desc">
+      Discover apps created for Tanzania and easily access them from one place.
+    </div>
+
+    <button
+      class="btn btn-primary btn-full"
+      onclick="showPage('marketPage','nav-market')">
+      Explore Tanzania Apps
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="product-title" style="font-size:22px;">
+      🌍 East Africa Apps
+    </div>
+
+    <div class="product-desc">
+      Explore useful apps from Tanzania, Kenya, Uganda, Rwanda and other
+      East African countries.
+    </div>
+
+    <button
+      class="btn btn-primary btn-full"
+      onclick="showPage('marketPage','nav-market')">
+      Explore East Africa
+    </button>
+  </div>
+
+</section>
 
     <!-- MARKET PAGE -->
     <section id="marketPage" class="page">
