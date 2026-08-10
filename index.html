@@ -1395,10 +1395,16 @@ Edit
     `).join("");
 }
 }
-function deleteProduct(index){
+async function deleteProduct(index){
 
     if(!confirm("Delete this product?")){
         return;
+    }
+
+    const product = products[index];
+
+    if(product.id){
+        await deleteDoc(doc(db, "products", product.id));
     }
 
     products.splice(index,1);
@@ -1409,7 +1415,7 @@ function deleteProduct(index){
     );
 
     updateMerchantStats();
-    renderMarket();
+    renderProducts();
 }
 function editProduct(index){
 
