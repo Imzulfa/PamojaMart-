@@ -120,6 +120,28 @@ function openCategory(category) {
       </div>
     `;
   }
+    else if (category === 'ecommerce') {
+    document.body.innerHTML = `
+      <div style="padding:20px;font-family:Arial;background:#f5f3ff;min-height:100vh;">
+        <button onclick="location.reload()" style="padding:10px 16px;border:none;border-radius:12px;background:#6d28d9;color:white;font-weight:bold;">← Back</button>
+
+        <h1 style="color:#6d28d9;margin-top:20px;">🛒 E-Commerce DApps</h1>
+        <p>Pi shopping and marketplace apps</p>
+
+        <div style="background:white;padding:18px;border-radius:18px;margin-top:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+          <h3>PiChain Mall</h3>
+          <p>Pi marketplace and commerce ecosystem.</p>
+          <a href="https://pichainmall.com" target="_blank">Open DApp</a>
+        </div>
+
+        <div style="background:white;padding:18px;border-radius:18px;margin-top:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+          <h3>Map of Pi</h3>
+          <p>Find merchants and businesses that accept Pi.</p>
+          <a href="https://mapofpi.com" target="_blank">Open DApp</a>
+        </div>
+      </div>
+    `;
+  }
 }
 </script>
 </body>
