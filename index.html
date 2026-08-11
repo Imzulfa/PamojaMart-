@@ -72,6 +72,37 @@
     <div class="card">👨‍💻 Technology</div>
     <div class="card">🌐 Other</div>
   </div>
+<script>
+function openCategory(category) {
+  if (category === 'finance') {
+    document.body.innerHTML = `
+      <div style="padding:20px;font-family:Arial;background:#f5f3ff;min-height:100vh;">
+        <button onclick="location.reload()" style="padding:10px 16px;border:none;border-radius:12px;background:#6d28d9;color:white;font-weight:bold;">← Back</button>
 
+        <h1 style="color:#6d28d9;margin-top:20px;">💰 Finance DApps</h1>
+        <p>Pi ecosystem DApps for Tanzania & East Africa</p>
+
+        <div style="background:white;padding:18px;border-radius:18px;margin-top:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+          <h3>Omnipay</h3>
+          <p>Pi payments and merchant tools.</p>
+          <a href="https://omnipi.app" target="_blank">Open DApp</a>
+        </div>
+
+        <div style="background:white;padding:18px;border-radius:18px;margin-top:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+          <h3>Map of Pi</h3>
+          <p>Discover Pi merchants and businesses.</p>
+          <a href="https://mapofpi.com" target="_blank">Open DApp</a>
+        </div>
+
+        <div style="background:white;padding:18px;border-radius:18px;margin-top:16px;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+          <h3>PiChain Mall</h3>
+          <p>Pi commerce and payments ecosystem.</p>
+          <a href="https://pichainmall.com" target="_blank">Open DApp</a>
+        </div>
+      </div>
+    `;
+  }
+}
+</script>
 </body>
 </html>
