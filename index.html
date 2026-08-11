@@ -56,24 +56,16 @@
     <input class="search" placeholder="Search DApps...">
   </div>
 
-  <h2>Categories</h2>
+  <h2>Select Country</h2>
 
-  <div class="grid">
-    <div class="card" onclick="openCategory('finance')">
-  💰 Finance
+<div class="grid">
+  <div class="card" onclick="openCountry('tanzania')">🇹🇿 Tanzania</div>
+  <div class="card" onclick="openCountry('kenya')">🇰🇪 Kenya</div>
+  <div class="card" onclick="openCountry('uganda')">🇺🇬 Uganda</div>
+  <div class="card" onclick="openCountry('congo')">🇨🇩 Congo</div>
+  <div class="card" onclick="openCountry('zambia')">🇿🇲 Zambia</div>
+  <div class="card" onclick="openCountry('malawi')">🇲🇼 Malawi</div>
 </div>
-    <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
-    <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
-    <div class="card">🚗 Transport</div>
-    <div class="card">🏥 Health</div>
-    <div class="card">🎓 Education</div>
-    <div class="card">💼 Business</div>
-    <div class="card">🏠 Real Estate</div>
-    <div class="card">🍽 Food</div>
-    <div class="card">🎮 Entertainment</div>
-    <div class="card">👨‍💻 Technology</div>
-    <div class="card">🌐 Other</div>
-  </div>
 <script>
 function openCategory(category) {
   if (category === 'finance') {
