@@ -135,6 +135,29 @@ function openCategory(category) {
     `;
   }
 }
+  function openCountry(country){
+  if(country === 'tanzania'){
+    document.body.innerHTML = `
+      <div style="padding:20px;font-family:Arial;background:#f5f3ff;min-height:100vh;">
+        <button onclick="location.reload()" style="padding:10px 16px;border:none;border-radius:12px;background:#6d28d9;color:white;font-weight:bold;">← Back</button>
+
+        <h1 style="color:#6d28d9;margin-top:20px;">🇹🇿 Tanzania DApps</h1>
+        <p>Pi ecosystem DApps for Tanzania</p>
+
+        <div class="grid" style="margin-top:20px;">
+          <div class="card" onclick="openCategory('finance')">💰 Finance</div>
+          <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
+          <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
+          <div class="card">🚗 Transport</div>
+          <div class="card">🏥 Health</div>
+          <div class="card">🎓 Education</div>
+          <div class="card">💼 Business</div>
+          <div class="card">🌐 Other</div>
+        </div>
+      </div>
+    `;
+  }
+}
 </script>
 </body>
 </html>
