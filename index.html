@@ -1522,17 +1522,7 @@ async function deleteProduct(index){
     updateMerchantStats();
     renderProducts();
 }
-function editProduct(index){
 
-    const p = products[index];
-
-    document.getElementById("newProductName").value = p.name;
-    document.getElementById("newProductPrice").value = p.price;
-    document.getElementById("newProductDesc").value = p.desc;
-    document.getElementById("newProductTag").value = p.tag;
-
-    editingProductIndex = index;
-}
 function submitBuyOrder(paymentId, txid){
     const product = document.getElementById("buyProduct").value.trim();
     const price = document.getElementById("buyPrice").value.trim();
