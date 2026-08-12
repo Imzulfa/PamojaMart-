@@ -137,6 +137,34 @@ function openCategory(category) {
 }
   function openCountry(country){
   if(country === 'tanzania'){
+    if(country === 'all'){
+  document.body.innerHTML = `
+    <div style="padding:20px;font-family:Arial;background:#f5f3ff;min-height:100vh;">
+      <button onclick="location.reload()" style="padding:10px 16px;border:none;border-radius:12px;background:#6d28d9;color:white;font-weight:bold;">← Back</button>
+
+      <h1 style="color:#6d28d9;margin-top:20px;">🌍 All Countries</h1>
+      <p>Search any country in the Pi ecosystem</p>
+
+      <input placeholder="Search country..." style="width:100%;padding:14px;border:none;border-radius:14px;margin-top:16px;box-sizing:border-box;">
+
+      <div class="grid" style="margin-top:20px;">
+        <div class="card">🇹🇿 Tanzania</div>
+        <div class="card">🇰🇪 Kenya</div>
+        <div class="card">🇺🇬 Uganda</div>
+        <div class="card">🇨🇩 Congo</div>
+        <div class="card">🇿🇲 Zambia</div>
+        <div class="card">🇲🇼 Malawi</div>
+        <div class="card">🇳🇬 Nigeria</div>
+        <div class="card">🇮🇳 India</div>
+        <div class="card">🇮🇩 Indonesia</div>
+        <div class="card">🇧🇷 Brazil</div>
+        <div class="card">🇺🇸 United States</div>
+        <div class="card">🇵🇭 Philippines</div>
+      </div>
+    </div>
+  `;
+  return;
+}
     document.body.innerHTML = `
       <div style="padding:20px;font-family:Arial;background:#f5f3ff;min-height:100vh;">
         <button onclick="location.reload()" style="padding:10px 16px;border:none;border-radius:12px;background:#6d28d9;color:white;font-weight:bold;">← Back</button>
