@@ -1,421 +1,980 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MSALINA HUB</title>
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MSALINA HUB</title>
+    <script src="https://sdk.minepi.com/pi-sdk.js">
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f3ff;
-      min-height: 100vh;
-      padding-bottom: 80px;
-      /* space for bottom nav */;
-    }
+        body {
+            background: #f5f3ff;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #6d28d9, #9333ea);
-      color: white;
-      padding: 30px 20px 20px;
-      border-radius: 0 0 24px 24px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 26px;
-    }
-    .hero p {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-    .search {
-      width: 100%;
-      padding: 14px 18px;
-      border: none;
-      border-radius: 16px;
-      font-size: 16px;
-      margin-top: 14px;
-      box-sizing: border-box;
-      outline: none;
-    }
+        .hero {
+            background: linear-gradient(135deg, #6d28d9, #9333ea);
+            color: #fff;
+            padding: 32px 20px 24px;
+            border-radius: 0 0 28px 28px;
+            text-align: center;
+        }
 
-    /* CONTENT */
-    .content {
-      padding: 16px 20px;
-    }
-    h2 {
-      color: #6d28d9;
-      margin: 16px 0 12px;
-      font-size: 20px;
-    }
+        .hero h1 {
+            font-size: 28px;
+            letter-spacing: -0.5px;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 18px 12px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      transition: 0.2s;
-      border: 2px solid transparent;
-    }
-    .card:active {
-      transform: scale(0.96);
-    }
+        .hero p {
+            opacity: 0.85;
+            font-size: 14px;
+            margin-top: 4px;
+        }
 
-    .back-btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 14px;
-      background: #6d28d9;
-      color: white;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-      margin-bottom: 16px;
-    }
+        .search-box {
+            margin-top: 16px;
+            width: 100%;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            outline: none;
+            background: #fff;
+            color: #1e1b2e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
 
-    .app-item {
-      background: white;
-      padding: 16px 20px;
-      border-radius: 16px;
-      margin-top: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .app-item h3 {
-      font-size: 17px;
-    }
-    .app-item p {
-      font-size: 14px;
-      color: #555;
-    }
-    .app-item a {
-      background: #6d28d9;
-      color: white;
-      padding: 8px 18px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-    }
+        .search-box::placeholder {
+            color: #a5a0b5;
+        }
 
-    /* BOTTOM NAVIGATION */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: white;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0 14px;
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
-      border-top: 1px solid #eee;
-      z-index: 1000;
-    }
-    .nav-item {
-      text-align: center;
-      font-size: 12px;
-      color: #888;
-      cursor: pointer;
-      transition: 0.2s;
-      border: none;
-      background: none;
-      padding: 4px 12px;
-    }
-    .nav-item .icon {
-      font-size: 24px;
-      display: block;
-    }
-    .nav-item.active {
-      color: #6d28d9;
-      font-weight: bold;
-    }
+        .content {
+            padding: 20px 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    .footer {
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-      margin-top: 24px;
-    }
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4c1d95;
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    @media (max-width: 480px) {
-      .grid {
-        gap: 10px;
-      }
-      .card {
-        font-size: 15px;
-        padding: 14px 8px;
-      }
-    }
-  </style>
+        .section-title span {
+            background: #ede9fe;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #6d28d9;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 18px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            color: #1e1b2e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s ease;
+        }
+
+        .card:active {
+            transform: scale(0.96);
+            border-color: #6d28d9;
+        }
+
+        .card .emoji {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .country-chip {
+            display: inline-block;
+            background: #ede9fe;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4c1d95;
+            margin: 4px 6px 4px 0;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .country-chip.active {
+            background: #6d28d9;
+            color: #fff;
+            border-color: #6d28d9;
+        }
+
+        .country-chip:active {
+            transform: scale(0.95);
+        }
+
+        .country-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0 12px;
+            justify-content: center;
+        }
+
+        .dapp-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: 0.2s;
+            border: 1px solid #f0edf9;
+        }
+
+        .dapp-card .logo {
+            width: 52px;
+            height: 52px;
+            background: #ede9fe;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .dapp-card .info {
+            flex: 1;
+        }
+
+        .dapp-card .info h4 {
+            font-size: 16px;
+            color: #1e1b2e;
+        }
+
+        .dapp-card .info .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+            font-size: 12px;
+            color: #6b657e;
+            margin-top: 3px;
+        }
+
+        .dapp-card .info .meta .badge {
+            background: #ede9fe;
+            color: #4c1d95;
+            padding: 0 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .dapp-card .info .meta .pending-badge {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 0 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .dapp-card .info .desc {
+            font-size: 13px;
+            color: #4b4562;
+            margin-top: 4px;
+        }
+
+        .dapp-card .actions {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+
+        .dapp-card .actions button {
+            background: #6d28d9;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .dapp-card .actions button:active {
+            transform: scale(0.94);
+        }
+
+        .dapp-card .actions .share-btn {
+            background: #e5e1ef;
+            color: #1e1b2e;
+        }
+
+        .dapp-card .actions .approve-btn {
+            background: #16a34a;
+        }
+
+        .dapp-card .actions .reject-btn {
+            background: #dc2626;
+        }
+
+        .dapp-card .actions .delete-btn {
+            background: #dc2626;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px;
+            border-top: 1px solid #ede9fe;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
+            z-index: 999;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            text-align: center;
+            font-size: 11px;
+            color: #9a93b0;
+            cursor: pointer;
+            padding: 4px 10px;
+            transition: 0.15s;
+            font-weight: 500;
+        }
+
+        .nav-item .icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .nav-item.active {
+            color: #6d28d9;
+            font-weight: 700;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: #6d28d9;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            padding: 6px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 0;
+            color: #9a93b0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1e1b2e;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #ede9fe;
+            border-radius: 16px;
+            font-size: 15px;
+            background: #fff;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #6d28d9;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            background: #6d28d9;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+        }
+
+        .admin-section {
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 2px solid #f0edf9;
+        }
+
+        .admin-section h3 {
+            color: #4c1d95;
+            margin-bottom: 8px;
+        }
+
+        .admin-section .count {
+            font-size: 14px;
+            color: #6b657e;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .admin-actions button {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .admin-actions .approve {
+            background: #16a34a;
+            color: #fff;
+        }
+
+        .admin-actions .reject {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .admin-actions .delete {
+            background: #dc2626;
+            color: #fff;
+        }
+
+        .admin-actions .edit {
+            background: #6d28d9;
+            color: #fff;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .lang-btn.active {
+            background: #fff;
+            color: #6d28d9;
+            border-color: #fff;
+        }
+
+        .lang-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 480px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .dapp-card {
+                flex-wrap: wrap;
+            }
+            .dapp-card .actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <!-- HERO / Home -->
-  <div id="appRoot">
-    <div class="hero">
-      <h1>📍 MSALINA HUB</h1>
-      <p>Pi Browser DApps for Tanzania & East Africa</p>
-      <input class="search" placeholder="🔍 Search DApps..." id="searchInput" oninput="searchDApps(this.value)">
+    <!-- ROOT APP -->
+    <div id="appRoot">
+        <!-- HERO -->
+        <div class="hero">
+            <h1>📍 MSALINA HUB</h1>
+            <p>Discover Pi Browser DApps</p>
+            <div class="language-selector" id="languageSelector">
+                <button class="lang-btn active" data-lang="sw" onclick="setLanguage('sw')">Kiswahili</button>
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
+                <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
+                <button class="lang-btn" data-lang="hi" onclick="setLanguage('hi')">हिन्दी</button>
+                <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+                <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+            </div>
+            <input class="search-box" id="searchInput" placeholder="🔍 Search DApps..." oninput="handleSearch(this.value)" />
+        </div>
+
+        <div class="content" id="mainContent">
+            <!-- COUNTRIES -->
+            <div class="section-title">🌍 Select Country</div>
+            <div class="country-filter" id="countryFilter"></div>
+
+            <!-- FEATURED -->
+            <div class="section-title">⭐ Featured DApps <span>Top</span></div>
+            <div id="featuredContainer"></div>
+
+            <!-- CATEGORIES -->
+            <div class="section-title">📂 Categories</div>
+            <div class="grid-2" id="categoryGrid"></div>
+        </div>
     </div>
 
-    <div class="content">
-      <h2>🌍 Select Country</h2>
-      <div class="grid">
-        <div class="card" onclick="openCountry('tanzania')">🇹🇿 Tanzania</div>
-        <div class="card" onclick="openCountry('kenya')">🇰🇪 Kenya</div>
-        <div class="card" onclick="openCountry('uganda')">🇺🇬 Uganda</div>
-        <div class="card" onclick="openCountry('congo')">🇨🇩 Congo</div>
-        <div class="card" onclick="openCountry('zambia')">🇿🇲 Zambia</div>
-        <div class="card" onclick="openCountry('malawi')">🇲🇼 Malawi</div>
-      </div>
-      <div class="card" onclick="openCountry('all')" style="margin-top:8px;">🌍 All Countries</div>
-
-      <div class="footer">Built on Pi Network • MSALINA HUB v1.0</div>
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-page="home" onclick="navigateTo('home')">
+            <span class="icon">🏠</span> Home
+        </button>
+        <button class="nav-item" data-page="categories" onclick="navigateTo('categories')">
+            <span class="icon">📂</span> Categories
+        </button>
+        <button class="nav-item" data-page="mainnet" onclick="navigateTo('mainnet')">
+            <span class="icon">🔵</span> Mainnet
+        </button>
+        <button class="nav-item" data-page="testnet" onclick="navigateTo('testnet')">
+            <span class="icon">🧪</span> Testnet
+        </button>
+        <button class="nav-item" data-page="submit" onclick="navigateTo('submit')">
+            <span class="icon">➕</span> Submit
+        </button>
     </div>
-  </div>
 
-  <!-- BOTTOM NAV -->
-  <div class="bottom-nav">
-    <button class="nav-item active" onclick="goHome()">
-      <span class="icon">🏠</span> Home
-    </button>
-    <button class="nav-item" onclick="goCategories()">
-      <span class="icon">📂</span> Categories
-    </button>
-    <button class="nav-item" onclick="openAddApp()">
-      <span class="icon">➕</span> Add
-    </button>
-    <button class="nav-item" onclick="goFavorites()">
-      <span class="icon">⭐</span> Favorites
-    </button>
-    <button class="nav-item" onclick="goProfile()">
-      <span class="icon">👤</span> Profile
-    </button>
-  </div>
+    <script>
+        // ============================================================
+        // 1. DATA
+        // ============================================================
 
-  <script>
-    Pi.init();
+        const COUNTRIES = [
+            { code: 'tanzania', name: '🇹🇿 Tanzania' },
+            { code: 'kenya', name: '🇰🇪 Kenya' },
+            { code: 'uganda', name: '🇺🇬 Uganda' },
+            { code: 'congo', name: '🇨🇩 Congo' },
+            { code: 'zambia', name: '🇿🇲 Zambia' },
+            { code: 'malawi', name: '🇲🇼 Malawi' }
+        ];
 
-    const dapps = {
-      finance: [
-        { name: 'Omnipay', desc: 'Pi payments and merchant tools.', url: 'https://omnipi.app' },
-        { name: 'Map of Pi', desc: 'Discover Pi merchants and businesses.', url: 'https://mapofpi.com' },
-        { name: 'PiChain Mall', desc: 'Pi commerce and payments ecosystem.', url: 'https://pichainmall.com' }
-      ],
-      banking: [
-        { name: 'Omnipay', desc: 'Banking and payment services.', url: 'https://omnipi.app' }
-      ],
-      ecommerce: [
-        { name: 'PiChain Mall', desc: 'Pi marketplace.', url: 'https://pichainmall.com' },
-        { name: 'Map of Pi', desc: 'Find merchants that accept Pi.', url: 'https://mapofpi.com' }
-      ],
-      transport: [
-        { name: 'PiRide', desc: 'Transport services using Pi.', url: 'https://piride.pi' }
-      ],
-      health: [
-        { name: 'PiHealth', desc: 'Medical appointments.', url: 'https://pihealth.pi' }
-      ],
-      education: [
-        { name: 'PiLearn', desc: 'Online courses.', url: 'https://pilearn.pi' }
-      ],
-      realestate: [
-        { name: 'PiHomes', desc: 'Property listings.', url: 'https://pihomes.pi' }
-      ],
-      food: [
-        { name: 'PiEats', desc: 'Food delivery.', url: 'https://pieats.pi' }
-      ],
-      entertainment: [
-        { name: 'PiPlay', desc: 'Games and entertainment.', url: 'https://piplay.pi' }
-      ],
-      business: [
-        { name: 'PiBiz', desc: 'Business tools.', url: 'https://pibiz.pi' }
-      ],
-      technology: [
-        { name: 'PiDev', desc: 'Developer tools.', url: 'https://pidev.pi' }
-      ]
-    };
+        const CATEGORIES = [
+            'Finance & Payments', 'Banking', 'E-Commerce', 'Transport',
+            'Health', 'Education', 'Business', 'Real Estate',
+            'Food & Restaurants', 'Entertainment', 'Technology', 'Other'
+        ];
 
-    // ==================== FUNCTIONS ====================
+        const LANGUAGES = {
+            sw: {
+                title: '📍 MSALINA HUB',
+                subtitle: 'Discover Pi Browser DApps',
+                search: '🔍 Search DApps...',
+                selectCountry: '🌍 Select Country',
+                featured: '⭐ Featured DApps',
+                categories: '📂 Categories',
+                mainnet: '🔵 Mainnet DApps',
+                testnet: '🧪 Testnet / App Studio',
+                submit: '➕ Submit Your DApp',
+                submitDesc: 'Add your Pi DApp to MSALINA HUB',
+                noDapps: '😔 No DApps found.',
+                noFeatured: 'No featured DApps in this country.',
+                open: 'Open',
+                share: 'Share',
+                back: '← Back',
+                submitBtn: '🚀 Submit DApp',
+                pending: 'Pending Approval',
+                approved: 'Approved',
+                reviewNotice: 'Your submission will be reviewed before publishing.',
+                adminPanel: '🔐 Admin Panel',
+                pendingApps: 'Pending DApps',
+                allApps: 'All DApps',
+                approve: 'Approve',
+                reject: 'Reject',
+                delete: 'Delete',
+                edit: 'Edit',
+                appName: 'DApp Name *',
+                appUrl: 'Pi Browser URL *',
+                country: 'Country *',
+                category: 'Category *',
+                status: 'Status *',
+                logo: 'Logo Emoji (or URL)',
+                description: 'Short Description *',
+                selectCountryLabel: 'Select...',
+                mainnetLabel: 'Mainnet',
+                testnetLabel: 'Testnet',
+                appStudioLabel: 'App Studio',
+                thankYou: '✅ Thank you!',
+                submitted: 'has been submitted for review.',
+                notifyApproved: "We'll notify you once approved.",
+                shareText: 'Check out {name} on MSALINA HUB!',
+                results: '📱 Results',
+                resultsFor: '🔍 Results for "{query}"',
+                appNotFound: 'DApp URL not available.'
+            },
+            en: {
+                title: '📍 MSALINA HUB',
+                subtitle: 'Discover Pi Browser DApps',
+                search: '🔍 Search DApps...',
+                selectCountry: '🌍 Select Country',
+                featured: '⭐ Featured DApps',
+                categories: '📂 Categories',
+                mainnet: '🔵 Mainnet DApps',
+                testnet: '🧪 Testnet / App Studio',
+                submit: '➕ Submit Your DApp',
+                submitDesc: 'Add your Pi DApp to MSALINA HUB',
+                noDapps: '😔 No DApps found.',
+                noFeatured: 'No featured DApps in this country.',
+                open: 'Open',
+                share: 'Share',
+                back: '← Back',
+                submitBtn: '🚀 Submit DApp',
+                pending: 'Pending Approval',
+                approved: 'Approved',
+                reviewNotice: 'Your submission will be reviewed before publishing.',
+                adminPanel: '🔐 Admin Panel',
+                pendingApps: 'Pending DApps',
+                allApps: 'All DApps',
+                approve: 'Approve',
+                reject: 'Reject',
+                delete: 'Delete',
+                edit: 'Edit',
+                appName: 'DApp Name *',
+                appUrl: 'Pi Browser URL *',
+                country: 'Country *',
+                category: 'Category *',
+                status: 'Status *',
+                logo: 'Logo Emoji (or URL)',
+                description: 'Short Description *',
+                selectCountryLabel: 'Select...',
+                mainnetLabel: 'Mainnet',
+                testnetLabel: 'Testnet',
+                appStudioLabel: 'App Studio',
+                thankYou: '✅ Thank you!',
+                submitted: 'has been submitted for review.',
+                notifyApproved: "We'll notify you once approved.",
+                shareText: 'Check out {name} on MSALINA HUB!',
+                results: '📱 Results',
+                resultsFor: '🔍 Results for "{query}"',
+                appNotFound: 'DApp URL not available.'
+            },
+            fr: {
+                title: '📍 MSALINA HUB',
+                subtitle: 'Découvrez les DApps Pi Browser',
+                search: '🔍 Rechercher...',
+                selectCountry: '🌍 Choisir un pays',
+                featured: '⭐ DApps en vedette',
+                categories: '📂 Catégories',
+                mainnet: '🔵 DApps Mainnet',
+                testnet: '🧪 Testnet / App Studio',
+                submit: '➕ Soumettre votre DApp',
+                submitDesc: 'Ajoutez votre DApp Pi à MSALINA HUB',
+                noDapps: '😔 Aucune DApp trouvée.',
+                noFeatured: 'Aucune DApp en vedette dans ce pays.',
+                open: 'Ouvrir',
+                share: 'Partager',
+                back: '← Retour',
+                submitBtn: '🚀 Soumettre',
+                pending: 'En attente',
+                approved: 'Approuvée',
+                reviewNotice: 'Votre soumission sera examinée avant publication.',
+                adminPanel: '🔐 Panneau Admin',
+                pendingApps: 'DApps en attente',
+                allApps: 'Toutes les DApps',
+                approve: 'Approuver',
+                reject: 'Rejeter',
+                delete: 'Supprimer',
+                edit: 'Modifier',
+                appName: 'Nom de la DApp *',
+                appUrl: 'URL Pi Browser *',
+                country: 'Pays *',
+                category: 'Catégorie *',
+                status: 'Statut *',
+                logo: 'Émoji logo (ou URL)',
+                description: 'Description courte *',
+                selectCountryLabel: 'Choisir...',
+                mainnetLabel: 'Mainnet',
+                testnetLabel: 'Testnet',
+            appStudioLabel: 'App Studio',
+                thankYou: '✅ Merci !',
+                submitted: 'a été soumise pour examen.',
+                notifyApproved: 'Nous vous informerons une fois approuvée.',
+                shareText: 'Découvrez {name} sur MSALINA HUB !',
+                results: '📱 Résultats',
+                resultsFor: '🔍 Résultats pour "{query}"',
+                appNotFound: 'URL de la DApp non disponible.'
+            },
+            hi: {
+                title: '📍 MSALINA HUB',
+                subtitle: 'Pi ब्राउज़र DApps खोजें',
+                search: '🔍 DApps खोजें...',
+                selectCountry: '🌍 देश चुनें',
+                featured: '⭐ विशेष DApps',
+                categories: '📂 श्रेणियाँ',
+                mainnet: '🔵 मुख्य DApps',
+                testnet: '🧪 टेस्टनेट / App Studio',
+                submit: '➕ अपनी DApp जमा करें',
+                submitDesc: 'MSALINA HUB में अपनी Pi DApp जोड़ें',
+                noDapps: '😔 कोई DApp नहीं मिली।',
+                noFeatured: 'इस देश में कोई विशेष DApp नहीं।',
+                open: 'खोलें',
+                share: 'साझा करें',
+                back: '← वापस',
+                submitBtn: '🚀 जमा करें',
+                pending: 'लंबित',
+                approved: 'स्वीकृत',
+                reviewNotice: 'आपका सबमिशन प्रकाशन से पहले समीक्षा किया जाएगा।',
+                adminPanel: '🔐 व्यवस्थापक पैनल',
+                pendingApps: 'लंबित DApps',
+                allApps: 'सभी DApps',
+                approve: 'स्वीकार करें',
+                reject: 'अस्वीकार करें',
+                delete: 'हटाएं',
+                edit: 'संपादित करें',
+                appName: 'DApp नाम *',
+                appUrl: 'Pi ब्राउज़र URL *',
+                country: 'देश *',
+                category: 'श्रेणी *',
+                status: 'स्थिति *',
+                logo: 'लोगो इमोजी (या URL)',
+                description: 'संक्षिप्त विवरण *',
+                selectCountryLabel: 'चुनें...',
+                mainnetLabel: 'मुख्य',
+                testnetLabel: 'टेस्टनेट',
+                appStudioLabel: 'App Studio',
+                thankYou: '✅ धन्यवाद!',
+                submitted: 'समीक्षा के लिए जमा किया गया है।',
+                notifyApproved: 'स्वीकृत होने पर हम आपको सूचित करेंगे।',
+                shareText: 'MSALINA HUB पर {name} देखें!',
+                results: '📱 परिणाम',
+                resultsFor: '🔍 "{query}" के लिए परिणाम',
+                appNotFound: 'DApp URL उपलब्ध नहीं है।'
+            },
+            zh: {
+                title: '📍 MSALINA HUB',
+                subtitle: '发现Pi浏览器DApps',
+                search: '🔍 搜索DApps...',
+                selectCountry: '🌍 选择国家',
+                featured: '⭐ 精选DApps',
+                categories: '📂 分类',
+                mainnet: '🔵 主网DApps',
+                testnet: '🧪 测试网 / App Studio',
+                submit: '➕ 提交您的DApp',
+                submitDesc: '将您的Pi DApp添加到MSALINA HUB',
+                noDapps: '😔 未找到DApp。',
+                noFeatured: '该国家没有精选DApp。',
+                open: '打开',
+                share: '分享',
+                back: '← 返回',
+                submitBtn: '🚀 提交',
+                pending: '待审核',
+                approved: '已批准',
+                reviewNotice: '您的提交将在发布前进行审核。',
+                adminPanel: '🔐 管理员面板',
+                pendingApps: '待审核DApps',
+                allApps: '所有DApps',
+                approve: '批准',
+                reject: '拒绝',
+                delete: '删除',
+                edit: '编辑',
+                appName: 'DApp名称 *',
+                appUrl: 'Pi浏览器URL *',
+                country: '国家 *',
+                category: '分类 *',
+                status: '状态 *',
+                logo: '标志表情符号（或URL）',
+                description: '简短描述 *',
+                selectCountryLabel: '选择...',
+                mainnetLabel: '主网',
+                testnetLabel: '测试网',
+                appStudioLabel: 'App Studio',
+                thankYou: '✅ 谢谢！',
+                submitted: '已提交审核。',
+                notifyApproved: '批准后我们将通知您。',
+                shareText: '在MSALINA HUB上查看{name}！',
+                results: '📱 结果',
+                resultsFor: '🔍 "{query}"的结果',
+                appNotFound: 'DApp URL不可用。'
+            },
+            ar: {
+                title: '📍 MSALINA HUB',
+                subtitle: 'اكتشف تطبيقات Pi Browser',
+                search: '🔍 بحث...',
+                selectCountry: '🌍 اختر الدولة',
+                featured: '⭐ تطبيقات مميزة',
+                categories: '📂 التصنيفات',
+                mainnet: '🔵 تطبيقات Mainnet',
+                testnet: '🧪 Testnet / App Studio',
+                submit: '➕ أرسل تطبيقك',
+                submitDesc: 'أضف تطبيق Pi الخاص بك إلى MSALINA HUB',
+                noDapps: '😔 لا توجد تطبيقات.',
+                noFeatured: 'لا توجد تطبيقات مميزة في هذا البلد.',
+                open: 'فتح',
+                share: 'مشاركة',
+                back: '← رجوع',
+                submitBtn: '🚀 إرسال',
+                pending: 'قيد المراجعة',
+                approved: 'موافق',
+                reviewNotice: 'سيتم مراجعة طلبك قبل النشر.',
+                adminPanel: '🔐 لوحة الإدارة',
+                pendingApps: 'تطبيقات قيد المراجعة',
+                allApps: 'جميع التطبيقات',
+                approve: 'موافقة',
+                reject: 'رفض',
+                delete: 'حذف',
+                edit: 'تعديل',
+                appName: 'اسم التطبيق *',
+                appUrl: 'رابط Pi Browser *',
+                country: 'الدولة *',
+                category: 'التصنيف *',
+                status: 'الحالة *',
+                logo: 'رمز تعبيري (أو رابط)',
+                description: 'وصف مختصر *',
+                selectCountryLabel: 'اختر...',
+                mainnetLabel: 'الشبكة الرئيسية',
+                testnetLabel: 'شبكة الاختبار',
+                appStudioLabel: 'App Studio',
+                thankYou: '✅ شكراً!',
+                submitted: 'تم الإرسال للمراجعة.',
+                notifyApproved: 'سنخطرك عند الموافقة.',
+                shareText: 'اطلع على {name} على MSALINA HUB!',
+                results: '📱 النتائج',
+                resultsFor: '🔍 نتائج لـ "{query}"',
+                appNotFound: 'رابط التطبيق غير متوفر.'
+            }
+        };
 
-    function goHome() {
-      location.reload();
-    }
+        // DApps zilizo na nchi na hali ya approval
+        let DAPPS = [{
+            id: 1,
+            name: 'Pi Commerce Tz',
+            category: 'E-Commerce',
+            status: 'Mainnet',
+            country: 'tanzania',
+            url: 'https://pichainmall.com',
+            logo: '🛒',
+            desc: 'Buy and sell inside the Pi ecosystem.',
+            featured: true,
+            approved: true
+        }, {
+            id: 2,
+            name: 'Pi Games KE',
+            category: 'Entertainment',
+            status: 'Testnet',
+            country: 'kenya',
+            url: 'https://pigames.pi',
+            logo: '🎮',
+            desc: 'Play and earn with Pi.',
+            featured: true,
+            approved: true
+        }, {
+            id: 3,
+            name: 'PiLearn UG',
+            category: 'Education',
+            status: 'App Studio',
+            country: 'uganda',
+            url: 'https://pilearn.pi',
+            logo: '📚',
+            desc: 'Learn web3 and Pi development.',
+            featured: false,
+            approved: true
+        }, {
+            id: 4,
+            name: 'PiPay Tz',
+            category: 'Finance & Payments',
+            status: 'Mainnet',
+            country: 'tanzania',
+            url: 'https://omnipi.app',
+            logo: '💳',
+            desc: 'Send and receive Pi payments easily.',
+            featured: false,
+            approved: true
+        }, {
+            id: 5,
+            name: 'PiHealth CD',
+            category: 'Health',
+            status: 'Testnet',
+            country: 'congo',
+            url: 'https://pihealth.pi',
+            logo: '🏥',
+            desc: 'Book appointments and health records.',
+            featured: false,
+            approved: true
+        }, {
+            id: 6,
+            name: 'PiBuild ZM',
+            category: 'Technology',
+            status: 'App Studio',
+            country: 'zambia',
+            url: 'https://pibuild.pi',
+            logo: '🛠️',
+            desc: 'Tools for Pi developers.',
+            featured: false,
+            approved: true
+        }];
 
-    function goCategories() {
-      const root = document.getElementById('appRoot');
-      root.innerHTML = `
-        <div class="hero" style="border-radius:0 0 24px 24px;">
-          <h1>📂 Categories</h1>
-          <p>Browse DApps by category</p>
-        </div>
-        <div class="content">
-          <div class="grid">
-            <div class="card" onclick="openCategory('finance')">💰 Finance</div>
-            <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
-            <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
-            <div class="card" onclick="openCategory('transport')">🚗 Transport</div>
-            <div class="card" onclick="openCategory('health')">🏥 Health</div>
-            <div class="card" onclick="openCategory('education')">🎓 Education</div>
-            <div class="card" onclick="openCategory('business')">💼 Business</div>
-            <div class="card" onclick="openCategory('realestate')">🏠 Real Estate</div>
-            <div class="card" onclick="openCategory('food')">🍽 Food</div>
-            <div class="card" onclick="openCategory('entertainment')">🎮 Entertainment</div>
-            <div class="card" onclick="openCategory('technology')">👨‍💻 Tech</div>
-          </div>
-        </div>
-      `;
-    }
+        let selectedCountry = 'all';
+        let currentPage = 'home';
+        let currentLang = 'sw';
 
-    function openCountry(country) {
-      const root = document.getElementById('appRoot');
-      const names = {
-        tanzania: '🇹🇿 Tanzania',
-        kenya: '🇰🇪 Kenya',
-        uganda: '🇺🇬 Uganda',
-        congo: '🇨🇩 Congo',
-        zambia: '🇿🇲 Zambia',
-        malawi: '🇲🇼 Malawi'
-      };
+        // ============================================================
+        // 2. TRANSLATION
+        // ============================================================
 
-      root.innerHTML = `
-        <div class="hero" style="border-radius:0 0 24px 24px;">
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h1>${names[country] || country}</h1>
-          <p>DApps from ${names[country] || country}</p>
-        </div>
-        <div class="content">
-          <div class="grid">
-            <div class="card" onclick="openCategory('finance')">💰 Finance</div>
-            <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
-            <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
-            <div class="card" onclick="openCategory('transport')">🚗 Transport</div>
-            <div class="card" onclick="openCategory('health')">🏥 Health</div>
-            <div class="card" onclick="openCategory('education')">🎓 Education</div>
-            <div class="card" onclick="openCategory('business')">💼 Business</div>
-            <div class="card" onclick="openCategory('realestate')">🏠 Real Estate</div>
-            <div class="card" onclick="openCategory('food')">🍽 Food</div>
-            <div class="card" onclick="openCategory('entertainment')">🎮 Entertainment</div>
-            <div class="card" onclick="openCategory('technology')">👨‍💻 Tech</div>
-          </div>
-        </div>
-      `;
-    }
+        function t(key) {
+            return LANGUAGES[currentLang]?.[key] || LANGUAGES.sw[key] || key;
+        }
 
-    function openCategory(category) {
-      const root = document.getElementById('appRoot');
-      const apps = dapps[category] || [];
-      const names = {
-        finance: '💰 Finance',
-        banking: '🏦 Banking',
-        ecommerce: '🛒 E-Commerce',
-        transport: '🚗 Transport',
-        health: '🏥 Health',
-        education: '🎓 Education',
-        business: '💼 Business',
-        realestate: '🏠 Real Estate',
-        food: '🍽 Food',
-        entertainment: '🎮 Entertainment',
-        technology: '👨‍💻 Technology'
-      };
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            navigateTo(currentPage);
+        }
 
-      let html = apps.map(app => `
-        <div class="app-item">
-          <div>
-            <h3>${app.name}</h3>
-            <p>${app.desc}</p>
-          </div>
-          <a href="${app.url}" target="_blank">Open</a>
-        </div>
-      `).join('');
+        // ============================================================
+        // 3. RENDER FUNCTIONS
+        // ============================================================
 
-      if (!html) html = '<p style="text-align:center;color:#999;margin-top:30px;">😔 No DApps in this category yet.</p>';
+        function renderCountries() {
+            const container = document.getElementById('countryFilter');
+            if (!container) return;
+            let html =
+                `<span class="country-chip ${selectedCountry === 'all' ? 'active' : ''}" onclick="selectCountry('all')">🌍 All</span>`;
+            COUNTRIES.forEach(c => {
+                html +=
+                    `<span class="country-chip ${selectedCountry === c.code ? 'active' : ''}" onclick="selectCountry('${c.code}')">${c.name}</span>`;
+            });
+            container.innerHTML = html;
+        }
 
-      root.innerHTML = `
-        <div class="hero" style="border-radius:0 0 24px 24px;">
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h1>${names[category] || category}</h1>
-          <p>DApps in this category</p>
-        </div>
-        <div class="content">${html}</div>
-      `;
-    }
+        function selectCountry(country) {
+            selectedCountry = country;
+            renderCountries();
+            // Re-render current page
+            navigateTo(currentPage);
+        }
 
-    function searchDApps(query) {
-      if (!query.trim()) return;
-      const root = document.getElementById('appRoot');
-      const results = [];
-      for (const cat in dapps) {
-        dapps[cat].forEach(app => {
-          if (app.name.toLowerCase().includes(query.toLowerCase()) ||
-            app.desc.toLowerCase().includes(query.toLowerCase())) {
-            results.push({ ...app, category: cat });
-          }
-        });
-      }
+        function getFilteredDapps(includePending = false) {
+            let filtered = DAPPS;
+            if (selectedCountry !== 'all') {
+                filtered = filtered.filter(d => d.country === selectedCountry);
+            }
+            if (!includePending) {
+                filtered = filtered.filter(d => d.approved === true);
+            }
+            return filtered;
+        }
 
-      let html = results.map(app => `
-        <div class="app-item">
-          <div>
-            <h3>${app.name}</h3>
-            <p>${app.desc}</p>
-            <span style="font-size:12px;color:#6d28d9;background:#ede9fe;padding:2px 10px;border-radius:12px;">${app.category}</span>
-          </div>
-          <a href="${app.url}" target="_blank">Open</a>
-        </div>
-      `).join('');
+        function getCategoryEmoji(cat) {
+            const map = {
+                'Finance & Payments': '💰',
+                'Banking': '🏦',
+                'E-Commerce': '🛒',
+                'Transport': '🚗',
+                'Health': '🏥',
+                'Education': '📚',
+                'Business': '💼',
+                'Real Estate': '🏠',
+                'Food & Restaurants': '🍽️',
+                'Entertainment': '🎮',
+                'Technology': '👨‍💻',
+                'Other': '🌐'
+            };
+            return map[cat] || '📌';
+        }
 
-      if (!html) html = '<p style="text-align:center;color:#999;margin-top:30px;">😔 No DApps found.</p>';
+        function getStatusEmoji(status) {
+            const map = { 'Mainnet': '🔵', 'Testnet': '🧪', 'App Studio': '🧪' };
+            return map[status] || '⚪';
+        }
 
-      root.innerHTML = `
-        <div class="hero" style="border-radius:0 0 24px 24px;">
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h1>🔍 Results</h1>
-        </div>
-        <div class="content">${html}</div>
-      `;
-    }
+        function getCountryName(code) {
+            const found = COUNTRIES.find(c => c.code === code);
+            return found ? found.name : code;
+        }
 
-    function openAddApp() {
-      alert('📝 Add Your DApp feature coming soon!\n\nPrepare:\n- App Name\n- Description\n- Category\n- URL\n- Icon');
-    }
+        function buildDappCard(dapp, showAdmin = false) {
+            const statusLabel = dapp.approved ? t('approved') : t('pending');
+            const statusBadge = dapp.approved ?
+                `<span class="badge">${getStatusEmoji(dapp.status)} ${dapp.status}</span>` :
+                `<span class="pending-badge">⏳ ${t('pending')}</span>`;
 
-    function goFavorites() {
-      alert('⭐ Favorites feature coming soon!');
-    }
-
-    function goProfile() {
-      alert('👤 Profile feature coming soon!');
-    }
-
-    // Highlight active nav
-    document.querySelectorAll('.nav-item').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
-  </script>
-
-</body>
-  </html>
+            let adminButtons = '';
+            if (showAdmin) {
+                if (!dapp.approved) {
+                    adminButtons = `
+                        <button class="approve-btn" onclick="approveDApp(${dapp.id})">${t('approve')}</button>
+                        <button class="reject-btn" onclick="rejectDApp(${dapp.id})">${t('reject')}</button>
+                    `;
+                }
+                adminButtons += `
+                    <button class="delete-btn" onclick="deleteDApp(${dapp.id})">${t('delete')}</button>
+                `;
