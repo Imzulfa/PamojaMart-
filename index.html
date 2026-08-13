@@ -2,39 +2,39 @@
 <html lang="sw">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>MSALINA HUB</title>
-  
-  <!-- Pi SDK -->
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-  
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: Arial, sans-serif;
       background: #f5f3ff;
       min-height: 100vh;
-      padding: 20px;
+      padding-bottom: 80px;
+      /* space for bottom nav */;
     }
+
+    /* HERO */
     .hero {
       background: linear-gradient(135deg, #6d28d9, #9333ea);
       color: white;
-      padding: 30px 20px;
-      border-radius: 24px;
+      padding: 30px 20px 20px;
+      border-radius: 0 0 24px 24px;
       text-align: center;
-      margin-bottom: 20px;
     }
     .hero h1 {
-      font-size: 28px;
+      font-size: 26px;
     }
     .hero p {
       font-size: 14px;
       opacity: 0.9;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .search {
       width: 100%;
@@ -46,16 +46,21 @@
       box-sizing: border-box;
       outline: none;
     }
+
+    /* CONTENT */
+    .content {
+      padding: 16px 20px;
+    }
     h2 {
       color: #6d28d9;
       margin: 16px 0 12px;
       font-size: 20px;
     }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-top: 10px;
     }
     .card {
       background: white;
@@ -66,16 +71,13 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      transition: 0.2s;
       border: 2px solid transparent;
     }
     .card:active {
       transform: scale(0.96);
     }
-    .card:hover {
-      box-shadow: 0 6px 20px rgba(109, 40, 217, 0.15);
-      border-color: #6d28d9;
-    }
+
     .back-btn {
       padding: 10px 18px;
       border: none;
@@ -87,9 +89,7 @@
       cursor: pointer;
       margin-bottom: 16px;
     }
-    .back-btn:active {
-      transform: scale(0.95);
-    }
+
     .app-item {
       background: white;
       padding: 16px 20px;
@@ -103,7 +103,6 @@
     }
     .app-item h3 {
       font-size: 17px;
-      margin-bottom: 4px;
     }
     .app-item p {
       font-size: 14px;
@@ -118,33 +117,49 @@
       font-size: 14px;
       font-weight: bold;
     }
-    .app-item a:active {
-      transform: scale(0.95);
+
+    /* BOTTOM NAVIGATION */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 14px;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+      border-top: 1px solid #eee;
+      z-index: 1000;
     }
-    .add-btn {
-      background: #6d28d9;
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 16px;
-      font-size: 17px;
-      font-weight: bold;
-      width: 100%;
-      margin-top: 20px;
+    .nav-item {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
       cursor: pointer;
+      transition: 0.2s;
+      border: none;
+      background: none;
+      padding: 4px 12px;
     }
-    .add-btn:active {
-      transform: scale(0.97);
+    .nav-item .icon {
+      font-size: 24px;
+      display: block;
     }
+    .nav-item.active {
+      color: #6d28d9;
+      font-weight: bold;
+    }
+
     .footer {
       text-align: center;
       font-size: 12px;
       color: #999;
       margin-top: 24px;
     }
+
     @media (max-width: 480px) {
       .grid {
-        grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
       .card {
@@ -164,30 +179,44 @@
       <input class="search" placeholder="🔍 Search DApps..." id="searchInput" oninput="searchDApps(this.value)">
     </div>
 
-    <h2>🌍 Select Country</h2>
-    <div class="grid">
-      <div class="card" onclick="openCountry('tanzania')">🇹🇿 Tanzania</div>
-      <div class="card" onclick="openCountry('kenya')">🇰🇪 Kenya</div>
-      <div class="card" onclick="openCountry('uganda')">🇺🇬 Uganda</div>
-      <div class="card" onclick="openCountry('congo')">🇨🇩 Congo</div>
-      <div class="card" onclick="openCountry('zambia')">🇿🇲 Zambia</div>
-      <div class="card" onclick="openCountry('malawi')">🇲🇼 Malawi</div>
-    </div>
-    <div class="card" onclick="openCountry('all')" style="margin-top:8px;">🌍 All Countries</div>
+    <div class="content">
+      <h2>🌍 Select Country</h2>
+      <div class="grid">
+        <div class="card" onclick="openCountry('tanzania')">🇹🇿 Tanzania</div>
+        <div class="card" onclick="openCountry('kenya')">🇰🇪 Kenya</div>
+        <div class="card" onclick="openCountry('uganda')">🇺🇬 Uganda</div>
+        <div class="card" onclick="openCountry('congo')">🇨🇩 Congo</div>
+        <div class="card" onclick="openCountry('zambia')">🇿🇲 Zambia</div>
+        <div class="card" onclick="openCountry('malawi')">🇲🇼 Malawi</div>
+      </div>
+      <div class="card" onclick="openCountry('all')" style="margin-top:8px;">🌍 All Countries</div>
 
-    <button class="add-btn" onclick="openAddApp()">➕ Add Your DApp</button>
-    <div class="footer">Built on Pi Network • MSALINA HUB v1.0</div>
+      <div class="footer">Built on Pi Network • MSALINA HUB v1.0</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="nav-item active" onclick="goHome()">
+      <span class="icon">🏠</span> Home
+    </button>
+    <button class="nav-item" onclick="goCategories()">
+      <span class="icon">📂</span> Categories
+    </button>
+    <button class="nav-item" onclick="openAddApp()">
+      <span class="icon">➕</span> Add
+    </button>
+    <button class="nav-item" onclick="goFavorites()">
+      <span class="icon">⭐</span> Favorites
+    </button>
+    <button class="nav-item" onclick="goProfile()">
+      <span class="icon">👤</span> Profile
+    </button>
   </div>
 
   <script>
-    // ========================
-    // PI SDK INIT
-    // ========================
     Pi.init();
 
-    // ========================
-    // DATA YA DAPPS (Sampuli)
-    // ========================
     const dapps = {
       finance: [
         { name: 'Omnipay', desc: 'Pi payments and merchant tools.', url: 'https://omnipi.app' },
@@ -195,103 +224,108 @@
         { name: 'PiChain Mall', desc: 'Pi commerce and payments ecosystem.', url: 'https://pichainmall.com' }
       ],
       banking: [
-        { name: 'Omnipay', desc: 'Banking and payment services for Pi users.', url: 'https://omnipi.app' }
+        { name: 'Omnipay', desc: 'Banking and payment services.', url: 'https://omnipi.app' }
       ],
       ecommerce: [
-        { name: 'PiChain Mall', desc: 'Pi marketplace and commerce ecosystem.', url: 'https://pichainmall.com' },
+        { name: 'PiChain Mall', desc: 'Pi marketplace.', url: 'https://pichainmall.com' },
         { name: 'Map of Pi', desc: 'Find merchants that accept Pi.', url: 'https://mapofpi.com' }
       ],
       transport: [
-        { name: 'PiRide', desc: 'Transport services using Pi coins.', url: 'https://piride.pi' },
-        { name: 'GoPi', desc: 'Ride-hailing with Pi payments.', url: 'https://gopi.pi' }
+        { name: 'PiRide', desc: 'Transport services using Pi.', url: 'https://piride.pi' }
       ],
       health: [
-        { name: 'PiHealth', desc: 'Medical appointments and records.', url: 'https://pihealth.pi' }
+        { name: 'PiHealth', desc: 'Medical appointments.', url: 'https://pihealth.pi' }
       ],
       education: [
-        { name: 'PiLearn', desc: 'Online courses and tutorials.', url: 'https://pilearn.pi' }
+        { name: 'PiLearn', desc: 'Online courses.', url: 'https://pilearn.pi' }
       ],
       realestate: [
-        { name: 'PiHomes', desc: 'Property listings and rentals.', url: 'https://pihomes.pi' }
+        { name: 'PiHomes', desc: 'Property listings.', url: 'https://pihomes.pi' }
       ],
       food: [
-        { name: 'PiEats', desc: 'Food delivery and restaurant finder.', url: 'https://pieats.pi' }
+        { name: 'PiEats', desc: 'Food delivery.', url: 'https://pieats.pi' }
       ],
       entertainment: [
-        { name: 'PiPlay', desc: 'Games and entertainment apps.', url: 'https://piplay.pi' }
+        { name: 'PiPlay', desc: 'Games and entertainment.', url: 'https://piplay.pi' }
       ],
       business: [
-        { name: 'PiBiz', desc: 'Business tools and networking.', url: 'https://pibiz.pi' }
+        { name: 'PiBiz', desc: 'Business tools.', url: 'https://pibiz.pi' }
       ],
       technology: [
-        { name: 'PiDev', desc: 'Developer tools and resources.', url: 'https://pidev.pi' }
+        { name: 'PiDev', desc: 'Developer tools.', url: 'https://pidev.pi' }
       ]
     };
 
-    // ========================
-    // FUNCTIONS
-    // ========================
+    // ==================== FUNCTIONS ====================
 
-    // Open Country Page
+    function goHome() {
+      location.reload();
+    }
+
+    function goCategories() {
+      const root = document.getElementById('appRoot');
+      root.innerHTML = `
+        <div class="hero" style="border-radius:0 0 24px 24px;">
+          <h1>📂 Categories</h1>
+          <p>Browse DApps by category</p>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="card" onclick="openCategory('finance')">💰 Finance</div>
+            <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
+            <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
+            <div class="card" onclick="openCategory('transport')">🚗 Transport</div>
+            <div class="card" onclick="openCategory('health')">🏥 Health</div>
+            <div class="card" onclick="openCategory('education')">🎓 Education</div>
+            <div class="card" onclick="openCategory('business')">💼 Business</div>
+            <div class="card" onclick="openCategory('realestate')">🏠 Real Estate</div>
+            <div class="card" onclick="openCategory('food')">🍽 Food</div>
+            <div class="card" onclick="openCategory('entertainment')">🎮 Entertainment</div>
+            <div class="card" onclick="openCategory('technology')">👨‍💻 Tech</div>
+          </div>
+        </div>
+      `;
+    }
+
     function openCountry(country) {
       const root = document.getElementById('appRoot');
-      if (country === 'all') {
-        root.innerHTML = `
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h1 style="color:#6d28d9;margin-top:10px;">🌍 All Countries</h1>
-          <p>Search any country in the Pi ecosystem</p>
-          <input placeholder="🔍 Search country..." style="width:100%;padding:14px;border:none;border-radius:14px;margin-top:14px;box-sizing:border-box;font-size:16px;">
-          <div class="grid" style="margin-top:18px;">
-            <div class="card" onclick="openCountry('tanzania')">🇹🇿 Tanzania</div>
-            <div class="card" onclick="openCountry('kenya')">🇰🇪 Kenya</div>
-            <div class="card" onclick="openCountry('uganda')">🇺🇬 Uganda</div>
-            <div class="card" onclick="openCountry('congo')">🇨🇩 Congo</div>
-            <div class="card" onclick="openCountry('zambia')">🇿🇲 Zambia</div>
-            <div class="card" onclick="openCountry('malawi')">🇲🇼 Malawi</div>
-            <div class="card" onclick="openCountry('nigeria')">🇳🇬 Nigeria</div>
-            <div class="card" onclick="openCountry('india')">🇮🇳 India</div>
-          </div>
-        `;
-        return;
-      }
-
-      const countryNames = {
+      const names = {
         tanzania: '🇹🇿 Tanzania',
         kenya: '🇰🇪 Kenya',
         uganda: '🇺🇬 Uganda',
         congo: '🇨🇩 Congo',
         zambia: '🇿🇲 Zambia',
-        malawi: '🇲🇼 Malawi',
-        nigeria: '🇳🇬 Nigeria',
-        india: '🇮🇳 India'
+        malawi: '🇲🇼 Malawi'
       };
 
       root.innerHTML = `
-        <button class="back-btn" onclick="goHome()">← Back</button>
-        <h1 style="color:#6d28d9;margin-top:10px;">${countryNames[country] || country} DApps</h1>
-        <p>Pi ecosystem DApps for ${countryNames[country] || country}</p>
-        <div class="grid" style="margin-top:18px;">
-          <div class="card" onclick="openCategory('finance')">💰 Finance</div>
-          <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
-          <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
-          <div class="card" onclick="openCategory('transport')">🚗 Transport</div>
-          <div class="card" onclick="openCategory('health')">🏥 Health</div>
-          <div class="card" onclick="openCategory('education')">🎓 Education</div>
-          <div class="card" onclick="openCategory('business')">💼 Business</div>
-          <div class="card" onclick="openCategory('realestate')">🏠 Real Estate</div>
-          <div class="card" onclick="openCategory('food')">🍽 Food</div>
-          <div class="card" onclick="openCategory('entertainment')">🎮 Entertainment</div>
-          <div class="card" onclick="openCategory('technology')">👨‍💻 Tech</div>
-          <div class="card" onclick="openCategory('other')">🌐 Other</div>
+        <div class="hero" style="border-radius:0 0 24px 24px;">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h1>${names[country] || country}</h1>
+          <p>DApps from ${names[country] || country}</p>
+        </div>
+        <div class="content">
+          <div class="grid">
+            <div class="card" onclick="openCategory('finance')">💰 Finance</div>
+            <div class="card" onclick="openCategory('banking')">🏦 Banking</div>
+            <div class="card" onclick="openCategory('ecommerce')">🛒 E-Commerce</div>
+            <div class="card" onclick="openCategory('transport')">🚗 Transport</div>
+            <div class="card" onclick="openCategory('health')">🏥 Health</div>
+            <div class="card" onclick="openCategory('education')">🎓 Education</div>
+            <div class="card" onclick="openCategory('business')">💼 Business</div>
+            <div class="card" onclick="openCategory('realestate')">🏠 Real Estate</div>
+            <div class="card" onclick="openCategory('food')">🍽 Food</div>
+            <div class="card" onclick="openCategory('entertainment')">🎮 Entertainment</div>
+            <div class="card" onclick="openCategory('technology')">👨‍💻 Tech</div>
+          </div>
         </div>
       `;
     }
 
-    // Open Category Page
     function openCategory(category) {
       const root = document.getElementById('appRoot');
       const apps = dapps[category] || [];
-      const categoryNames = {
+      const names = {
         finance: '💰 Finance',
         banking: '🏦 Banking',
         ecommerce: '🛒 E-Commerce',
@@ -302,85 +336,86 @@
         realestate: '🏠 Real Estate',
         food: '🍽 Food',
         entertainment: '🎮 Entertainment',
-        technology: '👨‍💻 Technology',
-        other: '🌐 Other'
+        technology: '👨‍💻 Technology'
       };
 
-      let appHtml = '';
-      if (apps.length === 0) {
-        appHtml = `<p style="text-align:center;color:#999;margin-top:30px;">😔 No DApps in this category yet.</p>`;
-      } else {
-        appHtml = apps.map(app => `
-          <div class="app-item">
-            <div>
-              <h3>${app.name}</h3>
-              <p>${app.desc}</p>
-            </div>
-            <a href="${app.url}" target="_blank">Open</a>
+      let html = apps.map(app => `
+        <div class="app-item">
+          <div>
+            <h3>${app.name}</h3>
+            <p>${app.desc}</p>
           </div>
-        `).join('');
-      }
+          <a href="${app.url}" target="_blank">Open</a>
+        </div>
+      `).join('');
+
+      if (!html) html = '<p style="text-align:center;color:#999;margin-top:30px;">😔 No DApps in this category yet.</p>';
 
       root.innerHTML = `
-        <button class="back-btn" onclick="goHome()">← Back</button>
-        <h1 style="color:#6d28d9;margin-top:10px;">${categoryNames[category] || category}</h1>
-        <p>Pi DApps in this category</p>
-        ${appHtml}
+        <div class="hero" style="border-radius:0 0 24px 24px;">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h1>${names[category] || category}</h1>
+          <p>DApps in this category</p>
+        </div>
+        <div class="content">${html}</div>
       `;
     }
 
-    // Add DApp (Temporary)
-    function openAddApp() {
-      alert('📝 Add Your DApp feature coming soon!\n\nPrepare:\n- App Name\n- Description\n- Category\n- URL\n- Icon');
-    }
-
-    // Search DApps
     function searchDApps(query) {
       if (!query.trim()) return;
       const root = document.getElementById('appRoot');
       const results = [];
       for (const cat in dapps) {
         dapps[cat].forEach(app => {
-          if (app.name.toLowerCase().includes(query.toLowerCase()) || 
-              app.desc.toLowerCase().includes(query.toLowerCase())) {
+          if (app.name.toLowerCase().includes(query.toLowerCase()) ||
+            app.desc.toLowerCase().includes(query.toLowerCase())) {
             results.push({ ...app, category: cat });
           }
         });
       }
 
-      if (results.length === 0) {
-        root.innerHTML = `
-          <button class="back-btn" onclick="goHome()">← Back</button>
-          <h1 style="color:#6d28d9;margin-top:10px;">🔍 Search Results</h1>
-          <p style="color:#999;margin-top:20px;">No DApps found for "${query}"</p>
-        `;
-        return;
-      }
-
-      let html = `
-        <button class="back-btn" onclick="goHome()">← Back</button>
-        <h1 style="color:#6d28d9;margin-top:10px;">🔍 Results for "${query}"</h1>
-      `;
-      results.forEach(app => {
-        html += `
-          <div class="app-item">
-            <div>
-              <h3>${app.name}</h3>
-              <p>${app.desc}</p>
-              <span style="font-size:12px;color:#6d28d9;background:#ede9fe;padding:2px 10px;border-radius:12px;">${app.category}</span>
-            </div>
-            <a href="${app.url}" target="_blank">Open</a>
+      let html = results.map(app => `
+        <div class="app-item">
+          <div>
+            <h3>${app.name}</h3>
+            <p>${app.desc}</p>
+            <span style="font-size:12px;color:#6d28d9;background:#ede9fe;padding:2px 10px;border-radius:12px;">${app.category}</span>
           </div>
-        `;
-      });
-      root.innerHTML = html;
+          <a href="${app.url}" target="_blank">Open</a>
+        </div>
+      `).join('');
+
+      if (!html) html = '<p style="text-align:center;color:#999;margin-top:30px;">😔 No DApps found.</p>';
+
+      root.innerHTML = `
+        <div class="hero" style="border-radius:0 0 24px 24px;">
+          <button class="back-btn" onclick="goHome()">← Back</button>
+          <h1>🔍 Results</h1>
+        </div>
+        <div class="content">${html}</div>
+      `;
     }
 
-    // Go Home
-    function goHome() {
-      location.reload();
+    function openAddApp() {
+      alert('📝 Add Your DApp feature coming soon!\n\nPrepare:\n- App Name\n- Description\n- Category\n- URL\n- Icon');
     }
+
+    function goFavorites() {
+      alert('⭐ Favorites feature coming soon!');
+    }
+
+    function goProfile() {
+      alert('👤 Profile feature coming soon!');
+    }
+
+    // Highlight active nav
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
   </script>
 
 </body>
-</html>
+  </html>
