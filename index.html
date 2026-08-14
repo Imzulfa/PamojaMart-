@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>MSALINA HUB</title>
+    <!-- Pi SDK Foundation -->
     <script src="https://sdk.minepi.com/pi-sdk.js">
     </script>
     <style>
@@ -50,6 +51,60 @@
             margin-top: 2px;
         }
 
+        /* ===== USER SECTION ===== */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+        .user-section .avatar {
+            width: 36px;
+            height: 36px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #6d28d9;
+            flex-shrink: 0;
+        }
+        .user-section .user-name {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            flex: 1;
+        }
+        .user-section .login-btn {
+            background: #fff;
+            color: #6d28d9;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .user-section .login-btn:active {
+            transform: scale(0.95);
+        }
+        .user-section .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         /* ===== STATS BAR ===== */
         .stats-bar {
             display: grid;
@@ -75,57 +130,6 @@
             color: #fff;
         }
 
-        /* ===== USER SECTION ===== */
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 8px 14px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
-        }
-        .user-section .avatar {
-            width: 36px;
-            height: 36px;
-            background: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            color: #6d28d9;
-            flex-shrink: 0;
-                   }
-        .user-section .user-name {
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-            flex: 1;
-        }
-        .user-section .login-btn {
-            background: #fff;
-            color: #6d28d9;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .user-section .logout-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
         .search-box {
             margin-top: 14px;
             width: 100%;
@@ -140,43 +144,6 @@
         }
         .search-box::placeholder {
             color: #a5a0b5;
-        }
-
-        /* ===== SECTION HEADER WITH VIEW ALL ===== */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 20px 0 12px;
-        }
-        .section-header .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #4c1d95;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-header .section-title span {
-            background: #ede9fe;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-size: 13px;
-            color: #6d28d9;
-        }
-        .section-header .view-all {
-            font-size: 13px;
-            font-weight: 600;
-            color: #6d28d9;
-            cursor: pointer;
-            background: none;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .section-header .view-all:active {
-            opacity: 0.6;
         }
 
         /* ===== SIDEBAR ===== */
@@ -203,8 +170,8 @@
             color: #4c1d95;
             cursor: pointer;
             float: right;
-            }
-                .sidebar h2 {
+        }
+        .sidebar h2 {
             color: #4c1d95;
             font-size: 20px;
             margin-top: 30px;
@@ -282,8 +249,39 @@
             max-width: 600px;
             margin: 0 auto;
         }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0 12px;
+        }
+        .section-header .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4c1d95;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-header .section-title span {
+            background: #ede9fe;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #6d28d9;
+        }
+        .section-header .view-all {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6d28d9;
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-        /* ===== COUNTRY FILTER ===== */
         .country-filter {
             display: flex;
             flex-wrap: wrap;
@@ -307,7 +305,6 @@
             border-color: #6d28d9;
         }
 
-        /* ===== CATEGORIES GRID ===== */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -392,7 +389,6 @@
             padding: 2px 10px;
             border-radius: 20px;
             font-weight: 700;
-            margin-left: 4px;
         }
         .dapp-card .info .meta {
             display: flex;
@@ -401,8 +397,8 @@
             font-size: 11px;
             color: #6b657e;
             margin-top: 2px;
-            }
-                .dapp-card .info .meta .badge {
+        }
+        .dapp-card .info .meta .badge {
             background: #ede9fe;
             color: #4c1d95;
             padding: 0 10px;
@@ -421,7 +417,6 @@
             color: #4b4562;
             margin-top: 3px;
         }
-        /* Updated only for admin */
         .dapp-card .info .updated {
             font-size: 11px;
             color: #9a93b0;
@@ -443,9 +438,6 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-        }
-        .dapp-card .actions button:active {
-            transform: scale(0.92);
         }
         .dapp-card .actions .share-btn {
             background: #e5e1ef;
@@ -610,7 +602,7 @@
             background: #f5f3ff;
             padding: 8px 0 12px;
         }
-                .admin-search {
+        .admin-search {
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #ede9fe;
@@ -619,9 +611,6 @@
             outline: none;
             background: #fff;
             color: #1e1b2e;
-        }
-        .admin-search:focus {
-            border-color: #6d28d9;
         }
 
         .filter-buttons {
@@ -744,7 +733,7 @@
         </div>
     </div>
 
-    <!-- SIDEBAR -->
+ <!-- SIDEBAR -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <button class="close-btn" onclick="closeSidebar()">✕</button>
@@ -779,8 +768,8 @@
             <div class="user-section" id="userSection">
                 <div class="avatar" id="userAvatar">👤</div>
                 <span class="user-name" id="userName">Guest</span>
-                <button class="login-btn" id="loginBtn" onclick="loginWithPi()">🔑 Login</button>
-                <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="display:none;">Logout</button>
+                <button class="login-btn" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
+                <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="display:none;">Logout</button>
             </div>
             <div class="stats-bar" id="statsBar">
                 <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">Total DApps</div></div>
@@ -808,7 +797,7 @@
         </div>
     </div>
 
-    <!-- BOTTOM NAV -->
+       <!-- BOTTOM NAV -->
     <div class="bottom-nav">
         <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="icon">🏠</span> Home</button>
         <button class="nav-item" data-page="categories" onclick="navigateTo('categories')"><span class="icon">📂</span> Categories</button>
@@ -846,7 +835,7 @@
             url: 'https://pichainmall.com',
             logo: '🛒',
             desc: 'Buy and sell inside the Pi ecosystem.',
-                        featured: true,
+            featured: true,
             approved: true,
             verified: true,
             updated: Date.now()
@@ -923,38 +912,108 @@
         let deleteTargetId = null;
         let adminFilter = 'all';
         let adminSearchQuery = '';
-        let piUser = null;
 
         // =============================================
-        // PI LOGIN
+        // PI AUTHENTICATION (PiService Pattern)
         // =============================================
-        function loginWithPi() {
-            Pi.authenticate(['username', 'email'], function(error, auth) {
-                if (error) {
-                    alert('Login failed: ' + error.message);
-                    return;
-                }
-                piUser = auth.user;
-                document.getElementById('userName').textContent = piUser.username || 'User';
-                document.getElementById('userAvatar').textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
-                document.getElementById('loginBtn').style.display = 'none';
-                document.getElementById('logoutBtn').style.display = 'block';
-                alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
-                navigateTo(currentPage);
-            });
+        let piUser = null;
+        let piAccessToken = null;
+
+        async function initPi() {
+            try {
+                // Pi.init() inarudisha Promise
+                await Pi.init();
+                console.log('Pi SDK initialized successfully');
+
+                // Jaribu ku-authenticate automatically
+                await autoLogin();
+            } catch (error) {
+                console.error('Pi init error:', error);
+            }
         }
 
-        function logoutPi() {
+        async function autoLogin() {
+            try {
+                // Jaribu ku-authenticate automatically
+                const auth = await Pi.authenticate(['username'], {
+                    onIncompletePaymentFound: function(payment) {
+                        console.log('Incomplete payment found:', payment);
+                    }
+                });
+                handleAuthSuccess(auth);
+            } catch (error) {
+                // User not logged in or cancelled
+                console.log('Auto login skipped:', error.message);
+                updateUIForGuest();
+            }
+        }
+
+        async function handleLogin() {
+            try {
+                const auth = await Pi.authenticate(['username'], {
+                    onIncompletePaymentFound: function(payment) {
+                        console.log('Incomplete payment found:', payment);
+                    }
+                });
+                handleAuthSuccess(auth);
+            } catch (error) {
+                alert('Login failed: ' + error.message);
+            }
+        }
+
+        function handleAuthSuccess(auth) {
+            piUser = auth.user;
+            piAccessToken = auth.accessToken;
+
+            // Update UI
+            document.getElementById('userName').textContent = piUser.username || 'User';
+            document.getElementById('userAvatar').textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'block';
+
+            // Validate token on backend (simulated for now)
+            validateTokenOnBackend(piAccessToken);
+
+            alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
+            navigateTo(currentPage);
+        }
+
+        function handleLogout() {
             piUser = null;
+            piAccessToken = null;
+            updateUIForGuest();
+            navigateTo(currentPage);
+        }
+
+        function updateUIForGuest() {
             document.getElementById('userName').textContent = 'Guest';
             document.getElementById('userAvatar').textContent = '👤';
             document.getElementById('loginBtn').style.display = 'block';
             document.getElementById('logoutBtn').style.display = 'none';
-            navigateTo(currentPage);
+        }
+
+        async function validateTokenOnBackend(accessToken) {
+            try {
+                // Simulated backend validation
+                // In production, send to your backend: POST /api/auth/pi
+                const response = await fetch('https://api.minepi.com/v2/me', {
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                     });
+                if (response.ok) {
+                    const userData = await response.json();
+                    console.log('Token validated successfully:', userData);
+                } else {
+                    console.warn('Token validation failed');
+                }
+            } catch (error) {
+                console.error('Backend validation error:', error);
+            }
         }
 
         // =============================================
-        // TRANSLATIONS (FUPI)
+        // TRANSLATIONS
         // =============================================
         const LANGUAGES = {
             sw: {
@@ -1077,7 +1136,7 @@
                 verified: '✅ Verified',
                 viewAll: 'View all →'
             },
-                        fr: {
+            fr: {
                 title: '📍 MSALINA HUB',
                 subtitle: 'Découvrez les DApps Pi Browser',
                 search: '🔍 Rechercher...',
@@ -1326,7 +1385,7 @@
             document.querySelectorAll('#sidebarLangGrid button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
-                        navigateTo(currentPage);
+            navigateTo(currentPage);
             closeSidebar();
         }
 
@@ -1427,7 +1486,7 @@
                 'Transport': '🚗',
                 'Health': '🏥',
                 'Education': '📚',
-                'Business': '💼',
+                 'Business': '💼',
                 'Real Estate': '🏠',
                 'Food & Restaurants': '🍽️',
                 'Entertainment': '🎮',
@@ -1452,7 +1511,6 @@
                 `<span class="badge">${getStatusEmoji(dapp.status)} ${dapp.status}</span>` :
                 `<span class="pending-badge">⏳ ${t('pending')}</span>`;
 
-            // Only show updated on admin
             const updatedText = showAdmin && dapp.updated ? `${t('updated')} ${timeAgo(dapp.updated)} ${t('ago')}` : '';
 
             const verifiedBadge = dapp.verified && dapp.approved ?
@@ -1509,22 +1567,22 @@
             container.innerHTML = list.map(d => buildDappCard(d, showAdmin)).join('');
         }
 
-function renderFeatured() {
-    const container = document.getElementById('featuredContainer');
-    if (!container) return;
-    
-    const total = getFilteredDapps(false).length;
-    container.innerHTML = `
-        <div style="text-align:center;padding:30px 0;background:#fff;border-radius:16px;border:2px dashed #ede9fe;">
-            <div style="font-size:48px;margin-bottom:8px;">🚀</div>
-            <p style="font-size:16px;font-weight:600;color:#4c1d95;">${total} DApps Available</p>
-            <p style="font-size:14px;color:#6b657e;margin-top:4px;">${t('featured')} on MSALINA HUB</p>
-            <button onclick="navigateTo('categories')" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
-                ${t('viewAll')}
-            </button>
-        </div>
-    `;
-}
+        function renderFeatured() {
+            const container = document.getElementById('featuredContainer');
+            if (!container) return;
+
+            const total = getFilteredDapps(false).length;
+            container.innerHTML = `
+                <div style="text-align:center;padding:30px 0;background:#fff;border-radius:16px;border:2px dashed #ede9fe;">
+                    <div style="font-size:48px;margin-bottom:8px;">🚀</div>
+                    <p style="font-size:16px;font-weight:600;color:#4c1d95;">${total} DApps Available</p>
+                    <p style="font-size:14px;color:#6b657e;margin-top:4px;">${t('featured')} on MSALINA HUB</p>
+                    <button onclick="navigateTo('categories')" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
+                        ${t('viewAll')}
+                    </button>
+                </div>
+            `;
+        }
 
         function renderCategories() {
             const container = document.getElementById('categoryGrid');
@@ -1545,7 +1603,7 @@ function renderFeatured() {
                 `;
             }).join('');
         }
-
+        
         // =============================================
         // NAVIGATION (FUPI)
         // =============================================
@@ -1565,11 +1623,11 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                         <div class="stats-bar" id="statsBar">
-                                                    <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
+                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
                             <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
                             <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
                         </div>
@@ -1608,8 +1666,8 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                         <div class="stats-bar" id="statsBar">
                             <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
@@ -1646,15 +1704,15 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                         <div class="stats-bar" id="statsBar">
                             <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
                             <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
                             <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
                         </div>
-                    </div>
+                        </div>
                     <div class="content" id="mainContent">
                         <div class="section-header">
                             <div class="section-title">${t('selectCountry')}</div>
@@ -1677,8 +1735,8 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                         <div class="stats-bar" id="statsBar">
                             <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
@@ -1736,8 +1794,8 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                     </div>
                     <div class="content" id="mainContent">
@@ -1781,8 +1839,8 @@ function renderFeatured() {
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                         </div>
                         <div class="stats-bar" id="statsBar">
                             <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
@@ -1801,7 +1859,7 @@ function renderFeatured() {
                             <div class="form-group"><label>${t('description')}</label><textarea id="appDesc" required placeholder="Describe your DApp..."></textarea></div>
                             <button type="submit" class="submit-btn">${t('submitBtn')}</button>
                         </form>
-                                               <p style="text-align:center;font-size:13px;color:#9a93b0;margin-top:16px;">${t('reviewNotice')}</p>
+                        <p style="text-align:center;font-size:13px;color:#9a93b0;margin-top:16px;">${t('reviewNotice')}</p>
                     </div>
                 `;
                 updateStats();
@@ -1850,8 +1908,8 @@ function renderFeatured() {
                     <div class="user-section" id="userSection">
                         <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                         <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                        <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                        <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                        <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                        <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                     </div>
                     <div class="stats-bar" id="statsBar">
                         <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
@@ -1883,8 +1941,8 @@ function renderFeatured() {
                     <div class="user-section" id="userSection">
                         <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                         <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                        <button class="login-btn" id="loginBtn" onclick="loginWithPi()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                        <button class="logout-btn" id="logoutBtn" onclick="logoutPi()" style="${piUser ? '' : 'display:none;'}">Logout</button>
+                        <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
+                        <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
                     </div>
                     <div class="stats-bar" id="statsBar">
                         <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
@@ -1989,7 +2047,16 @@ function renderFeatured() {
         // =============================================
         // INIT
         // =============================================
-        Pi.init();
+        // Anzisha Pi SDK automatically
+        document.addEventListener('DOMContentLoaded', function() {
+            initPi();
+        });
+
+        // Pia endesha mara moja ikiwa DOM tayari imepakiwa
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            initPi();
+        }
+
         renderCountries();
         renderFeatured();
         renderCategories();
