@@ -13,34 +13,48 @@
             box-sizing: border-box;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
-
         body {
             background: #f5f3ff;
             padding-bottom: 80px;
             min-height: 100vh;
         }
 
+        /* HERO */
         .hero {
             background: linear-gradient(135deg, #6d28d9, #9333ea);
             color: #fff;
-            padding: 32px 20px 24px;
+            padding: 20px 20px 24px;
             border-radius: 0 0 28px 28px;
-            text-align: center;
+            position: relative;
         }
-
-        .hero h1 {
-            font-size: 28px;
+        .hero-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-top h1 {
+            font-size: 22px;
             letter-spacing: -0.5px;
         }
-
+        .hero-top .menu-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .hero-top .menu-btn:active {
+            transform: scale(0.92);
+        }
         .hero p {
             opacity: 0.85;
             font-size: 14px;
-            margin-top: 4px;
+            margin-top: 2px;
         }
-
         .search-box {
-            margin-top: 16px;
+            margin-top: 14px;
             width: 100%;
             padding: 14px 18px;
             border: none;
@@ -51,17 +65,115 @@
             color: #1e1b2e;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-
         .search-box::placeholder {
             color: #a5a0b5;
         }
 
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: #fff;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            transition: left 0.3s ease;
+            padding: 24px 20px;
+            overflow-y: auto;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #4c1d95;
+            cursor: pointer;
+            float: right;
+        }
+        .sidebar h2 {
+            color: #4c1d95;
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 16px;
+        }
+        .sidebar .menu-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e1b2e;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .sidebar .menu-item:active {
+            background: #ede9fe;
+        }
+        .sidebar .menu-item .icon {
+            margin-right: 12px;
+        }
+        .sidebar .lang-section {
+            margin-top: 20px;
+            border-top: 2px solid #f0edf9;
+            padding-top: 16px;
+        }
+        .sidebar .lang-section label {
+            font-weight: 600;
+            color: #4c1d95;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .sidebar .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .sidebar .lang-grid button {
+            background: #f5f3ff;
+            border: 2px solid transparent;
+            padding: 8px 6px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e1b2e;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .sidebar .lang-grid button.active {
+            border-color: #6d28d9;
+            background: #ede9fe;
+            color: #4c1d95;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 9998;
+            display: none;
+        }
+        .sidebar-overlay.show {
+            display: block;
+        }
+
+        /* CONTENT */
         .content {
             padding: 20px 16px;
             max-width: 600px;
             margin: 0 auto;
         }
-
         .section-title {
             font-size: 18px;
             font-weight: 700;
@@ -71,7 +183,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .section-title span {
             background: #ede9fe;
             padding: 2px 12px;
@@ -80,12 +191,40 @@
             color: #6d28d9;
         }
 
+        /* COUNTRY FILTER */
+        .country-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 12px 0 20px;
+        }
+        .country-chip {
+            background: #ede9fe;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4c1d95;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .country-chip.active {
+            background: #6d28d9;
+            color: #fff;
+            border-color: #6d28d9;
+        }
+        .country-chip:active {
+            transform: scale(0.95);
+        }
+
+        /* CARDS */
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
-
         .card {
             background: #fff;
             border-radius: 20px;
@@ -99,50 +238,17 @@
             border: 2px solid transparent;
             transition: 0.2s ease;
         }
-
         .card:active {
             transform: scale(0.96);
             border-color: #6d28d9;
         }
-
         .card .emoji {
             font-size: 28px;
             display: block;
             margin-bottom: 6px;
         }
 
-        .country-chip {
-            display: inline-block;
-            background: #ede9fe;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #4c1d95;
-            margin: 4px 6px 4px 0;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 2px solid transparent;
-        }
-
-        .country-chip.active {
-            background: #6d28d9;
-            color: #fff;
-            border-color: #6d28d9;
-        }
-
-        .country-chip:active {
-            transform: scale(0.95);
-        }
-
-        .country-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 16px 0 12px;
-            justify-content: center;
-        }
-
+        /* DAPP CARD */
         .dapp-card {
             background: #fff;
             border-radius: 20px;
@@ -152,10 +258,8 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            transition: 0.2s;
             border: 1px solid #f0edf9;
         }
-
         .dapp-card .logo {
             width: 52px;
             height: 52px;
@@ -167,16 +271,13 @@
             font-size: 28px;
             flex-shrink: 0;
         }
-
         .dapp-card .info {
             flex: 1;
         }
-
         .dapp-card .info h4 {
             font-size: 16px;
             color: #1e1b2e;
         }
-
         .dapp-card .info .meta {
             display: flex;
             flex-wrap: wrap;
@@ -185,7 +286,6 @@
             color: #6b657e;
             margin-top: 3px;
         }
-
         .dapp-card .info .meta .badge {
             background: #ede9fe;
             color: #4c1d95;
@@ -193,7 +293,6 @@
             border-radius: 20px;
             font-weight: 500;
         }
-
         .dapp-card .info .meta .pending-badge {
             background: #fef3c7;
             color: #b45309;
@@ -201,20 +300,17 @@
             border-radius: 20px;
             font-weight: 500;
         }
-
         .dapp-card .info .desc {
             font-size: 13px;
             color: #4b4562;
             margin-top: 4px;
         }
-
         .dapp-card .actions {
             display: flex;
             gap: 6px;
             flex-shrink: 0;
             flex-wrap: wrap;
         }
-
         .dapp-card .actions button {
             background: #6d28d9;
             color: #fff;
@@ -224,30 +320,22 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.15s;
         }
-
-        .dapp-card .actions button:active {
-            transform: scale(0.94);
-        }
-
         .dapp-card .actions .share-btn {
             background: #e5e1ef;
             color: #1e1b2e;
         }
-
         .dapp-card .actions .approve-btn {
             background: #16a34a;
         }
-
         .dapp-card .actions .reject-btn {
             background: #dc2626;
         }
-
         .dapp-card .actions .delete-btn {
             background: #dc2626;
         }
 
+        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -261,7 +349,6 @@
             box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
             z-index: 999;
         }
-
         .nav-item {
             background: none;
             border: none;
@@ -273,13 +360,11 @@
             transition: 0.15s;
             font-weight: 500;
         }
-
         .nav-item .icon {
             font-size: 24px;
             display: block;
             margin-bottom: 2px;
         }
-
         .nav-item.active {
             color: #6d28d9;
             font-weight: 700;
@@ -305,10 +390,10 @@
             color: #9a93b0;
         }
 
+        /* FORM */
         .form-group {
             margin-bottom: 18px;
         }
-
         .form-group label {
             font-weight: 600;
             font-size: 14px;
@@ -316,7 +401,6 @@
             display: block;
             margin-bottom: 5px;
         }
-
         .form-group input,
         .form-group select,
         .form-group textarea {
@@ -329,13 +413,11 @@
             outline: none;
             transition: 0.2s;
         }
-
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: #6d28d9;
         }
-
         .form-group textarea {
             resize: vertical;
             min-height: 80px;
@@ -351,13 +433,9 @@
             font-weight: 700;
             width: 100%;
             cursor: pointer;
-            transition: 0.15s;
         }
 
-        .submit-btn:active {
-            transform: scale(0.97);
-        }
-
+        /* ADMIN */
         .admin-section {
             background: #fff;
             border-radius: 20px;
@@ -365,81 +443,9 @@
             margin-bottom: 16px;
             border: 2px solid #f0edf9;
         }
-
         .admin-section h3 {
             color: #4c1d95;
             margin-bottom: 8px;
-        }
-
-        .admin-section .count {
-            font-size: 14px;
-            color: #6b657e;
-        }
-
-        .admin-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 8px;
-        }
-
-        .admin-actions button {
-            padding: 6px 14px;
-            border: none;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .admin-actions .approve {
-            background: #16a34a;
-            color: #fff;
-        }
-
-        .admin-actions .reject {
-            background: #dc2626;
-            color: #fff;
-        }
-
-        .admin-actions .delete {
-            background: #dc2626;
-            color: #fff;
-        }
-
-        .admin-actions .edit {
-            background: #6d28d9;
-            color: #fff;
-        }
-
-        .language-selector {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .lang-btn.active {
-            background: #fff;
-            color: #6d28d9;
-            border-color: #fff;
-        }
-
-        .lang-btn:active {
-            transform: scale(0.95);
         }
 
         @media (max-width: 480px) {
@@ -457,68 +463,68 @@
         }
     </style>
 </head>
-
 <body>
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">✕</button>
+        <h2>📍 MSALINA HUB</h2>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('home')"><span class="icon">🏠</span> Home</button>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('categories')"><span class="icon">📂</span> Categories</button>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('mainnet')"><span class="icon">🔵</span> Mainnet</button>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('testnet')"><span class="icon">🧪</span> Testnet</button>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('admin')"><span class="icon">🔐</span> Admin</button>
+        <button class="menu-item" onclick="closeSidebar(); navigateTo('submit')"><span class="icon">➕</span> Submit</button>
+        <div class="lang-section">
+            <label>🌐 Language</label>
+            <div class="lang-grid" id="sidebarLangGrid">
+                <button data-lang="sw" onclick="setLanguage('sw')">Kiswahili</button>
+                <button data-lang="en" onclick="setLanguage('en')">English</button>
+                <button data-lang="fr" onclick="setLanguage('fr')">Français</button>
+                <button data-lang="hi" onclick="setLanguage('hi')">हिन्दी</button>
+                <button data-lang="zh" onclick="setLanguage('zh')">中文</button>
+                <button data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ROOT APP -->
     <div id="appRoot">
-        <!-- HERO -->
         <div class="hero">
-            <h1>📍 MSALINA HUB</h1>
-            <p>Discover Pi Browser DApps</p>
-            <div class="language-selector" id="languageSelector">
-                <button class="lang-btn active" data-lang="sw" onclick="setLanguage('sw')">Kiswahili</button>
-                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
-                <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
-                <button class="lang-btn" data-lang="hi" onclick="setLanguage('hi')">हिन्दी</button>
-                <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
-                <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+            <div class="hero-top">
+                <h1>📍 MSALINA HUB</h1>
+                <button class="menu-btn" onclick="openSidebar()">☰</button>
             </div>
+            <p>Discover Pi Browser DApps</p>
             <input class="search-box" id="searchInput" placeholder="🔍 Search DApps..." oninput="handleSearch(this.value)" />
         </div>
-
         <div class="content" id="mainContent">
-            <!-- COUNTRIES -->
             <div class="section-title">🌍 Select Country</div>
             <div class="country-filter" id="countryFilter"></div>
-
-            <!-- FEATURED -->
             <div class="section-title">⭐ Featured DApps <span>Top</span></div>
             <div id="featuredContainer"></div>
-
-            <!-- CATEGORIES -->
             <div class="section-title">📂 Categories</div>
             <div class="grid-2" id="categoryGrid"></div>
         </div>
     </div>
 
-<!-- BOTTOM NAV -->
-<div class="bottom-nav" id="bottomNav">
-    <button class="nav-item active" data-page="home" onclick="navigateTo('home')">
-        <span class="icon">🏠</span> Home
-    </button>
-    <button class="nav-item" data-page="categories" onclick="navigateTo('categories')">
-        <span class="icon">📂</span> Categories
-    </button>
-    <button class="nav-item" data-page="mainnet" onclick="navigateTo('mainnet')">
-        <span class="icon">🔵</span> Mainnet
-    </button>
-    <button class="nav-item" data-page="testnet" onclick="navigateTo('testnet')">
-        <span class="icon">🧪</span> Testnet
-    </button>
-    <button class="nav-item" data-page="admin" onclick="navigateTo('admin')">
-        <span class="icon">🔐</span> Admin
-    </button>
-    <button class="nav-item" data-page="submit" onclick="navigateTo('submit')">
-        <span class="icon">➕</span> Submit
-    </button>
-</div>
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="icon">🏠</span> Home</button>
+        <button class="nav-item" data-page="categories" onclick="navigateTo('categories')"><span class="icon">📂</span> Categories</button>
+        <button class="nav-item" data-page="mainnet" onclick="navigateTo('mainnet')"><span class="icon">🔵</span> Mainnet</button>
+        <button class="nav-item" data-page="testnet" onclick="navigateTo('testnet')"><span class="icon">🧪</span> Testnet</button>
+        <button class="nav-item" data-page="admin" onclick="navigateTo('admin')"><span class="icon">🔐</span> Admin</button>
+        <button class="nav-item" data-page="submit" onclick="navigateTo('submit')"><span class="icon">➕</span> Submit</button>
+    </div>
 
     <script>
-        // ============================================================
-        // 1. DATA
-        // ============================================================
-
+        // =============================================
+        // DATA
+        // =============================================
         const COUNTRIES = [
             { code: 'tanzania', name: '🇹🇿 Tanzania' },
             { code: 'kenya', name: '🇰🇪 Kenya' },
@@ -534,7 +540,6 @@
             'Food & Restaurants', 'Entertainment', 'Technology', 'Other'
         ];
 
-        // DApps zilizo na nchi na hali ya approval
         let DAPPS = [{
             id: 1,
             name: 'Pi Commerce Tz',
@@ -607,10 +612,6 @@
         let currentPage = 'home';
         let currentLang = 'sw';
 
-        // ============================================================
-        // 2. TRANSLATION
-        // ============================================================
-
         const LANGUAGES = {
             sw: {
                 title: '📍 MSALINA HUB',
@@ -638,7 +639,6 @@
                 approve: 'Approve',
                 reject: 'Reject',
                 delete: 'Delete',
-                edit: 'Edit',
                 appName: 'DApp Name *',
                 appUrl: 'Pi Browser URL *',
                 country: 'Country *',
@@ -684,7 +684,6 @@
                 approve: 'Approve',
                 reject: 'Reject',
                 delete: 'Delete',
-                edit: 'Edit',
                 appName: 'DApp Name *',
                 appUrl: 'Pi Browser URL *',
                 country: 'Country *',
@@ -730,7 +729,6 @@
                 approve: 'Approuver',
                 reject: 'Rejeter',
                 delete: 'Supprimer',
-                edit: 'Modifier',
                 appName: 'Nom de la DApp *',
                 appUrl: 'URL Pi Browser *',
                 country: 'Pays *',
@@ -776,7 +774,6 @@
                 approve: 'स्वीकार करें',
                 reject: 'अस्वीकार करें',
                 delete: 'हटाएं',
-                edit: 'संपादित करें',
                 appName: 'DApp नाम *',
                 appUrl: 'Pi ब्राउज़र URL *',
                 country: 'देश *',
@@ -822,7 +819,6 @@
                 approve: '批准',
                 reject: '拒绝',
                 delete: '删除',
-                edit: '编辑',
                 appName: 'DApp名称 *',
                 appUrl: 'Pi浏览器URL *',
                 country: '国家 *',
@@ -868,7 +864,6 @@
                 approve: 'موافقة',
                 reject: 'رفض',
                 delete: 'حذف',
-                edit: 'تعديل',
                 appName: 'اسم التطبيق *',
                 appUrl: 'رابط Pi Browser *',
                 country: 'الدولة *',
@@ -890,25 +885,28 @@
             }
         };
 
-        // ============================================================
-        // 3. TRANSLATION HELPERS
-        // ============================================================
-
-        function t(key) {
-            return LANGUAGES[currentLang]?.[key] || LANGUAGES.sw[key] || key;
-        }
+        function t(key) { return LANGUAGES[currentLang]?.[key] || LANGUAGES.sw[key] || key; }
 
         function setLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
+            document.querySelectorAll('#sidebarLangGrid button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             navigateTo(currentPage);
+            closeSidebar();
         }
 
-        // ============================================================
-        // 4. RENDER FUNCTIONS
-        // ============================================================
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+            document.body.style.overflow = '';
+        }
 
         function renderCountries() {
             const container = document.getElementById('countryFilter');
@@ -968,7 +966,6 @@
         }
 
         function buildDappCard(dapp, showAdmin = false) {
-            const statusLabel = dapp.approved ? t('approved') : t('pending');
             const statusBadge = dapp.approved ?
                 `<span class="badge">${getStatusEmoji(dapp.status)} ${dapp.status}</span>` :
                 `<span class="pending-badge">⏳ ${t('pending')}</span>`;
@@ -1033,9 +1030,7 @@
             if (!container) return;
             const filtered = getFilteredDapps(false);
             const counts = {};
-            filtered.forEach(d => {
-                counts[d.category] = (counts[d.category] || 0) + 1;
-            });
+            filtered.forEach(d => { counts[d.category] = (counts[d.category] || 0) + 1; });
 
             container.innerHTML = CATEGORIES.map(cat => {
                 const count = counts[cat] || 0;
@@ -1049,32 +1044,22 @@
             }).join('');
         }
 
-        // ============================================================
-        // 5. NAVIGATION
-        // ============================================================
-
         function navigateTo(page) {
             currentPage = page;
             document.querySelectorAll('.nav-item').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.page === page);
             });
+            document.querySelectorAll('#sidebarLangGrid button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === currentLang);
+            });
 
             const root = document.getElementById('appRoot');
 
-            // HOME
             if (page === 'home') {
                 root.innerHTML = `
                     <div class="hero">
-                        <h1>📍 MSALINA HUB</h1>
+                        <div class="hero-top"><h1>📍 MSALINA HUB</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                         <p>${t('subtitle')}</p>
-                        <div class="language-selector" id="languageSelector">
-                            <button class="lang-btn ${currentLang === 'sw' ? 'active' : ''}" data-lang="sw" onclick="setLanguage('sw')">Kiswahili</button>
-                            <button class="lang-btn ${currentLang === 'en' ? 'active' : ''}" data-lang="en" onclick="setLanguage('en')">English</button>
-                            <button class="lang-btn ${currentLang === 'fr' ? 'active' : ''}" data-lang="fr" onclick="setLanguage('fr')">Français</button>
-                            <button class="lang-btn ${currentLang === 'hi' ? 'active' : ''}" data-lang="hi" onclick="setLanguage('hi')">हिन्दी</button>
-                            <button class="lang-btn ${currentLang === 'zh' ? 'active' : ''}" data-lang="zh" onclick="setLanguage('zh')">中文</button>
-                            <button class="lang-btn ${currentLang === 'ar' ? 'active' : ''}" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
-                        </div>
                         <input class="search-box" id="searchInput" placeholder="${t('search')}" oninput="handleSearch(this.value)" />
                     </div>
                     <div class="content" id="mainContent">
@@ -1092,11 +1077,10 @@
                 return;
             }
 
-            // CATEGORIES
             if (page === 'categories') {
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <h1>📂 ${t('categories')}</h1>
+                        <div class="hero-top"><h1>📂 ${t('categories')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                         <p>${t('subtitle')}</p>
                     </div>
                     <div class="content" id="mainContent">
@@ -1116,12 +1100,11 @@
                 return;
             }
 
-            // MAINNET
             if (page === 'mainnet') {
                 const filtered = getFilteredDapps(false).filter(d => d.status === 'Mainnet');
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <h1>🔵 ${t('mainnet')}</h1>
+                        <div class="hero-top"><h1>🔵 ${t('mainnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                         <p>${t('subtitle')}</p>
                     </div>
                     <div class="content" id="mainContent">
@@ -1134,12 +1117,11 @@
                 return;
             }
 
-            // TESTNET
             if (page === 'testnet') {
                 const filtered = getFilteredDapps(false).filter(d => d.status === 'Testnet' || d.status === 'App Studio');
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <h1>🧪 ${t('testnet')}</h1>
+                        <div class="hero-top"><h1>🧪 ${t('testnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                         <p>${t('subtitle')}</p>
                     </div>
                     <div class="content" id="mainContent">
@@ -1152,53 +1134,37 @@
                 return;
             }
 
-            // SUBMIT
+            if (page === 'admin') {
+                const pending = DAPPS.filter(d => !d.approved);
+                const all = DAPPS;
+                root.innerHTML = `
+                    <div class="hero" style="border-radius:0 0 28px 28px;">
+                        <div class="hero-top"><h1>🔐 ${t('adminPanel')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
+                        <p>Manage DApps on MSALINA HUB</p>
+                    </div>
+                    <div class="content" id="mainContent">
+                        <div class="admin-section"><h3>⏳ ${t('pendingApps')} (${pending.length})</h3>${pending.length ? pending.map(d => buildDappCard(d, true)).join('') : '<p class="empty-state">✅ No pending DApps.</p>'}</div>
+                        <div class="admin-section"><h3>📋 ${t('allApps')} (${all.length})</h3>${all.length ? all.map(d => buildDappCard(d, true)).join('') : '<p class="empty-state">No DApps found.</p>'}</div>
+                    </div>
+                `;
+                return;
+            }
+
             if (page === 'submit') {
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <h1>➕ ${t('submit')}</h1>
+                        <div class="hero-top"><h1>➕ ${t('submit')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                         <p>${t('submitDesc')}</p>
                     </div>
                     <div class="content" id="mainContent">
                         <form id="submitForm" onsubmit="handleSubmit(event)">
-                            <div class="form-group">
-                                <label>${t('appName')}</label>
-                                <input type="text" id="appName" required placeholder="e.g. Pi Commerce" />
-                            </div>
-                            <div class="form-group">
-                                <label>${t('appUrl')}</label>
-                                <input type="url" id="appUrl" required placeholder="https://your-dapp.pi" />
-                            </div>
-                            <div class="form-group">
-                                <label>${t('country')}</label>
-                                <select id="appCountry" required>
-                                    <option value="">${t('selectCountryLabel')}</option>
-                                    ${COUNTRIES.map(c => `<option value="${c.code}">${c.name}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>${t('category')}</label>
-                                <select id="appCategory" required>
-                                    <option value="">${t('selectCountryLabel')}</option>
-                                    ${CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>${t('status')}</label>
-                                <select id="appStatus" required>
-                                    <option value="Mainnet">${t('mainnetLabel')}</option>
-                                    <option value="Testnet">${t('testnetLabel')}</option>
-                                    <option value="App Studio">${t('appStudioLabel')}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>${t('logo')}</label>
-                                <input type="text" id="appLogo" placeholder="e.g. 🛒 or https://example.com/logo.png" />
-                            </div>
-                            <div class="form-group">
-                                <label>${t('description')}</label>
-                                <textarea id="appDesc" required placeholder="Describe your DApp..."></textarea>
-                            </div>
+                            <div class="form-group"><label>${t('appName')}</label><input type="text" id="appName" required placeholder="e.g. Pi Commerce" /></div>
+                            <div class="form-group"><label>${t('appUrl')}</label><input type="url" id="appUrl" required placeholder="https://your-dapp.pi" /></div>
+                            <div class="form-group"><label>${t('country')}</label><select id="appCountry" required><option value="">${t('selectCountryLabel')}</option>${COUNTRIES.map(c => `<option value="${c.code}">${c.name}</option>`).join('')}</select></div>
+                            <div class="form-group"><label>${t('category')}</label><select id="appCategory" required><option value="">${t('selectCountryLabel')}</option>${CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')}</select></div>
+                            <div class="form-group"><label>${t('status')}</label><select id="appStatus" required><option value="Mainnet">${t('mainnetLabel')}</option><option value="Testnet">${t('testnetLabel')}</option><option value="App Studio">${t('appStudioLabel')}</option></select></div>
+                            <div class="form-group"><label>${t('logo')}</label><input type="text" id="appLogo" placeholder="e.g. 🛒 or https://example.com/logo.png" /></div>
+                            <div class="form-group"><label>${t('description')}</label><textarea id="appDesc" required placeholder="Describe your DApp..."></textarea></div>
                             <button type="submit" class="submit-btn">${t('submitBtn')}</button>
                         </form>
                         <p style="text-align:center;font-size:13px;color:#9a93b0;margin-top:16px;">${t('reviewNotice')}</p>
@@ -1207,10 +1173,6 @@
                 return;
             }
         }
-
-        // ============================================================
-        // 6. ACTIONS
-        // ============================================================
 
         function openDApp(url) {
             if (url) window.open(url, '_blank');
@@ -1231,7 +1193,7 @@
             const root = document.getElementById('appRoot');
             root.innerHTML = `
                 <div class="hero" style="border-radius:0 0 28px 28px;">
-                    <button class="back-btn" onclick="navigateTo('home')">${t('back')}</button>
+                    <div class="hero-top"><button class="back-btn" onclick="navigateTo('home')">${t('back')}</button><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                     <h1>📂 ${category}</h1>
                     <p>${t('subtitle')}</p>
                 </div>
@@ -1253,17 +1215,13 @@
             const root = document.getElementById('appRoot');
             root.innerHTML = `
                 <div class="hero" style="border-radius:0 0 28px 28px;">
-                    <button class="back-btn" onclick="navigateTo('home')">${t('back')}</button>
+                    <div class="hero-top"><button class="back-btn" onclick="navigateTo('home')">${t('back')}</button><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                     <h1>${t('resultsFor').replace('{query}', query)}</h1>
                 </div>
                 <div class="content" id="mainContent"></div>
             `;
             renderDapps(results, false);
         }
-
-        // ============================================================
-        // 7. SUBMIT & ADMIN
-        // ============================================================
 
         function handleSubmit(e) {
             e.preventDefault();
@@ -1300,20 +1258,16 @@
 
         function approveDApp(id) {
             const dapp = DAPPS.find(d => d.id === id);
-            if (dapp) {
-                dapp.approved = true;
+            if (dapp) { dapp.approved = true;
                 alert(`✅ "${dapp.name}" has been approved!`);
-                navigateTo(currentPage);
-            }
+                navigateTo(currentPage); }
         }
 
         function rejectDApp(id) {
             const dapp = DAPPS.find(d => d.id === id);
-            if (dapp) {
-                dapp.approved = false;
+            if (dapp) { dapp.approved = false;
                 alert(`❌ "${dapp.name}" has been rejected.`);
-                navigateTo(currentPage);
-            }
+                navigateTo(currentPage); }
         }
 
         function deleteDApp(id) {
@@ -1324,10 +1278,9 @@
             }
         }
 
-        // ============================================================
-        // 8. INIT
-        // ============================================================
-
+        // =============================================
+        // INIT
+        // =============================================
         Pi.init();
         renderCountries();
         renderFeatured();
