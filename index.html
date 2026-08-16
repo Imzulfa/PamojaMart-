@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>MSALINA HUB</title>
     <!-- Pi SDK Foundation -->
-    <script src="https://sdk.minepi.com/pi-sdk.js">
-    </script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -20,8 +18,6 @@
             padding-bottom: 80px;
             min-height: 100vh;
         }
-
-        /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, #6d28d9, #9333ea);
             color: #fff;
@@ -50,8 +46,6 @@
             font-size: 14px;
             margin-top: 2px;
         }
-
-        /* ===== USER SECTION ===== */
         .user-section {
             display: flex;
             align-items: center;
@@ -91,9 +85,6 @@
             font-weight: 700;
             cursor: pointer;
         }
-        .user-section .login-btn:active {
-            transform: scale(0.95);
-        }
         .user-section .logout-btn {
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
@@ -104,8 +95,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-
-        /* ===== STATS BAR ===== */
         .stats-bar {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -129,7 +118,6 @@
             opacity: 0.8;
             color: #fff;
         }
-
         .search-box {
             margin-top: 14px;
             width: 100%;
@@ -145,105 +133,6 @@
         .search-box::placeholder {
             color: #a5a0b5;
         }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -280px;
-            width: 280px;
-            height: 100%;
-            background: #fff;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
-            z-index: 9999;
-            transition: left 0.3s ease;
-            padding: 24px 20px;
-            overflow-y: auto;
-        }
-        .sidebar.open {
-            left: 0;
-        }
-        .sidebar .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #4c1d95;
-            cursor: pointer;
-            float: right;
-        }
-        .sidebar h2 {
-            color: #4c1d95;
-            font-size: 20px;
-            margin-top: 30px;
-            margin-bottom: 16px;
-        }
-        .sidebar .menu-item {
-            display: block;
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1e1b2e;
-            cursor: pointer;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-        }
-        .sidebar .menu-item:active {
-            background: #ede9fe;
-        }
-        .sidebar .menu-item .icon {
-            margin-right: 12px;
-        }
-        .sidebar .lang-section {
-            margin-top: 20px;
-            border-top: 2px solid #f0edf9;
-            padding-top: 16px;
-        }
-        .sidebar .lang-section label {
-            font-weight: 600;
-            color: #4c1d95;
-            font-size: 14px;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .sidebar .lang-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-        .sidebar .lang-grid button {
-            background: #f5f3ff;
-            border: 2px solid transparent;
-            padding: 8px 6px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #1e1b2e;
-            cursor: pointer;
-        }
-        .sidebar .lang-grid button.active {
-            border-color: #6d28d9;
-            background: #ede9fe;
-            color: #4c1d95;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 9998;
-            display: none;
-        }
-        .sidebar-overlay.show {
-            display: block;
-        }
-
-        /* ===== CONTENT ===== */
         .content {
             padding: 20px 16px;
             max-width: 600px;
@@ -281,7 +170,6 @@
             align-items: center;
             gap: 4px;
         }
-
         .country-filter {
             display: flex;
             flex-wrap: wrap;
@@ -304,7 +192,6 @@
             color: #fff;
             border-color: #6d28d9;
         }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -339,8 +226,6 @@
             color: #b0a8c0;
             font-weight: 400;
         }
-
-        /* ===== DAPP CARD ===== */
         .dapp-card {
             background: #fff;
             border-radius: 16px;
@@ -417,11 +302,6 @@
             color: #4b4562;
             margin-top: 3px;
         }
-        .dapp-card .info .updated {
-            font-size: 11px;
-            color: #9a93b0;
-            margin-top: 3px;
-        }
         .dapp-card .actions {
             display: flex;
             gap: 6px;
@@ -445,21 +325,6 @@
             font-size: 16px;
             padding: 4px 12px;
         }
-        .dapp-card .actions .approve-btn {
-            background: #16a34a;
-        }
-        .dapp-card .actions .reject-btn {
-            background: #dc2626;
-        }
-        .dapp-card .actions .delete-btn {
-            background: #dc2626;
-        }
-        .dapp-card .actions .edit-btn {
-            background: #f59e0b;
-            color: #1e1b2e;
-        }
-
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -492,205 +357,12 @@
             color: #6d28d9;
             font-weight: 700;
         }
-
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 15px;
-            font-weight: 600;
-            color: #6d28d9;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            margin-bottom: 12px;
-            padding: 6px 0;
-        }
-
         .empty-state {
             text-align: center;
             padding: 20px 0;
             color: #9a93b0;
             font-size: 14px;
         }
-
-        /* ===== FORM ===== */
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group label {
-            font-weight: 600;
-            font-size: 14px;
-            color: #1e1b2e;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #ede9fe;
-            border-radius: 16px;
-            font-size: 15px;
-            background: #fff;
-            outline: none;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #6d28d9;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-        .submit-btn {
-            background: #6d28d9;
-            color: #fff;
-            border: none;
-            padding: 16px;
-            border-radius: 40px;
-            font-size: 18px;
-            font-weight: 700;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        /* ===== ADMIN ===== */
-        .admin-section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 14px 16px;
-            margin-bottom: 14px;
-            border: 2px solid #f0edf9;
-        }
-        .admin-section h3 {
-            color: #4c1d95;
-            font-size: 16px;
-            margin-bottom: 6px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        .stat-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 14px 8px;
-            text-align: center;
-            border: 2px solid #f0edf9;
-        }
-        .stat-card .number {
-            font-size: 24px;
-            font-weight: 700;
-            color: #4c1d95;
-        }
-        .stat-card .label {
-            font-size: 11px;
-            color: #6b657e;
-            margin-top: 2px;
-        }
-
-        .admin-search-wrapper {
-            position: sticky;
-            top: 10px;
-            z-index: 20;
-            background: #f5f3ff;
-            padding: 8px 0 12px;
-        }
-        .admin-search {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #ede9fe;
-            border-radius: 16px;
-            font-size: 15px;
-            outline: none;
-            background: #fff;
-            color: #1e1b2e;
-        }
-
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-        .filter-btn {
-            background: #f5f3ff;
-            border: 2px solid transparent;
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #1e1b2e;
-            cursor: pointer;
-        }
-        .filter-btn.active {
-            border-color: #6d28d9;
-            background: #ede9fe;
-            color: #4c1d95;
-        }
-
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 99999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-overlay.show {
-            display: flex;
-        }
-        .modal-box {
-            background: #fff;
-            border-radius: 24px;
-            padding: 30px 24px;
-            max-width: 380px;
-            width: 90%;
-            text-align: center;
-        }
-        .modal-box h3 {
-            color: #dc2626;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .modal-box p {
-            color: #6b657e;
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
-        .modal-box .modal-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
-        .modal-box .modal-actions button {
-            padding: 10px 28px;
-            border: none;
-            border-radius: 30px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .modal-box .modal-actions .cancel-btn {
-            background: #e5e1ef;
-            color: #1e1b2e;
-        }
-        .modal-box .modal-actions .confirm-delete-btn {
-            background: #dc2626;
-            color: #fff;
-        }
-
         @media (max-width: 480px) {
             .grid-2 {
                 grid-template-columns: 1fr 1fr;
@@ -703,10 +375,6 @@
             .dapp-card .actions {
                 width: 100%;
                 justify-content: flex-start;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
             }
             .stats-bar {
                 grid-template-columns: 1fr 1fr 1fr;
@@ -721,93 +389,158 @@
 </head>
 <body>
 
-    <!-- MODAL -->
-    <div class="modal-overlay" id="deleteModal">
-        <div class="modal-box">
-            <h3>🗑️ Delete DApp?</h3>
-            <p id="deleteModalMessage">Are you sure you want to delete this DApp? This action cannot be undone.</p>
-            <div class="modal-actions">
-                <button class="cancel-btn" onclick="closeDeleteModal()">Cancel</button>
-                <button class="confirm-delete-btn" onclick="confirmDelete()">Delete</button>
-            </div>
+    <div class="hero">
+        <div class="hero-top">
+            <h1>📍 MSALINA HUB</h1>
+            <button class="menu-btn" onclick="openSidebar()">☰</button>
         </div>
+        <p>Discover Pi Browser DApps</p>
+        <div class="user-section" id="userSection">
+            <div class="avatar" id="userAvatar">👤</div>
+            <span class="user-name" id="userName">Guest</span>
+            <button class="login-btn" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
+            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="display:none;">Logout</button>
+        </div>
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">Total DApps</div></div>
+            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">Verified</div></div>
+            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
+        </div>
+        <input class="search-box" id="searchInput" placeholder="🔍 Search DApps..." oninput="handleSearch(this.value)" />
+    </div>
+    <div class="content" id="mainContent">
+        <div class="section-header">
+            <div class="section-title">🌍 Select Country</div>
+        </div>
+        <div class="country-filter" id="countryFilter"></div>
+        <div class="section-header">
+            <div class="section-title">⭐ Featured DApps <span>Top</span></div>
+            <button class="view-all" onclick="navigateToCategories()">View all →</button>
+        </div>
+        <div id="featuredContainer"></div>
+        <div class="section-header">
+            <div class="section-title">📂 Categories</div>
+        </div>
+        <div class="grid-2" id="categoryGrid"></div>
     </div>
 
- <!-- SIDEBAR -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <div class="sidebar" id="sidebar">
-        <button class="close-btn" onclick="closeSidebar()">✕</button>
-        <h2>📍 MSALINA HUB</h2>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('home')"><span class="icon">🏠</span> Home</button>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('categories')"><span class="icon">📂</span> Categories</button>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('mainnet')"><span class="icon">🔵</span> Mainnet</button>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('testnet')"><span class="icon">🧪</span> Testnet</button>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('admin')"><span class="icon">🔐</span> Admin</button>
-        <button class="menu-item" onclick="closeSidebar(); navigateTo('submit')"><span class="icon">➕</span> Submit</button>
-        <div class="lang-section">
-            <label>🌐 Language</label>
-            <div class="lang-grid" id="sidebarLangGrid">
-                <button data-lang="sw" onclick="setLanguage('sw')">Kiswahili</button>
-                <button data-lang="en" onclick="setLanguage('en')">English</button>
-                <button data-lang="fr" onclick="setLanguage('fr')">Français</button>
-                <button data-lang="hi" onclick="setLanguage('hi')">हिन्दी</button>
-                <button data-lang="zh" onclick="setLanguage('zh')">中文</button>
-                <button data-lang="ar" onclick="setLanguage('ar')">العربية</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ROOT APP -->
-    <div id="appRoot">
-        <div class="hero">
-            <div class="hero-top">
-                <h1>📍 MSALINA HUB</h1>
-                <button class="menu-btn" onclick="openSidebar()">☰</button>
-            </div>
-            <p>Discover Pi Browser DApps</p>
-            <div class="user-section" id="userSection">
-                <div class="avatar" id="userAvatar">👤</div>
-                <span class="user-name" id="userName">Guest</span>
-                <button class="login-btn" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
-                <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="display:none;">Logout</button>
-            </div>
-            <div class="stats-bar" id="statsBar">
-                <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">Total DApps</div></div>
-                <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">Verified</div></div>
-                <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-            </div>
-            <input class="search-box" id="searchInput" placeholder="🔍 Search DApps..." oninput="handleSearch(this.value)" />
-        </div>
-        <div class="content" id="mainContent">
-            <div class="section-header">
-                <div class="section-title">🌍 Select Country</div>
-            </div>
-            <div class="country-filter" id="countryFilter"></div>
-
-            <div class="section-header">
-                <div class="section-title">⭐ Featured DApps <span>Top</span></div>
-                <button class="view-all" onclick="navigateTo('categories')">View all →</button>
-            </div>
-            <div id="featuredContainer"></div>
-
-            <div class="section-header">
-                <div class="section-title">📂 Categories</div>
-            </div>
-            <div class="grid-2" id="categoryGrid"></div>
-        </div>
-    </div>
-
-       <!-- BOTTOM NAV -->
     <div class="bottom-nav">
-        <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="icon">🏠</span> Home</button>
-        <button class="nav-item" data-page="categories" onclick="navigateTo('categories')"><span class="icon">📂</span> Categories</button>
-        <button class="nav-item" data-page="mainnet" onclick="navigateTo('mainnet')"><span class="icon">🔵</span> Mainnet</button>
-        <button class="nav-item" data-page="testnet" onclick="navigateTo('testnet')"><span class="icon">🧪</span> Testnet</button>
-        <button class="nav-item" data-page="admin" onclick="navigateTo('admin')"><span class="icon">🔐</span> Admin</button>
-        <button class="nav-item" data-page="submit" onclick="navigateTo('submit')"><span class="icon">➕</span> Submit</button>
+        <button class="nav-item active" onclick="navigateToHome()"><span class="icon">🏠</span> Home</button>
+        <button class="nav-item" onclick="navigateToCategories()"><span class="icon">📂</span> Categories</button>
+        <button class="nav-item" onclick="navigateToMainnet()"><span class="icon">🔵</span> Mainnet</button>
+        <button class="nav-item" onclick="navigateToTestnet()"><span class="icon">🧪</span> Testnet</button>
+        <button class="nav-item" onclick="navigateToAdmin()"><span class="icon">🔐</span> Admin</button>
+        <button class="nav-item" onclick="navigateToSubmit()"><span class="icon">➕</span> Submit</button>
     </div>
 
     <script>
+        // =============================================
+        // PI AUTHENTICATION
+        // =============================================
+        let piUser = null;
+        let piAccessToken = null;
+
+        console.log('🚀 MSALINA HUB loading...');
+
+        function updateUIForGuest() {
+            const nameEl = document.getElementById('userName');
+            const avatarEl = document.getElementById('userAvatar');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (nameEl) nameEl.textContent = 'Guest';
+            if (avatarEl) avatarEl.textContent = '👤';
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (logoutBtn) logoutBtn.style.display = 'none';
+        }
+
+        async function initPi() {
+            try {
+                console.log('🔵 Pi.init() starting...');
+                if (typeof Pi === 'undefined') {
+                    console.error('❌ Pi SDK not loaded!');
+                    updateUIForGuest();
+                    return;
+                }
+                await Pi.init();
+                console.log('✅ Pi SDK initialized successfully');
+                await autoLogin();
+            } catch (error) {
+                console.error('❌ Pi init error:', error);
+                updateUIForGuest();
+            }
+        }
+
+        async function autoLogin() {
+            try {
+                console.log('🔑 autoLogin() starting...');
+                const auth = await Pi.authenticate(['username']);
+                console.log('✅ Auth successful:', auth);
+                handleAuthSuccess(auth);
+            } catch (error) {
+                console.log('⚠️ Auto login skipped:', error.message);
+                updateUIForGuest();
+            }
+        }
+
+        function handleAuthSuccess(auth) {
+            piUser = auth.user;
+            piAccessToken = auth.accessToken;
+
+            const nameEl = document.getElementById('userName');
+            const avatarEl = document.getElementById('userAvatar');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (nameEl) nameEl.textContent = piUser.username || 'User';
+            if (avatarEl) avatarEl.textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (logoutBtn) logoutBtn.style.display = 'block';
+
+            const backendUrl = 'https://PamojaMart-railway.com';
+            fetch(`${backendUrl}/api/auth/pi`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accessToken: piAccessToken })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Token validation failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('✅ Backend validation successful:', data);
+                alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
+            })
+            .catch(error => {
+                console.error('❌ Backend validation error:', error);
+                alert('⚠️ Login succeeded, but session could not be established.');
+                handleLogout();
+            });
+        }
+
+        function handleLogout() {
+            piUser = null;
+            piAccessToken = null;
+            updateUIForGuest();
+        }
+
+        async function handleLogin() {
+            try {
+                console.log('🔑 handleLogin() called');
+                if (typeof Pi === 'undefined') {
+                    alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
+                    return;
+                }
+                await Pi.init();
+                const auth = await Pi.authenticate(['username']);
+                handleAuthSuccess(auth);
+            } catch (error) {
+                console.error('❌ Login error:', error);
+                alert('Login failed: ' + error.message);
+            }
+        }
+
         // =============================================
         // DATA
         // =============================================
@@ -907,566 +640,6 @@
         }];
 
         let selectedCountry = 'all';
-        let currentPage = 'home';
-        let currentLang = 'sw';
-        let deleteTargetId = null;
-        let adminFilter = 'all';
-        let adminSearchQuery = '';
-
-        // =============================================
-        // PI AUTHENTICATION (PiService Pattern)
-        // =============================================
-        let piUser = null;
-        let piAccessToken = null;
-
-        async function initPi() {
-            try {
-                // Pi.init() inarudisha Promise
-                await Pi.init();
-                console.log('Pi SDK initialized successfully');
-
-                // Jaribu ku-authenticate automatically
-                await autoLogin();
-            } catch (error) {
-                console.error('Pi init error:', error);
-            }
-        }
-
-        async function autoLogin() {
-            try {
-                // Jaribu ku-authenticate automatically
-                const auth = await Pi.authenticate(['username'], {
-                    onIncompletePaymentFound: function(payment) {
-                        console.log('Incomplete payment found:', payment);
-                    }
-                });
-                handleAuthSuccess(auth);
-            } catch (error) {
-                // User not logged in or cancelled
-                console.log('Auto login skipped:', error.message);
-                updateUIForGuest();
-            }
-        }
-
-        async function handleLogin() {
-    try {
-        console.log('🔑 handleLogin() called');
-        // Hakikisha Pi SDK imeanzishwa kwanza
-        if (typeof Pi === 'undefined') {
-            alert('Pi SDK not loaded. Please open this app in Pi Browser.');
-            return;
-        }
-        
-        // Anzisha SDK ikiwa haijaanzishwa
-        await Pi.init();
-        console.log('✅ Pi SDK initialized from login button');
-        
-        const auth = await Pi.authenticate(['username'], {
-            onIncompletePaymentFound: function(payment) {
-                console.log('Incomplete payment found:', payment);
-            }
-        });
-        handleAuthSuccess(auth);
-    } catch (error) {
-        console.error('❌ Login error:', error);
-        alert('Login failed: ' + error.message);
-    }
-}
-
-        function handleAuthSuccess(auth) {
-    piUser = auth.user;
-    piAccessToken = auth.accessToken;
-
-    const nameEl = document.getElementById('userName');
-    const avatarEl = document.getElementById('userAvatar');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    if (nameEl) nameEl.textContent = piUser.username || 'User';
-    if (avatarEl) avatarEl.textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
-    if (loginBtn) loginBtn.style.display = 'none';
-    if (logoutBtn) logoutBtn.style.display = 'block';
-
-    const backendUrl = 'https://PamojaMart-railway.com';
-    fetch(`${backendUrl}/api/auth/pi`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: piAccessToken })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Token validation failed');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('✅ Backend validation successful:', data);
-        alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
-    })
-    .catch(error => {
-        console.error('❌ Backend validation error:', error);
-        alert('⚠️ Login succeeded, but session could not be established.');
-        handleLogout();
-    });
-}
-
-function handleLogout() {
-    piUser = null;
-    piAccessToken = null;
-    updateUIForGuest();
-}
-
-        function updateUIForGuest() {
-            document.getElementById('userName').textContent = 'Guest';
-            document.getElementById('userAvatar').textContent = '👤';
-            document.getElementById('loginBtn').style.display = 'block';
-            document.getElementById('logoutBtn').style.display = 'none';
-        }
-
-        async function validateTokenOnBackend(accessToken) {
-            try {
-                // Simulated backend validation
-                // In production, send to your backend: POST /api/auth/pi
-                const response = await fetch('https://api.minepi.com/v2/me', {
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken
-                    }
-                     });
-                if (response.ok) {
-                    const userData = await response.json();
-                    console.log('Token validated successfully:', userData);
-                } else {
-                    console.warn('Token validation failed');
-                }
-            } catch (error) {
-                console.error('Backend validation error:', error);
-            }
-        }
-
-        // =============================================
-        // TRANSLATIONS
-        // =============================================
-        const LANGUAGES = {
-            sw: {
-                title: '📍 MSALINA HUB',
-                subtitle: 'Discover Pi Browser DApps',
-                search: '🔍 Search DApps...',
-                selectCountry: '🌍 Select Country',
-                featured: '⭐ Featured DApps',
-                categories: '📂 Categories',
-                mainnet: '🔵 Mainnet DApps',
-                testnet: '🧪 Testnet / App Studio',
-                submit: '➕ Submit Your DApp',
-                submitDesc: 'Add your Pi DApp to MSALINA HUB',
-                noDapps: '😔 No DApps found.',
-                noFeatured: 'No featured DApps in this country.',
-                open: 'Open',
-                share: 'Share',
-                back: '← Back',
-                submitBtn: '🚀 Submit DApp',
-                pending: 'Pending Approval',
-                approved: 'Approved',
-                reviewNotice: 'Your submission will be reviewed before publishing.',
-                adminPanel: '🔐 Admin Panel',
-                pendingApps: 'Pending DApps',
-                allApps: 'All DApps',
-                approve: 'Approve',
-                reject: 'Reject',
-                delete: 'Delete',
-                edit: 'Edit',
-                appName: 'DApp Name *',
-                appUrl: 'Pi Browser URL *',
-                country: 'Country *',
-                category: 'Category *',
-                status: 'Status *',
-                logo: 'Logo Emoji (or URL)',
-                description: 'Short Description *',
-                selectCountryLabel: 'Select...',
-                mainnetLabel: 'Mainnet',
-                testnetLabel: 'Testnet',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ Thank you!',
-                submitted: 'has been submitted for review.',
-                notifyApproved: "We'll notify you once approved.",
-                shareText: 'Check out {name} on MSALINA HUB!',
-                results: '📱 Results',
-                resultsFor: '🔍 Results for "{query}"',
-                appNotFound: 'DApp URL not available.',
-                totalDApps: 'Total DApps',
-                mainnetCount: 'Mainnet',
-                testnetCount: 'Testnet',
-                pendingCount: 'Pending',
-                searchAdmin: '🔍 Search DApps...',
-                allFilter: 'All',
-                deleteConfirm: 'Are you sure you want to delete this DApp? This action cannot be undone.',
-                deleteTitle: '🗑️ Delete DApp?',
-                cancel: 'Cancel',
-                confirmDelete: 'Delete',
-                updated: 'Updated',
-                ago: 'ago',
-                verified: '✅ Verified',
-                viewAll: 'View all →'
-            },
-            en: {
-                title: '📍 MSALINA HUB',
-                subtitle: 'Discover Pi Browser DApps',
-                search: '🔍 Search DApps...',
-                selectCountry: '🌍 Select Country',
-                featured: '⭐ Featured DApps',
-                categories: '📂 Categories',
-                mainnet: '🔵 Mainnet DApps',
-                testnet: '🧪 Testnet / App Studio',
-                submit: '➕ Submit Your DApp',
-                submitDesc: 'Add your Pi DApp to MSALINA HUB',
-                noDapps: '😔 No DApps found.',
-                noFeatured: 'No featured DApps in this country.',
-                open: 'Open',
-                share: 'Share',
-                back: '← Back',
-                submitBtn: '🚀 Submit DApp',
-                pending: 'Pending Approval',
-                approved: 'Approved',
-                reviewNotice: 'Your submission will be reviewed before publishing.',
-                adminPanel: '🔐 Admin Panel',
-                pendingApps: 'Pending DApps',
-                allApps: 'All DApps',
-                approve: 'Approve',
-                reject: 'Reject',
-                delete: 'Delete',
-                edit: 'Edit',
-                appName: 'DApp Name *',
-                appUrl: 'Pi Browser URL *',
-                country: 'Country *',
-                category: 'Category *',
-                status: 'Status *',
-                logo: 'Logo Emoji (or URL)',
-                description: 'Short Description *',
-                selectCountryLabel: 'Select...',
-                mainnetLabel: 'Mainnet',
-                testnetLabel: 'Testnet',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ Thank you!',
-                submitted: 'has been submitted for review.',
-                notifyApproved: "We'll notify you once approved.",
-                shareText: 'Check out {name} on MSALINA HUB!',
-                results: '📱 Results',
-                resultsFor: '🔍 Results for "{query}"',
-                appNotFound: 'DApp URL not available.',
-                totalDApps: 'Total DApps',
-                mainnetCount: 'Mainnet',
-                testnetCount: 'Testnet',
-                pendingCount: 'Pending',
-                searchAdmin: '🔍 Search DApps...',
-                allFilter: 'All',
-                deleteConfirm: 'Are you sure you want to delete this DApp? This action cannot be undone.',
-                deleteTitle: '🗑️ Delete DApp?',
-                cancel: 'Cancel',
-                confirmDelete: 'Delete',
-                updated: 'Updated',
-                ago: 'ago',
-                verified: '✅ Verified',
-                viewAll: 'View all →'
-            },
-            fr: {
-                title: '📍 MSALINA HUB',
-                subtitle: 'Découvrez les DApps Pi Browser',
-                search: '🔍 Rechercher...',
-                selectCountry: '🌍 Choisir un pays',
-                featured: '⭐ DApps en vedette',
-                categories: '📂 Catégories',
-                mainnet: '🔵 DApps Mainnet',
-                testnet: '🧪 Testnet / App Studio',
-                submit: '➕ Soumettre votre DApp',
-                submitDesc: 'Ajoutez votre DApp Pi à MSALINA HUB',
-                noDapps: '😔 Aucune DApp trouvée.',
-                noFeatured: 'Aucune DApp en vedette dans ce pays.',
-                open: 'Ouvrir',
-                share: 'Partager',
-                back: '← Retour',
-                submitBtn: '🚀 Soumettre',
-                pending: 'En attente',
-                approved: 'Approuvée',
-                reviewNotice: 'Votre soumission sera examinée avant publication.',
-                adminPanel: '🔐 Panneau Admin',
-                pendingApps: 'DApps en attente',
-                allApps: 'Toutes les DApps',
-                approve: 'Approuver',
-                reject: 'Rejeter',
-                delete: 'Supprimer',
-                edit: 'Modifier',
-                appName: 'Nom de la DApp *',
-                appUrl: 'URL Pi Browser *',
-                country: 'Pays *',
-                category: 'Catégorie *',
-                status: 'Statut *',
-                logo: 'Émoji logo (ou URL)',
-                description: 'Description courte *',
-                selectCountryLabel: 'Choisir...',
-                mainnetLabel: 'Mainnet',
-                testnetLabel: 'Testnet',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ Merci !',
-                submitted: 'a été soumise pour examen.',
-                notifyApproved: 'Nous vous informerons une fois approuvée.',
-                shareText: 'Découvrez {name} sur MSALINA HUB !',
-                results: '📱 Résultats',
-                resultsFor: '🔍 Résultats pour "{query}"',
-                appNotFound: 'URL de la DApp non disponible.',
-                totalDApps: 'Total DApps',
-                mainnetCount: 'Mainnet',
-                testnetCount: 'Testnet',
-                pendingCount: 'En attente',
-                searchAdmin: '🔍 Rechercher...',
-                allFilter: 'Tout',
-                deleteConfirm: 'Êtes-vous sûr de vouloir supprimer cette DApp ? Cette action est irréversible.',
-                deleteTitle: '🗑️ Supprimer ?',
-                cancel: 'Annuler',
-                confirmDelete: 'Supprimer',
-                updated: 'Mis à jour',
-                ago: 'il y a',
-                verified: '✅ Vérifié',
-                viewAll: 'Voir tout →'
-            },
-            hi: {
-                title: '📍 MSALINA HUB',
-                subtitle: 'Pi ब्राउज़र DApps खोजें',
-                search: '🔍 DApps खोजें...',
-                selectCountry: '🌍 देश चुनें',
-                featured: '⭐ विशेष DApps',
-                categories: '📂 श्रेणियाँ',
-                mainnet: '🔵 मुख्य DApps',
-                testnet: '🧪 टेस्टनेट / App Studio',
-                submit: '➕ अपनी DApp जमा करें',
-                submitDesc: 'MSALINA HUB में अपनी Pi DApp जोड़ें',
-                noDapps: '😔 कोई DApp नहीं मिली।',
-                noFeatured: 'इस देश में कोई विशेष DApp नहीं।',
-                open: 'खोलें',
-                share: 'साझा करें',
-                back: '← वापस',
-                submitBtn: '🚀 जमा करें',
-                pending: 'लंबित',
-                approved: 'स्वीकृत',
-                reviewNotice: 'आपका सबमिशन प्रकाशन से पहले समीक्षा किया जाएगा।',
-                adminPanel: '🔐 व्यवस्थापक पैनल',
-                pendingApps: 'लंबित DApps',
-                allApps: 'सभी DApps',
-                approve: 'स्वीकार करें',
-                reject: 'अस्वीकार करें',
-                delete: 'हटाएं',
-                edit: 'संपादित करें',
-                appName: 'DApp नाम *',
-                appUrl: 'Pi ब्राउज़र URL *',
-                country: 'देश *',
-                category: 'श्रेणी *',
-                status: 'स्थिति *',
-                logo: 'लोगो इमोजी (या URL)',
-                description: 'संक्षिप्त विवरण *',
-                selectCountryLabel: 'चुनें...',
-                mainnetLabel: 'मुख्य',
-                testnetLabel: 'टेस्टनेट',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ धन्यवाद!',
-                submitted: 'समीक्षा के लिए जमा किया गया है।',
-                notifyApproved: 'स्वीकृत होने पर हम आपको सूचित करेंगे।',
-                shareText: 'MSALINA HUB पर {name} देखें!',
-                results: '📱 परिणाम',
-                resultsFor: '🔍 "{query}" के लिए परिणाम',
-                appNotFound: 'DApp URL उपलब्ध नहीं है।',
-                totalDApps: 'कुल DApps',
-                mainnetCount: 'मुख्य',
-                testnetCount: 'टेस्टनेट',
-                pendingCount: 'लंबित',
-                searchAdmin: '🔍 DApps खोजें...',
-                allFilter: 'सभी',
-                deleteConfirm: 'क्या आप इस DApp को हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती।',
-                deleteTitle: '🗑️ हटाएं?',
-                cancel: 'रद्द करें',
-                confirmDelete: 'हटाएं',
-                updated: 'अपडेट किया गया',
-                ago: 'पहले',
-                verified: '✅ सत्यापित',
-                viewAll: 'सभी देखें →'
-            },
-            zh: {
-                title: '📍 MSALINA HUB',
-                subtitle: '发现Pi浏览器DApps',
-                search: '🔍 搜索DApps...',
-                selectCountry: '🌍 选择国家',
-                featured: '⭐ 精选DApps',
-                categories: '📂 分类',
-                mainnet: '🔵 主网DApps',
-                testnet: '🧪 测试网 / App Studio',
-                submit: '➕ 提交您的DApp',
-                submitDesc: '将您的Pi DApp添加到MSALINA HUB',
-                noDapps: '😔 未找到DApp。',
-                noFeatured: '该国家没有精选DApp。',
-                open: '打开',
-                share: '分享',
-                back: '← 返回',
-                submitBtn: '🚀 提交',
-                pending: '待审核',
-                approved: '已批准',
-                reviewNotice: '您的提交将在发布前进行审核。',
-                adminPanel: '🔐 管理员面板',
-                pendingApps: '待审核DApps',
-                allApps: '所有DApps',
-                approve: '批准',
-                reject: '拒绝',
-                delete: '删除',
-                edit: '编辑',
-                appName: 'DApp名称 *',
-                appUrl: 'Pi浏览器URL *',
-                country: '国家 *',
-                category: '分类 *',
-                status: '状态 *',
-                logo: '标志表情符号（或URL）',
-                description: '简短描述 *',
-                selectCountryLabel: '选择...',
-                mainnetLabel: '主网',
-                testnetLabel: '测试网',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ 谢谢！',
-                submitted: '已提交审核。',
-                notifyApproved: '批准后我们将通知您。',
-                shareText: '在MSALINA HUB上查看{name}！',
-                results: '📱 结果',
-                resultsFor: '🔍 "{query}"的结果',
-                appNotFound: 'DApp URL不可用。',
-                totalDApps: '总DApps',
-                mainnetCount: '主网',
-                testnetCount: '测试网',
-                pendingCount: '待审核',
-                searchAdmin: '🔍 搜索DApps...',
-                allFilter: '全部',
-                deleteConfirm: '您确定要删除此DApp吗？此操作无法撤销。',
-                deleteTitle: '🗑️ 删除？',
-                cancel: '取消',
-                confirmDelete: '删除',
-                updated: '更新于',
-                ago: '前',
-                verified: '✅ 已验证',
-                viewAll: '查看全部 →'
-            },
-            ar: {
-                title: '📍 MSALINA HUB',
-                subtitle: 'اكتشف تطبيقات Pi Browser',
-                search: '🔍 بحث...',
-                selectCountry: '🌍 اختر الدولة',
-                featured: '⭐ تطبيقات مميزة',
-                categories: '📂 التصنيفات',
-                mainnet: '🔵 تطبيقات Mainnet',
-                testnet: '🧪 Testnet / App Studio',
-                submit: '➕ أرسل تطبيقك',
-                submitDesc: 'أضف تطبيق Pi الخاص بك إلى MSALINA HUB',
-                noDapps: '😔 لا توجد تطبيقات.',
-                noFeatured: 'لا توجد تطبيقات مميزة في هذا البلد.',
-                open: 'فتح',
-                share: 'مشاركة',
-                back: '← رجوع',
-                submitBtn: '🚀 إرسال',
-                pending: 'قيد المراجعة',
-                approved: 'موافق',
-                reviewNotice: 'سيتم مراجعة طلبك قبل النشر.',
-                adminPanel: '🔐 لوحة الإدارة',
-                pendingApps: 'تطبيقات قيد المراجعة',
-                allApps: 'جميع التطبيقات',
-                approve: 'موافقة',
-                reject: 'رفض',
-                delete: 'حذف',
-                edit: 'تعديل',
-                appName: 'اسم التطبيق *',
-                appUrl: 'رابط Pi Browser *',
-                country: 'الدولة *',
-                category: 'التصنيف *',
-                status: 'الحالة *',
-                logo: 'رمز تعبيري (أو رابط)',
-                description: 'وصف مختصر *',
-                selectCountryLabel: 'اختر...',
-                mainnetLabel: 'الشبكة الرئيسية',
-                testnetLabel: 'شبكة الاختبار',
-                appStudioLabel: 'App Studio',
-                thankYou: '✅ شكراً!',
-                submitted: 'تم الإرسال للمراجعة.',
-                notifyApproved: 'سنخطرك عند الموافقة.',
-                shareText: 'اطلع على {name} على MSALINA HUB!',
-                results: '📱 النتائج',
-                resultsFor: '🔍 نتائج لـ "{query}"',
-                appNotFound: 'رابط التطبيق غير متوفر.',
-                totalDApps: 'إجمالي التطبيقات',
-                mainnetCount: 'Mainnet',
-                testnetCount: 'Testnet',
-                pendingCount: 'قيد المراجعة',
-                searchAdmin: '🔍 بحث...',
-                allFilter: 'الكل',
-                deleteConfirm: 'هل أنت متأكد من حذف هذا التطبيق؟ هذا الإجراء لا يمكن التراجع عنه.',
-                deleteTitle: '🗑️ حذف؟',
-                cancel: 'إلغاء',
-                confirmDelete: 'حذف',
-                updated: 'تم التحديث',
-                ago: 'منذ',
-                verified: '✅ تم التحقق',
-                viewAll: 'عرض الكل →'
-            }
-        };
-
-        function t(key) { return LANGUAGES[currentLang]?.[key] || LANGUAGES.sw[key] || key; }
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('#sidebarLangGrid button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            navigateTo(currentPage);
-            closeSidebar();
-        }
-
-        // =============================================
-        // SIDEBAR
-        // =============================================
-        function openSidebar() {
-            document.getElementById('sidebar').classList.add('open');
-            document.getElementById('sidebarOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSidebar() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sidebarOverlay').classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        // =============================================
-        // MODAL
-        // =============================================
-        function openDeleteModal(id) {
-            deleteTargetId = id;
-            document.getElementById('deleteModalMessage').textContent = t('deleteConfirm');
-            document.getElementById('deleteModal').classList.add('show');
-        }
-
-        function closeDeleteModal() {
-            deleteTargetId = null;
-            document.getElementById('deleteModal').classList.remove('show');
-        }
-
-        function confirmDelete() {
-            if (deleteTargetId !== null) {
-                deleteDApp(deleteTargetId);
-                closeDeleteModal();
-            }
-        }
-
-        // =============================================
-        // TIME HELPERS
-        // =============================================
-        function timeAgo(timestamp) {
-            const diff = Math.floor((Date.now() - timestamp) / 1000);
-            if (diff < 60) return '1m';
-            if (diff < 3600) return Math.floor(diff / 60) + 'm';
-            if (diff < 86400) return Math.floor(diff / 3600) + 'h';
-            if (diff < 2592000) return Math.floor(diff / 86400) + 'd';
-            return Math.floor(diff / 2592000) + 'mo';
-        }
 
         // =============================================
         // RENDER FUNCTIONS
@@ -1480,830 +653,6 @@ function handleLogout() {
             document.getElementById('statCountries').textContent = countries || COUNTRIES.length;
         }
 
-        function renderCountries() {
-            const container = document.getElementById('countryFilter');
-            if (!container) return;
-            let html =
-                `<span class="country-chip ${selectedCountry === 'all' ? 'active' : ''}" onclick="selectCountry('all')">🌍 All</span>`;
-            COUNTRIES.forEach(c => {
-                html +=
-                    `<span class="country-chip ${selectedCountry === c.code ? 'active' : ''}" onclick="selectCountry('${c.code}')">${c.name}</span>`;
-            });
-            container.innerHTML = html;
-        }
-
-        function selectCountry(country) {
-            selectedCountry = country;
-            renderCountries();
-            navigateTo(currentPage);
-        }
-
-        function getFilteredDapps(includePending = false) {
-            let filtered = DAPPS;
-            if (selectedCountry !== 'all') {
-                filtered = filtered.filter(d => d.country === selectedCountry);
-            }
-            if (!includePending) {
-                filtered = filtered.filter(d => d.approved === true);
-            }
-            return filtered;
-        }
-
-        function getCategoryEmoji(cat) {
-            const map = {
-                'Finance & Payments': '💰',
-                'Banking': '🏦',
-                'E-Commerce': '🛒',
-                'Transport': '🚗',
-                'Health': '🏥',
-                'Education': '📚',
-                 'Business': '💼',
-                'Real Estate': '🏠',
-                'Food & Restaurants': '🍽️',
-                'Entertainment': '🎮',
-                'Technology': '👨‍💻',
-                'Other': '🌐'
-            };
-            return map[cat] || '📌';
-        }
-
-        function getStatusEmoji(status) {
-            const map = { 'Mainnet': '🔵', 'Testnet': '🧪', 'App Studio': '🧪' };
-            return map[status] || '⚪';
-        }
-
-        function getCountryName(code) {
-            const found = COUNTRIES.find(c => c.code === code);
-            return found ? found.name : code;
-        }
-
-        function buildDappCard(dapp, showAdmin = false) {
-            const statusBadge = dapp.approved ?
-                `<span class="badge">${getStatusEmoji(dapp.status)} ${dapp.status}</span>` :
-                `<span class="pending-badge">⏳ ${t('pending')}</span>`;
-
-            const updatedText = showAdmin && dapp.updated ? `${t('updated')} ${timeAgo(dapp.updated)} ${t('ago')}` : '';
-
-            const verifiedBadge = dapp.verified && dapp.approved ?
-                `<span class="verified-badge">${t('verified')}</span>` :
-                '';
-
-            let adminButtons = '';
-            if (showAdmin) {
-                if (!dapp.approved) {
-                    adminButtons = `
-                        <button class="approve-btn" onclick="event.stopPropagation(); approveDApp(${dapp.id})">${t('approve')}</button>
-                        <button class="reject-btn" onclick="event.stopPropagation(); rejectDApp(${dapp.id})">${t('reject')}</button>
-                    `;
-                }
-                adminButtons += `
-                    <button class="edit-btn" onclick="event.stopPropagation(); editDApp(${dapp.id})">✏️ ${t('edit')}</button>
-                    <button class="delete-btn" onclick="event.stopPropagation(); openDeleteModal(${dapp.id})">🗑️ ${t('delete')}</button>
-                `;
-            }
-
-            const cardClick = dapp.approved && dapp.url ?
-                `onclick="openDApp('${dapp.url}')"` :
-                '';
-
-            return `
-                <div class="dapp-card" ${cardClick}>
-                    <div class="logo">${dapp.logo || '📱'}</div>
-                    <div class="info">
-                        <h4>${dapp.name} ${verifiedBadge}</h4>
-                        <div class="meta">
-                            ${statusBadge}
-                            <span>${dapp.category}</span>
-                            <span>${getCountryName(dapp.country)}</span>
-                        </div>
-                        <div class="desc">${dapp.desc}</div>
-                        ${updatedText ? `<div class="updated">${updatedText}</div>` : ''}
-                    </div>
-                    <div class="actions">
-                        ${dapp.approved && dapp.url ? `<button onclick="event.stopPropagation(); openDApp('${dapp.url}')">${t('open')}</button>` : ''}
-                        <button class="share-btn" onclick="event.stopPropagation(); shareDApp('${dapp.name}','${dapp.url || ''}')">🔗</button>
-                        ${adminButtons}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderDapps(list, showAdmin = false) {
-            const container = document.getElementById('mainContent');
-            if (!container) return;
-            if (!list || !list.length) {
-                container.innerHTML = `<p class="empty-state">${t('noDapps')}</p>`;
-                return;
-            }
-            container.innerHTML = list.map(d => buildDappCard(d, showAdmin)).join('');
-        }
-
-        function renderFeatured() {
-            const container = document.getElementById('featuredContainer');
-            if (!container) return;
-
-            const total = getFilteredDapps(false).length;
-            container.innerHTML = `
-                <div style="text-align:center;padding:30px 0;background:#fff;border-radius:16px;border:2px dashed #ede9fe;">
-                    <div style="font-size:48px;margin-bottom:8px;">🚀</div>
-                    <p style="font-size:16px;font-weight:600;color:#4c1d95;">${total} DApps Available</p>
-                    <p style="font-size:14px;color:#6b657e;margin-top:4px;">${t('featured')} on MSALINA HUB</p>
-                    <button onclick="navigateTo('categories')" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
-                        ${t('viewAll')}
-                    </button>
-                </div>
-            `;
-        }
-
-        function renderCategories() {
-            const container = document.getElementById('categoryGrid');
-            if (!container) return;
-            const filtered = getFilteredDapps(false);
-            const counts = {};
-            filtered.forEach(d => { counts[d.category] = (counts[d.category] || 0) + 1; });
-
-            container.innerHTML = CATEGORIES.map(cat => {
-                const count = counts[cat] || 0;
-                const countClass = count > 0 ? 'count-purple' : 'count-gray';
-                return `
-                    <div class="card" onclick="filterByCategory('${cat}')">
-                        <span class="emoji">${getCategoryEmoji(cat)}</span>
-                        ${cat}
-                        <span style="font-size:12px;display:block;margin-top:4px;" class="${countClass}">${count} ${count === 1 ? 'DApp' : 'DApps'}</span>
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        // =============================================
-        // NAVIGATION (FUPI)
-        // =============================================
-        function navigateTo(page) {
-            currentPage = page;
-            document.querySelectorAll('.nav-item').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.page === page);
-            });
-
-            const root = document.getElementById('appRoot');
-
-            if (page === 'home') {
-                root.innerHTML = `
-                    <div class="hero">
-                        <div class="hero-top"><h1>📍 MSALINA HUB</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                        <div class="stats-bar" id="statsBar">
-                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                        </div>
-                        <input class="search-box" id="searchInput" placeholder="${t('search')}" oninput="handleSearch(this.value)" />
-                    </div>
-                    <div class="content" id="mainContent">
-                        <div class="section-header">
-                            <div class="section-title">${t('selectCountry')}</div>
-                        </div>
-                        <div class="country-filter" id="countryFilter"></div>
-
-                        <div class="section-header">
-                            <div class="section-title">${t('featured')} <span>Top</span></div>
-                            <button class="view-all" onclick="navigateTo('categories')">${t('viewAll')}</button>
-                        </div>
-                        <div id="featuredContainer"></div>
-
-                        <div class="section-header">
-                            <div class="section-title">${t('categories')}</div>
-                        </div>
-                        <div class="grid-2" id="categoryGrid"></div>
-                    </div>
-                `;
-                renderCountries();
-                renderFeatured();
-                renderCategories();
-                updateStats();
-                return;
-            }
-
-            if (page === 'categories') {
-                root.innerHTML = `
-                    <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <div class="hero-top"><h1>📂 ${t('categories')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                        <div class="stats-bar" id="statsBar">
-                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                        </div>
-                    </div>
-                    <div class="content" id="mainContent">
-                        <div class="section-header">
-                            <div class="section-title">${t('selectCountry')}</div>
-                        </div>
-                        <div class="country-filter" id="countryFilter"></div>
-                        <div class="grid-2" id="categoryGrid"></div>
-                    </div>
-                `;
-                renderCountries();
-                renderCategories();
-                updateStats();
-                document.querySelectorAll('#categoryGrid .card').forEach(el => {
-                    el.onclick = function() {
-                        const cat = this.textContent.trim().split('\n')[0].trim();
-                        filterByCategory(cat);
-                    };
-                });
-                return;
-            }
-
-            if (page === 'mainnet') {
-                const filtered = getFilteredDapps(false).filter(d => d.status === 'Mainnet');
-                root.innerHTML = `
-                    <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <div class="hero-top"><h1>🔵 ${t('mainnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                        <div class="stats-bar" id="statsBar">
-                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                        </div>
-                        </div>
-                    <div class="content" id="mainContent">
-                        <div class="section-header">
-                            <div class="section-title">${t('selectCountry')}</div>
-                        </div>
-                        <div class="country-filter" id="countryFilter"></div>
-                        ${filtered.length ? filtered.map(d => buildDappCard(d, false)).join('') : `<p class="empty-state">${t('noDapps')}</p>`}
-                    </div>
-                `;
-                renderCountries();
-                updateStats();
-                return;
-            }
-
-            if (page === 'testnet') {
-                const filtered = getFilteredDapps(false).filter(d => d.status === 'Testnet' || d.status === 'App Studio');
-                root.innerHTML = `
-                    <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <div class="hero-top"><h1>🧪 ${t('testnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                        <div class="stats-bar" id="statsBar">
-                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                        </div>
-                    </div>
-                    <div class="content" id="mainContent">
-                        <div class="section-header">
-                            <div class="section-title">${t('selectCountry')}</div>
-                        </div>
-                        <div class="country-filter" id="countryFilter"></div>
-                        ${filtered.length ? filtered.map(d => buildDappCard(d, false)).join('') : `<p class="empty-state">${t('noDapps')}</p>`}
-                    </div>
-                `;
-                renderCountries();
-                updateStats();
-                return;
-            }
-
-            if (page === 'admin') {
-                let pending = DAPPS.filter(d => !d.approved);
-                let all = DAPPS;
-
-                if (adminSearchQuery.trim()) {
-                    const q = adminSearchQuery.toLowerCase();
-                    pending = pending.filter(d =>
-                        d.name.toLowerCase().includes(q) ||
-                        d.category.toLowerCase().includes(q) ||
-                        d.country.toLowerCase().includes(q) ||
-                        d.status.toLowerCase().includes(q)
-                    );
-                    all = all.filter(d =>
-                        d.name.toLowerCase().includes(q) ||
-                        d.category.toLowerCase().includes(q) ||
-                        d.country.toLowerCase().includes(q) ||
-                        d.status.toLowerCase().includes(q)
-                    );
-                }
-
-                if (adminFilter !== 'all') {
-                    pending = pending.filter(d => d.status === adminFilter || d.category === adminFilter);
-                    all = all.filter(d => d.status === adminFilter || d.category === adminFilter);
-                }
-
-                const total = DAPPS.length;
-                const mainnetCount = DAPPS.filter(d => d.status === 'Mainnet').length;
-                const testnetCount = DAPPS.filter(d => d.status === 'Testnet' || d.status === 'App Studio').length;
-                const pendingCount = DAPPS.filter(d => !d.approved).length;
-
-                root.innerHTML = `
-                    <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <div class="hero-top"><h1>🔐 ${t('adminPanel')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>Manage DApps on MSALINA HUB</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                    </div>
-                    <div class="content" id="mainContent">
-                        <div class="stats-grid">
-                            <div class="stat-card"><div class="number">${total}</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-card"><div class="number">${mainnetCount}</div><div class="label">${t('mainnetCount')}</div></div>
-                            <div class="stat-card"><div class="number">${testnetCount}</div><div class="label">${t('testnetCount')}</div></div>
-                            <div class="stat-card"><div class="number">${pendingCount}</div><div class="label">⏳ ${t('pendingCount')}</div></div>
-                        </div>
-
-                        <div class="filter-buttons">
-                            <button class="filter-btn ${adminFilter === 'all' ? 'active' : ''}" onclick="setAdminFilter('all')">${t('allFilter')}</button>
-                            <button class="filter-btn ${adminFilter === 'Mainnet' ? 'active' : ''}" onclick="setAdminFilter('Mainnet')">🔵 Mainnet</button>
-                            <button class="filter-btn ${adminFilter === 'Testnet' ? 'active' : ''}" onclick="setAdminFilter('Testnet')">🧪 Testnet</button>
-                            <button class="filter-btn ${adminFilter === 'App Studio' ? 'active' : ''}" onclick="setAdminFilter('App Studio')">🧪 App Studio</button>
-                            <button class="filter-btn ${adminFilter === 'Education' ? 'active' : ''}" onclick="setAdminFilter('Education')">📚 Education</button>
-                            <button class="filter-btn ${adminFilter === 'Games' ? 'active' : ''}" onclick="setAdminFilter('Games')">🎮 Games</button>
-                        </div>
-
-                        <div class="admin-search-wrapper">
-                            <input class="admin-search" id="adminSearchInput" placeholder="${t('searchAdmin')}" oninput="setAdminSearch(this.value)" />
-                        </div>
-
-                        <div class="admin-section"><h3>⏳ ${t('pendingApps')} (${pending.length})</h3>
-                            ${pending.length ? pending.map(d => buildDappCard(d, true)).join('') : '<p class="empty-state" style="padding:8px 0;">✅ No pending DApps.</p>'}
-                        </div>
-
-                        <div class="admin-section"><h3>📋 ${t('allApps')} (${all.length})</h3>
-                            ${all.length ? all.map(d => buildDappCard(d, true)).join('') : '<p class="empty-state" style="padding:8px 0;">No DApps found.</p>'}
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-
-            if (page === 'submit') {
-                root.innerHTML = `
-                    <div class="hero" style="border-radius:0 0 28px 28px;">
-                        <div class="hero-top"><h1>➕ ${t('submit')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('submitDesc')}</p>
-                        <div class="user-section" id="userSection">
-                            <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                            <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                            <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                            <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                        </div>
-                        <div class="stats-bar" id="statsBar">
-                            <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                            <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                            <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                        </div>
-                    </div>
-                    <div class="content" id="mainContent">
-                        <form id="submitForm" onsubmit="handleSubmit(event)">
-                            <div class="form-group"><label>${t('appName')}</label><input type="text" id="appName" required placeholder="e.g. Pi Commerce" /></div>
-                            <div class="form-group"><label>${t('appUrl')}</label><input type="url" id="appUrl" required placeholder="https://your-dapp.pi" /></div>
-                            <div class="form-group"><label>${t('country')}</label><select id="appCountry" required><option value="">${t('selectCountryLabel')}</option>${COUNTRIES.map(c => `<option value="${c.code}">${c.name}</option>`).join('')}</select></div>
-                            <div class="form-group"><label>${t('category')}</label><select id="appCategory" required><option value="">${t('selectCountryLabel')}</option>${CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('')}</select></div>
-                            <div class="form-group"><label>${t('status')}</label><select id="appStatus" required><option value="Mainnet">${t('mainnetLabel')}</option><option value="Testnet">${t('testnetLabel')}</option><option value="App Studio">${t('appStudioLabel')}</option></select></div>
-                            <div class="form-group"><label>${t('logo')}</label><input type="text" id="appLogo" placeholder="e.g. 🛒 or https://example.com/logo.png" /></div>
-                            <div class="form-group"><label>${t('description')}</label><textarea id="appDesc" required placeholder="Describe your DApp..."></textarea></div>
-                            <button type="submit" class="submit-btn">${t('submitBtn')}</button>
-                        </form>
-                        <p style="text-align:center;font-size:13px;color:#9a93b0;margin-top:16px;">${t('reviewNotice')}</p>
-                    </div>
-                `;
-                updateStats();
-                return;
-            }
-        }
-
-        // =============================================
-        // ADMIN HELPERS
-        // =============================================
-        function setAdminFilter(filter) {
-            adminFilter = filter;
-            navigateTo('admin');
-        }
-
-        function setAdminSearch(query) {
-            adminSearchQuery = query;
-            navigateTo('admin');
-        }
-
-        // =============================================
-        // ACTIONS
-        // =============================================
-        function openDApp(url) {
-            if (url) window.open(url, '_blank');
-            else alert(t('appNotFound'));
-        }
-
-        function shareDApp(name, url) {
-            const text = t('shareText').replace('{name}', name);
-            if (navigator.share) {
-                navigator.share({ title: name, text: text, url: url }).catch(() => {});
-            } else {
-                alert(`${text}\n${url}`);
-            }
-        }
-
-        function filterByCategory(category) {
-            const filtered = getFilteredDapps(false).filter(d => d.category === category);
-            const root = document.getElementById('appRoot');
-            root.innerHTML = `
-                <div class="hero" style="border-radius:0 0 28px 28px;">
-                    <div class="hero-top"><button class="back-btn" onclick="navigateTo('home')">${t('back')}</button><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                    <h1>📂 ${category}</h1>
-                    <p>${t('subtitle')}</p>
-                    <div class="user-section" id="userSection">
-                        <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                        <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                        <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                        <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                    </div>
-                    <div class="stats-bar" id="statsBar">
-                        <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                        <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                        <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                    </div>
-                </div>
-                <div class="content" id="mainContent"></div>
-            `;
-            renderDapps(filtered, false);
-            updateStats();
-            document.querySelectorAll('.nav-item').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.page === currentPage);
-            });
-        }
-
-        function handleSearch(query) {
-            if (!query.trim()) return;
-            const results = getFilteredDapps(false).filter(d =>
-                d.name.toLowerCase().includes(query.toLowerCase()) ||
-                d.desc.toLowerCase().includes(query.toLowerCase()) ||
-                d.category.toLowerCase().includes(query.toLowerCase())
-            );
-            const root = document.getElementById('appRoot');
-            root.innerHTML = `
-                <div class="hero" style="border-radius:0 0 28px 28px;">
-                    <div class="hero-top"><button class="back-btn" onclick="navigateTo('home')">${t('back')}</button><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                    <h1>${t('resultsFor').replace('{query}', query)}</h1>
-                    <div class="user-section" id="userSection">
-                        <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
-                        <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
-                        <button class="login-btn" id="loginBtn" onclick="handleLogin()" style="${piUser ? 'display:none;' : ''}">🔑 Login</button>
-                        <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" style="${piUser ? '' : 'display:none;'}">Logout</button>
-                    </div>
-                    <div class="stats-bar" id="statsBar">
-                        <div class="stat-item"><div class="number" id="statTotal">0</div><div class="label">${t('totalDApps')}</div></div>
-                        <div class="stat-item"><div class="number" id="statVerified">0</div><div class="label">${t('verified')}</div></div>
-                        <div class="stat-item"><div class="number" id="statCountries">0</div><div class="label">Countries</div></div>
-                    </div>
-                </div>
-                <div class="content" id="mainContent"></div>
-            `;
-            renderDapps(results, false);
-            updateStats();
-        }
-
-        // =============================================
-        // SUBMIT & ADMIN
-        // =============================================
-        function handleSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('appName').value.trim();
-            const url = document.getElementById('appUrl').value.trim();
-            const country = document.getElementById('appCountry').value;
-            const category = document.getElementById('appCategory').value;
-            const status = document.getElementById('appStatus').value;
-            const logo = document.getElementById('appLogo').value.trim() || '📱';
-            const desc = document.getElementById('appDesc').value.trim();
-
-            if (!name || !url || !country || !category || !desc) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            DAPPS.push({
-                id: Date.now(),
-                name,
-                category,
-                status,
-                country,
-                url,
-                logo,
-                desc,
-                featured: false,
-                approved: false,
-                verified: false,
-                updated: Date.now()
-            });
-
-            alert(`${t('thankYou')}\n\n"${name}" ${t('submitted')}\n${t('notifyApproved')}`);
-            document.getElementById('submitForm').reset();
-            navigateTo('home');
-        }
-
-        function approveDApp(id) {
-            const dapp = DAPPS.find(d => d.id === id);
-            if (dapp) {
-                dapp.approved = true;
-                dapp.updated = Date.now();
-                alert(`✅ "${dapp.name}" has been approved!`);
-                navigateTo(currentPage);
-            }
-        }
-
-        function rejectDApp(id) {
-            const dapp = DAPPS.find(d => d.id === id);
-            if (dapp) {
-                dapp.approved = false;
-                alert(`❌ "${dapp.name}" has been rejected.`);
-                navigateTo(currentPage);
-            }
-        }
-
-        function deleteDApp(id) {
-            DAPPS = DAPPS.filter(d => d.id !== id);
-            alert('🗑️ DApp deleted.');
-            navigateTo(currentPage);
-        }
-
-        function editDApp(id) {
-            const dapp = DAPPS.find(d => d.id === id);
-            if (!dapp) return;
-
-            const newName = prompt('Enter new name:', dapp.name);
-            if (newName !== null && newName.trim()) dapp.name = newName.trim();
-
-            const newDesc = prompt('Enter new description:', dapp.desc);
-            if (newDesc !== null && newDesc.trim()) dapp.desc = newDesc.trim();
-
-            const newUrl = prompt('Enter new URL:', dapp.url);
-            if (newUrl !== null && newUrl.trim()) dapp.url = newUrl.trim();
-
-            const newCategory = prompt('Enter new category:', dapp.category);
-            if (newCategory !== null && newCategory.trim()) dapp.category = newCategory.trim();
-
-            const newStatus = prompt('Enter new status (Mainnet/Testnet/App Studio):', dapp.status);
-            if (newStatus !== null && newStatus.trim()) dapp.status = newStatus.trim();
-
-            dapp.updated = Date.now();
-
-            alert(`✅ "${dapp.name}" has been updated!`);
-            navigateTo(currentPage);
-        }
-
-        // =============================================
-        // INIT
-        // =============================================
-        // Anzisha Pi SDK automatically
-        document.addEventListener('DOMContentLoaded', function() {
-            initPi();
-        });
-
-        // Pia endesha mara moja ikiwa DOM tayari imepakiwa
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            initPi();
-        }
-
-        renderCountries();
-        renderFeatured();
-        renderCategories();
-        updateStats();
-    </script>
-</body>
-    <script>
-        // =============================================
-        // PI AUTHENTICATION
-        // =============================================
-        let piUser = null;
-        let piAccessToken = null;
-
-        console.log('🚀 MSALINA HUB loading...');
-
-        // Anzisha Pi SDK mara moja DOM inapopakiwa
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📄 DOM loaded');
-            initPi();
-        });
-
-        // Ikiwa DOM tayari imepakiwa
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            console.log('📄 DOM already ready');
-            initPi();
-        }
-
-        async function initPi() {
-            try {
-                console.log('🔵 Pi.init() starting...');
-                
-                // Hakikisha Pi ipo
-                if (typeof Pi === 'undefined') {
-                    console.error('❌ Pi SDK not loaded!');
-                    updateUIForGuest();
-                    return;
-                }
-
-                await Pi.init();
-                console.log('✅ Pi SDK initialized successfully');
-                await autoLogin();
-            } catch (error) {
-                console.error('❌ Pi init error:', error);
-                updateUIForGuest();
-            }
-        }
-
-        async function autoLogin() {
-            try {
-                console.log('🔑 autoLogin() starting...');
-                const auth = await Pi.authenticate(['username']);
-                console.log('✅ Auth successful:', auth);
-                handleAuthSuccess(auth);
-            } catch (error) {
-                console.log('⚠️ Auto login skipped:', error.message);
-                updateUIForGuest();
-            }
-        }
-
-        function handleAuthSuccess(auth) {
-    piUser = auth.user;
-    piAccessToken = auth.accessToken;
-
-    const nameEl = document.getElementById('userName');
-    const avatarEl = document.getElementById('userAvatar');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    if (nameEl) nameEl.textContent = piUser.username || 'User';
-    if (avatarEl) avatarEl.textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
-    if (loginBtn) loginBtn.style.display = 'none';
-    if (logoutBtn) logoutBtn.style.display = 'block';
-
-    const backendUrl = 'https://PamojaMart-railway.com';
-    fetch(`${backendUrl}/api/auth/pi`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: piAccessToken })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Token validation failed');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('✅ Backend validation successful:', data);
-        alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
-    })
-    .catch(error => {
-        console.error('❌ Backend validation error:', error);
-        alert('⚠️ Login succeeded, but session could not be established.');
-        handleLogout();
-    });
-}
-
-function handleLogout() {
-    piUser = null;
-    piAccessToken = null;
-    updateUIForGuest();
-}
-        function updateUIForGuest() {
-            const nameEl = document.getElementById('userName');
-            const avatarEl = document.getElementById('userAvatar');
-            const loginBtn = document.getElementById('loginBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-
-            if (nameEl) nameEl.textContent = 'Guest';
-            if (avatarEl) avatarEl.textContent = '👤';
-            if (loginBtn) loginBtn.style.display = 'block';
-            if (logoutBtn) logoutBtn.style.display = 'none';
-        }
-
-        // =============================================
-        // DATA (SAMPLE)
-        // =============================================
-        const COUNTRIES = [
-            { code: 'tanzania', name: '🇹🇿 Tanzania' },
-            { code: 'kenya', name: '🇰🇪 Kenya' },
-            { code: 'uganda', name: '🇺🇬 Uganda' },
-            { code: 'congo', name: '🇨🇩 Congo' },
-            { code: 'zambia', name: '🇿🇲 Zambia' },
-            { code: 'malawi', name: '🇲🇼 Malawi' }
-        ];
-
-        const CATEGORIES = [
-            'Finance & Payments', 'Banking', 'E-Commerce', 'Transport',
-            'Health', 'Education', 'Business', 'Real Estate',
-            'Food & Restaurants', 'Entertainment', 'Technology', 'Other'
-        ];
-
-        let DAPPS = [{
-            id: 1,
-            name: 'Pi Commerce Tz',
-            category: 'E-Commerce',
-            status: 'Mainnet',
-            country: 'tanzania',
-            url: 'https://pichainmall.com',
-            logo: '🛒',
-            desc: 'Buy and sell inside the Pi ecosystem.',
-            featured: true,
-            approved: true,
-            verified: true,
-            updated: Date.now()
-        }, {
-            id: 2,
-            name: 'Pi Games KE',
-            category: 'Entertainment',
-            status: 'Testnet',
-            country: 'kenya',
-            url: 'https://pigames.pi',
-            logo: '🎮',
-            desc: 'Play and earn with Pi.',
-            featured: true,
-            approved: true,
-            verified: false,
-            updated: Date.now()
-        }, {
-            id: 3,
-            name: 'PiLearn UG',
-            category: 'Education',
-            status: 'App Studio',
-            country: 'uganda',
-            url: 'https://pilearn.pi',
-            logo: '📚',
-            desc: 'Learn web3 and Pi development.',
-            featured: false,
-            approved: true,
-            verified: false,
-            updated: Date.now()
-        }, {
-            id: 4,
-            name: 'PiPay Tz',
-            category: 'Finance & Payments',
-            status: 'Mainnet',
-            country: 'tanzania',
-            url: 'https://omnipi.app',
-            logo: '💳',
-            desc: 'Send and receive Pi payments easily.',
-            featured: false,
-            approved: true,
-            verified: true,
-            updated: Date.now()
-        }, {
-            id: 5,
-            name: 'PiHealth CD',
-            category: 'Health',
-            status: 'Testnet',
-            country: 'congo',
-            url: 'https://pihealth.pi',
-            logo: '🏥',
-            desc: 'Book appointments and health records.',
-            featured: false,
-            approved: true,
-            verified: false,
-            updated: Date.now()
-        }, {
-            id: 6,
-            name: 'PiBuild ZM',
-            category: 'Technology',
-            status: 'App Studio',
-            country: 'zambia',
-            url: 'https://pibuild.pi',
-            logo: '🛠️',
-            desc: 'Tools for Pi developers.',
-            featured: false,
-            approved: true,
-            verified: false,
-            updated: Date.now()
-        }];
-
-        let selectedCountry = 'all';
-
-        // =============================================
-        // RENDER FUNCTIONS
-        // =============================================
         function renderCountries() {
             const container = document.getElementById('countryFilter');
             if (!container) return;
@@ -2392,7 +741,7 @@ function handleLogout() {
                     <div style="font-size:48px;margin-bottom:8px;">🚀</div>
                     <p style="font-size:16px;font-weight:600;color:#4c1d95;">${total} DApps Available</p>
                     <p style="font-size:14px;color:#6b657e;margin-top:4px;">Featured on MSALINA HUB</p>
-                    <button onclick="document.getElementById('categoryGrid').scrollIntoView({behavior:'smooth'})" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
+                    <button onclick="navigateToCategories()" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
                         View all →
                     </button>
                 </div>
@@ -2438,29 +787,107 @@ function handleLogout() {
         function shareDApp(name, url) {
             if (navigator.share) {
                 navigator.share({ title: name, text: `Check out ${name} on MSALINA HUB!`, url: url }).catch(() => {});
-            } else {
+                    } else {
                 alert(`Share: ${name}\n${url}`);
             }
         }
 
-        // =============================================
-        // UPDATE STATS
-        // =============================================
-        function updateStats() {
-            const total = DAPPS.filter(d => d.approved).length;
-            const verified = DAPPS.filter(d => d.approved && d.verified).length;
-            const countries = new Set(DAPPS.filter(d => d.approved).map(d => d.country)).size;
-            document.getElementById('statTotal').textContent = total;
-            document.getElementById('statVerified').textContent = verified;
-            document.getElementById('statCountries').textContent = countries || COUNTRIES.length;
+        function navigateToHome() {
+            document.querySelectorAll('.nav-item').forEach((btn, i) => {
+                btn.classList.toggle('active', i === 0);
+            });
+            renderFeatured();
+            renderCategories();
+            updateStats();
+            window.scrollTo(0, 0);
+        }
+
+        function navigateToCategories() {
+            document.querySelectorAll('.nav-item').forEach((btn, i) => {
+                btn.classList.toggle('active', i === 1);
+            });
+            const container = document.getElementById('featuredContainer');
+            if (container) {
+                const filtered = getFilteredDapps();
+                container.innerHTML = filtered.map(d => buildDappCard(d)).join('');
+                if (filtered.length === 0) {
+                    container.innerHTML = `<p style="text-align:center;color:#999;padding:20px;">No DApps available.</p>`;
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function navigateToMainnet() {
+            document.querySelectorAll('.nav-item').forEach((btn, i) => {
+                btn.classList.toggle('active', i === 2);
+            });
+            const filtered = getFilteredDapps().filter(d => d.status === 'Mainnet');
+            const container = document.getElementById('featuredContainer');
+            if (container) {
+                container.innerHTML = filtered.map(d => buildDappCard(d)).join('');
+                if (filtered.length === 0) {
+                    container.innerHTML = `<p style="text-align:center;color:#999;padding:20px;">No Mainnet DApps available.</p>`;
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function navigateToTestnet() {
+            document.querySelectorAll('.nav-item').forEach((btn, i) => {
+                btn.classList.toggle('active', i === 3);
+            });
+            const filtered = getFilteredDapps().filter(d => d.status === 'Testnet' || d.status === 'App Studio');
+            const container = document.getElementById('featuredContainer');
+            if (container) {
+                container.innerHTML = filtered.map(d => buildDappCard(d)).join('');
+                if (filtered.length === 0) {
+                    container.innerHTML = `<p style="text-align:center;color:#999;padding:20px;">No Testnet DApps available.</p>`;
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function navigateToAdmin() {
+            alert('🔐 Admin panel coming soon!');
+        }
+
+        function navigateToSubmit() {
+            alert('➕ Submit DApp feature coming soon!');
+        }
+
+        function handleSearch(query) {
+            if (!query.trim()) return;
+            const filtered = getFilteredDapps().filter(d =>
+                d.name.toLowerCase().includes(query.toLowerCase()) ||
+                d.desc.toLowerCase().includes(query.toLowerCase()) ||
+                d.category.toLowerCase().includes(query.toLowerCase())
+            );
+            const container = document.getElementById('featuredContainer');
+            if (container) {
+                container.innerHTML = filtered.map(d => buildDappCard(d)).join('');
+                if (filtered.length === 0) {
+                    container.innerHTML = `<p style="text-align:center;color:#999;padding:20px;">No DApps found for "${query}".</p>`;
+                }
+            }
         }
 
         // =============================================
-        // START APP
+        // INIT
         // =============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM loaded');
+            initPi();
+        });
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            console.log('📄 DOM already ready');
+            initPi();
+        }
+
         renderCountries();
         renderFeatured();
         renderCategories();
         updateStats();
     </script>
+</body>
 </html>
