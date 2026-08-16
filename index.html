@@ -962,28 +962,47 @@
         }
 
         function handleAuthSuccess(auth) {
-            piUser = auth.user;
-            piAccessToken = auth.accessToken;
+    piUser = auth.user;
+    piAccessToken = auth.accessToken;
 
-            // Update UI
-            document.getElementById('userName').textContent = piUser.username || 'User';
-            document.getElementById('userAvatar').textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
-            document.getElementById('loginBtn').style.display = 'none';
-            document.getElementById('logoutBtn').style.display = 'block';
+    const nameEl = document.getElementById('userName');
+    const avatarEl = document.getElementById('userAvatar');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
 
-            // Validate token on backend (simulated for now)
-            validateTokenOnBackend(piAccessToken);
+    if (nameEl) nameEl.textContent = piUser.username || 'User';
+    if (avatarEl) avatarEl.textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'block';
 
-            alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
-            navigateTo(currentPage);
+    const backendUrl = 'https://PamojaMart-railway.com';
+    fetch(`${backendUrl}/api/auth/pi`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: piAccessToken })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Token validation failed');
         }
+        return response.json();
+    })
+    .then(data => {
+        console.log('✅ Backend validation successful:', data);
+        alert('✅ Welcome, ' + (piUser.username || 'User') + '!');
+    })
+    .catch(error => {
+        console.error('❌ Backend validation error:', error);
+        alert('⚠️ Login succeeded, but session could not be established.');
+        handleLogout();
+    });
+}
 
-        function handleLogout() {
-            piUser = null;
-            piAccessToken = null;
-            updateUIForGuest();
-            navigateTo(currentPage);
-        }
+function handleLogout() {
+    piUser = null;
+    piAccessToken = null;
+    updateUIForGuest();
+}
 
         function updateUIForGuest() {
             document.getElementById('userName').textContent = 'Guest';
