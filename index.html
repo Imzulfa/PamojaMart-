@@ -949,17 +949,29 @@
         }
 
         async function handleLogin() {
-            try {
-                const auth = await Pi.authenticate(['username'], {
-                    onIncompletePaymentFound: function(payment) {
-                        console.log('Incomplete payment found:', payment);
-                    }
-                });
-                handleAuthSuccess(auth);
-            } catch (error) {
-                alert('Login failed: ' + error.message);
-            }
+    try {
+        console.log('🔑 handleLogin() called');
+        // Hakikisha Pi SDK imeanzishwa kwanza
+        if (typeof Pi === 'undefined') {
+            alert('Pi SDK not loaded. Please open this app in Pi Browser.');
+            return;
         }
+        
+        // Anzisha SDK ikiwa haijaanzishwa
+        await Pi.init();
+        console.log('✅ Pi SDK initialized from login button');
+        
+        const auth = await Pi.authenticate(['username'], {
+            onIncompletePaymentFound: function(payment) {
+                console.log('Incomplete payment found:', payment);
+            }
+        });
+        handleAuthSuccess(auth);
+    } catch (error) {
+        console.error('❌ Login error:', error);
+        alert('Login failed: ' + error.message);
+    }
+}
 
         function handleAuthSuccess(auth) {
     piUser = auth.user;
