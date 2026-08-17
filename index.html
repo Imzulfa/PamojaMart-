@@ -75,22 +75,27 @@
     <script src="https://sdk.minepi.com/pi-sdk.js">
     </script>
 
-    <script>
-        // =============================================
-        // PI AUTHENTICATION - NJIA RAHISI
-        // =============================================
-        let piUser = null;
-        let piAccessToken = null;
-
-        const statusDiv = document.getElementById('status');
-        const userStatus = document.getElementById('userStatus');
-        const loginBtn = document.getElementById('loginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        function updateStatus(message, type = 'info') {
-            statusDiv.textContent = message;
-            statusDiv.className = type;
+   <script>
+    // Funga Pi SDK kabla ya kuipakia
+    window.Pi = window.Pi || {};
+    window.Pi.ready = false;
+    
+    // Pakia SDK
+    var script = document.createElement('script');
+    script.src = 'https://sdk.minepi.com/pi-sdk.js';
+    script.onload = function() {
+        window.Pi.ready = true;
+        console.log('✅ Pi SDK loaded successfully!');
+        // Anzisha app baada ya SDK kupakiwa
+        if (typeof initApp === 'function') {
+            initApp();
         }
+    };
+    script.onerror = function() {
+        alert('❌ Failed to load Pi SDK. Please check your internet connection.');
+    };
+    document.head.appendChild(script);
+</script> 
 
         function updateUI() {
             if (piUser) {
