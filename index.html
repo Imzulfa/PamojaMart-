@@ -115,32 +115,45 @@
         // INITIALIZE PI SDK
         // =============================================
         async function initPi() {
-            try {
-                updateStatus('🔄 Initializing Pi SDK...', 'info');
-                
-                // Check if Pi SDK is loaded
-                if (typeof Pi === 'undefined') {
-                    updateStatus('❌ Pi SDK not loaded. Please use Pi Browser.', 'error');
-                    console.error('Pi SDK not found!');
-                    return;
-                }
-
-                console.log('✅ Pi SDK found!');
-                updateStatus('✅ Pi SDK loaded! Attempting to connect...', 'info');
-
-                // Initialize Pi
-                await Pi.init();
-                console.log('✅ Pi.init() successful!');
-                updateStatus('✅ Pi SDK initialized! Checking login status...', 'info');
-
-                // Try auto-login
-                await autoLogin();
-
-            } catch (error) {
-                console.error('❌ Init error:', error);
-                updateStatus('❌ Error: ' + error.message, 'error');
-            }
+        async function initPi() {
+    try {
+        updateStatus('🔄 Initializing Pi SDK...', 'info');
+        
+        // Subiri Pi SDK ipakie kwa kuangalia mara kwa mara
+        let attempts = 0;
+        while (typeof Pi === 'undefined' && attempts < 20) {
+            await new Promise(resolve => setTimeout(resolve, 500));
+            attempts++;
+            console.log(`⏳ Waiting for Pi SDK... attempt ${attempts}`);
         }
+        
+        if (typeof Pi === 'undefined') {
+            updateStatus('❌ Pi SDK not loaded after waiting. Please use Pi Browser.', 'error');
+            console.error('Pi SDK not found!');
+            return;
+        }
+
+        console.log('✅ Pi SDK found!', Pi);
+        updateStatus('✅ Pi SDK loaded!', 'info');
+
+        // Initialize Pi with error handling
+        try {
+            await Pi.init();
+            console.log('✅ Pi.init() successful!');
+            updateStatus('✅ Pi SDK initialized!', 'info');
+            
+            // Jaribu auto-login
+            await autoLogin();
+        } catch (initError) {
+            console.error('❌ Pi.init() error:', initError);
+            updateStatus('❌ Pi.init() failed: ' + initError.message, 'error');
+        }
+
+    } catch (error) {
+        console.error('❌ Init error:', error);
+        updateStatus('❌ Error: ' + error.message, 'error');
+    }
+}
 
         // =============================================
         // AUTO LOGIN
@@ -165,42 +178,35 @@
         // HANDLE LOGIN (BUTTON)
         // =============================================
         async function handleLogin() {
-            try {
-                updateStatus('🔄 Logging in...', 'info');
-                
-                if (typeof Pi === 'undefined') {
-                    updateStatus('❌ Pi SDK not loaded. Please use Pi Browser.', 'error');
-                    return;
-                }
-
-                const auth = await Pi.authenticate(['username']);
-                console.log('✅ Login successful!', auth);
-                piUser = auth.user;
-                piAccessToken = auth.accessToken;
-                updateUI();
-                updateStatus('✅ Welcome ' + (piUser.username || 'User') + '!', 'success');
-
-                // Optional: Send token to backend
-                try {
-                    const response = await fetch('https://PamojaMart-railway.com/api/auth/pi', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ accessToken: piAccessToken })
-                    });
-                    if (response.ok) {
-                        const data = await response.json();
-                        console.log('✅ Backend validation:', data);
-                    }
-                } catch (e) {
-                    console.log('ℹ️ Backend not available:', e.message);
-                }
-
-            } catch (error) {
-                console.error('❌ Login error:', error);
-                updateStatus('❌ Login failed: ' + error.message, 'error');
-                updateUI();
-            }
+    try {
+        updateStatus('🔄 Logging in...', 'info');
+        
+        // Hakikisha Pi ipo
+        if (typeof Pi === 'undefined') {
+            updateStatus('❌ Pi SDK not loaded. Please use Pi Browser.', 'error');
+            return;
         }
+        
+        // Hakikisha Pi imeanzishwa
+        try {
+            await Pi.init();
+        } catch (e) {
+            console.log('ℹ️ Pi.init() already called or error:', e.message);
+        }
+        
+        const auth = await Pi.authenticate(['username']);
+        console.log('✅ Login successful!', auth);
+        piUser = auth.user;
+        piAccessToken = auth.accessToken;
+        updateUI();
+        updateStatus('✅ Welcome ' + (piUser.username || 'User') + '!', 'success');
+
+    } catch (error) {
+        console.error('❌ Login error:', error);
+        updateStatus('❌ Login failed: ' + error.message, 'error');
+        updateUI();
+    }
+}
 
         // =============================================
         // HANDLE LOGOUT
