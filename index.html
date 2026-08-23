@@ -969,7 +969,7 @@
                 if (!isInitialized) {
                     const ok = await initPiSDK();
                     if (!ok) {
-                        alert('❌ Failed to initialize Pi SDK. Please refresh.');
+                        console.log('ℹ️ Pi SDK initialization skipped');
                         return;
                     }
                 }
