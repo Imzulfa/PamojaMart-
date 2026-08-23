@@ -958,7 +958,7 @@
             updateUIForUser();
             // Tuma kwa backend (hiari)
             try {
-                fetch('https://PamojaMart-railway.com/api/auth/pi', {
+                `https://pamojamart.onrender.com/api/auth/pi`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ accessToken: piAccessToken })
