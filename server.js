@@ -6,7 +6,6 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Endpoint ya kuthibitisha tokeni
 app.post('/api/auth/pi', async (req, res) => {
   const { accessToken } = req.body;
 
