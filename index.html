@@ -885,52 +885,56 @@
         // PI AUTHENTICATION
         // ============================================================
         async function initPiSDK() {
-            try {
-                console.log('🔵 initPiSDK() starting...');
-                let attempts = 0;
-                while (typeof Pi === 'undefined' && attempts < 30) {
-                    await new Promise(r => setTimeout(r, 500));
-                    attempts++;
-                    console.log(`⏳ Waiting for Pi... attempt ${attempts}`);
-                }
-                if (typeof Pi === 'undefined') {
-                    console.error('❌ Pi SDK not loaded!');
-                    updateUIForGuest();
-                    return false;
-                }
-                console.log('✅ Pi SDK found!');
-                try {
-                    await Pi.init();
-                    isInitialized = true;
-                    console.log('✅ Pi.init() successful!');
-                    return true;
-                } catch (e) {
-                    console.error('❌ Pi.init() error:', e);
-                    return false;
-                }
-            } catch (error) {
-                console.error('❌ Init error:', error);
-                updateUIForGuest();
-                return false;
-            }
+    try {
+        console.log('🔵 initPiSDK() starting...');
+        
+        // Subiri hadi Pi SDK ipatikane
+        let attempts = 0;
+        while (typeof Pi === 'undefined' && attempts < 30) {
+            await new Promise(r => setTimeout(r, 500));
+            attempts++;
+            console.log(`⏳ Waiting for Pi... attempt ${attempts}`);
         }
-
-        async function autoLogin() {
+        
+        if (typeof Pi === 'undefined') {
+            console.error('❌ Pi SDK not loaded!');
+            // Usionyeshe alert, endelea tu
+            updateUIForGuest();
+            return false;
+        }
+        
+        console.log('✅ Pi SDK found!');
+        
+        // Jaribu Pi.init() kwa try-catch
+        try {
+            await Pi.init();
+            isInitialized = true;
+            console.log('✅ Pi.init() successful!');
+            
+            // Jaribu autoLogin
             try {
-                console.log('🔑 autoLogin() starting...');
-                if (!isInitialized) {
-                    const ok = await initPiSDK();
-                    if (!ok) return;
-                }
                 const auth = await Pi.authenticate(['username']);
-                console.log('✅ Auth successful:', auth);
+                console.log('✅ Auto-login successful:', auth);
                 handleAuthSuccess(auth);
-            } catch (error) {
-                console.log('⚠️ Auto login skipped:', error.message);
+            } catch (authError) {
+                console.log('ℹ️ Auto-login skipped:', authError.message);
                 updateUIForGuest();
             }
+            
+            return true;
+        } catch (initError) {
+            console.error('❌ Pi.init() error:', initError);
+            // Usionyeshe alert, endelea tu
+            updateUIForGuest();
+            return false;
         }
-
+        
+    } catch (error) {
+        console.error('❌ Init error:', error);
+        updateUIForGuest();
+        return false;
+    }
+}
         function handleAuthSuccess(auth) {
             piUser = auth.user;
             piAccessToken = auth.accessToken;
