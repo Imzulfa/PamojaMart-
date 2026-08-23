@@ -956,15 +956,20 @@
             piUser = auth.user;
             piAccessToken = auth.accessToken;
             updateUIForUser();
-            // Tuma kwa backend (hiari)
-            try {
-                `https://pamojamart.onrender.com/api/auth/pi`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ accessToken: piAccessToken })
-                }).catch(e => console.log('ℹ️ Backend not available:', e.message));
-            } catch (e) {}
-        }
+            // Tuma kwa backend
+try {
+    const backendUrl = 'https://pamojamart.onrender.com';
+    fetch(`${backendUrl}/api/auth/pi`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: piAccessToken })
+    })
+    .then(response => response.json())
+    .then(data => console.log('✅ Backend validation:', data))
+    .catch(e => console.log('ℹ️ Backend not available:', e.message));
+} catch (e) {
+    console.log('Error:', e.message);
+}
 
         function handleLogout() {
             piUser = null;
@@ -974,37 +979,38 @@
         }
 
         async function handleLogin() {
-            try {
-                console.log('🔑 handleLogin() called');
-                if (typeof Pi === 'undefined') {
-                    alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
-                    return;
-                }
-                if (!isInitialized) {
-                    const ok = await initPiSDK();
-                    if (!ok) {
-                        alert('❌ Failed to initialize Pi SDK. Please refresh.');
-                        return;
-                    }
-                }
-                const auth = await Pi.authenticate(['username']);
-                handleAuthSuccess(auth);
-            } catch (error) {
-                console.error('❌ Login error:', error);
-                alert('Login failed: ' + error.message);
+    try {
+        console.log('🔑 handleLogin() called');
+        if (typeof Pi === 'undefined') {
+            alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
+            return;
+        }
+        if (!isInitialized) {
+            const ok = await initPiSDK();
+            if (!ok) {
+                alert('❌ Failed to initialize Pi SDK. Please refresh.');
+                return;
             }
         }
+        const auth = await Pi.authenticate(['username']);
+        console.log('✅ Auth successful:', auth);
+        handleAuthSuccess(auth);
+    } catch (error) {
+        console.error('❌ Login error:', error);
+        alert('Login failed: ' + error.message);
+    }
+}
 
-        function updateUIForGuest() {
-            const nameEl = document.getElementById('userName');
-            const avatarEl = document.getElementById('userAvatar');
-            const loginBtn = document.getElementById('loginBtn');
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (nameEl) nameEl.textContent = 'Guest';
-            if (avatarEl) avatarEl.textContent = '👤';
-            if (loginBtn) loginBtn.style.display = 'block';
-            if (logoutBtn) logoutBtn.style.display = 'none';
-        }
+function updateUIForGuest() {
+    const nameEl = document.getElementById('userName');
+    const avatarEl = document.getElementById('userAvatar');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (nameEl) nameEl.textContent = 'Guest';
+    if (avatarEl) avatarEl.textContent = '👤';
+    if (loginBtn) loginBtn.style.display = 'block';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+}
 
         function updateUIForUser() {
             const nameEl = document.getElementById('userName');
