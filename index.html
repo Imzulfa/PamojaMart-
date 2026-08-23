@@ -964,27 +964,36 @@
         }
 
         async function handleLogin() {
+    try {
+        console.log('🔑 handleLogin() called');
+        
+        if (typeof Pi === 'undefined') {
+            alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
+            return;
+        }
+        
+        // Hakikisha Pi imeanzishwa
+        if (!isInitialized) {
             try {
-                console.log('🔑 handleLogin() called');
-                if (typeof Pi === 'undefined') {
-                    alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
-                    return;
-                }
-                if (!isInitialized) {
-                    const ok = await initPiSDK();
-                    if (!ok) {
-                        console.log('ℹ️ Pi SDK initialization skipped');
-                        return;
-                    }
-                }
-                const auth = await Pi.authenticate(['username']);
-                console.log('✅ Auth successful:', auth);
-                handleAuthSuccess(auth);
-            } catch (error) {
-                console.error('❌ Login error:', error);
-                alert('Login failed: ' + error.message);
+                await Pi.init();
+                isInitialized = true;
+                console.log('✅ Pi.init() successful from login');
+            } catch (e) {
+                console.error('❌ Pi.init() error:', e);
+                alert('❌ Failed to initialize Pi SDK. Please refresh and try again.');
+                return;
             }
         }
+        
+        const auth = await Pi.authenticate(['username']);
+        console.log('✅ Auth successful:', auth);
+        handleAuthSuccess(auth);
+        
+    } catch (error) {
+        console.error('❌ Login error:', error);
+        alert('Login failed: ' + error.message);
+    }
+}
 
         function updateUIForGuest() {
             const nameEl = document.getElementById('userName');
