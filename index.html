@@ -18,7 +18,6 @@
             padding-bottom: 80px;
             min-height: 100vh;
         }
-
         .hero {
             background: linear-gradient(135deg, #6d28d9, #9333ea);
             color: #fff;
@@ -47,7 +46,6 @@
             font-size: 14px;
             margin-top: 2px;
         }
-
         .user-section {
             display: flex;
             align-items: center;
@@ -97,7 +95,6 @@
             font-weight: 600;
             cursor: pointer;
         }
-
         .stats-bar {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -121,7 +118,6 @@
             opacity: 0.8;
             color: #fff;
         }
-
         .search-box {
             margin-top: 14px;
             width: 100%;
@@ -137,7 +133,6 @@
         .search-box::placeholder {
             color: #a5a0b5;
         }
-
         .sidebar {
             position: fixed;
             top: 0;
@@ -219,7 +214,6 @@
             background: #ede9fe;
             color: #4c1d95;
         }
-
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -233,7 +227,6 @@
         .sidebar-overlay.show {
             display: block;
         }
-
         .content {
             padding: 20px 16px;
             max-width: 600px;
@@ -271,7 +264,6 @@
             align-items: center;
             gap: 4px;
         }
-
         .country-filter {
             display: flex;
             flex-wrap: wrap;
@@ -294,7 +286,6 @@
             color: #fff;
             border-color: #6d28d9;
         }
-
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -329,7 +320,6 @@
             color: #b0a8c0;
             font-weight: 400;
         }
-
         .dapp-card {
             background: #fff;
             border-radius: 16px;
@@ -447,7 +437,6 @@
             background: #f59e0b;
             color: #1e1b2e;
         }
-
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -480,7 +469,6 @@
             color: #6d28d9;
             font-weight: 700;
         }
-
         .back-btn {
             background: none;
             border: none;
@@ -494,14 +482,12 @@
             margin-bottom: 12px;
             padding: 6px 0;
         }
-
         .empty-state {
             text-align: center;
             padding: 20px 0;
             color: #9a93b0;
             font-size: 14px;
         }
-
         .form-group {
             margin-bottom: 18px;
         }
@@ -532,7 +518,6 @@
             resize: vertical;
             min-height: 80px;
         }
-
         .submit-btn {
             background: #6d28d9;
             color: #fff;
@@ -544,7 +529,6 @@
             width: 100%;
             cursor: pointer;
         }
-
         .admin-section {
             background: #fff;
             border-radius: 16px;
@@ -557,7 +541,6 @@
             font-size: 16px;
             margin-bottom: 6px;
         }
-
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -581,7 +564,6 @@
             color: #6b657e;
             margin-top: 2px;
         }
-
         .admin-search-wrapper {
             position: sticky;
             top: 10px;
@@ -599,7 +581,6 @@
             background: #fff;
             color: #1e1b2e;
         }
-
         .filter-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -621,7 +602,6 @@
             background: #ede9fe;
             color: #4c1d95;
         }
-
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -676,7 +656,6 @@
             background: #dc2626;
             color: #fff;
         }
-
         @media (max-width: 480px) {
             .grid-2 {
                 grid-template-columns: 1fr 1fr;
@@ -784,7 +763,7 @@
     </div>
 
     <!-- BOTTOM NAV -->
-  <div class="bottom-nav">
+    <div class="bottom-nav">
         <button class="nav-item active" data-page="home" onclick="navigateTo('home')"><span class="icon">🏠</span> Home</button>
         <button class="nav-item" data-page="categories" onclick="navigateTo('categories')"><span class="icon">📂</span> Categories</button>
         <button class="nav-item" data-page="mainnet" onclick="navigateTo('mainnet')"><span class="icon">🔵</span> Mainnet</button>
@@ -956,20 +935,22 @@
             piUser = auth.user;
             piAccessToken = auth.accessToken;
             updateUIForUser();
+
             // Tuma kwa backend
-try {
-    const backendUrl = 'https://pamojamart.onrender.com';
-    fetch(`${backendUrl}/api/auth/pi`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: piAccessToken })
-    })
-    .then(response => response.json())
-    .then(data => console.log('✅ Backend validation:', data))
-    .catch(e => console.log('ℹ️ Backend not available:', e.message));
-} catch (e) {
-    console.log('Error:', e.message);
-}
+            try {
+                const backendUrl = 'https://pamojamart.onrender.com';
+                fetch(`${backendUrl}/api/auth/pi`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accessToken: piAccessToken })
+                })
+                .then(response => response.json())
+                .then(data => console.log('✅ Backend validation:', data))
+                .catch(e => console.log('ℹ️ Backend not available:', e.message));
+            } catch (e) {
+                console.log('Error:', e.message);
+            }
+        }
 
         function handleLogout() {
             piUser = null;
@@ -979,38 +960,38 @@ try {
         }
 
         async function handleLogin() {
-    try {
-        console.log('🔑 handleLogin() called');
-        if (typeof Pi === 'undefined') {
-            alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
-            return;
-        }
-        if (!isInitialized) {
-            const ok = await initPiSDK();
-            if (!ok) {
-                alert('❌ Failed to initialize Pi SDK. Please refresh.');
-                return;
+            try {
+                console.log('🔑 handleLogin() called');
+                if (typeof Pi === 'undefined') {
+                    alert('❌ Pi SDK not loaded. Please open this app in Pi Browser.');
+                    return;
+                }
+                if (!isInitialized) {
+                    const ok = await initPiSDK();
+                    if (!ok) {
+                        alert('❌ Failed to initialize Pi SDK. Please refresh.');
+                        return;
+                    }
+                }
+                const auth = await Pi.authenticate(['username']);
+                console.log('✅ Auth successful:', auth);
+                handleAuthSuccess(auth);
+            } catch (error) {
+                console.error('❌ Login error:', error);
+                alert('Login failed: ' + error.message);
             }
         }
-        const auth = await Pi.authenticate(['username']);
-        console.log('✅ Auth successful:', auth);
-        handleAuthSuccess(auth);
-    } catch (error) {
-        console.error('❌ Login error:', error);
-        alert('Login failed: ' + error.message);
-    }
-}
 
-function updateUIForGuest() {
-    const nameEl = document.getElementById('userName');
-    const avatarEl = document.getElementById('userAvatar');
-    const loginBtn = document.getElementById('loginBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (nameEl) nameEl.textContent = 'Guest';
-    if (avatarEl) avatarEl.textContent = '👤';
-    if (loginBtn) loginBtn.style.display = 'block';
-    if (logoutBtn) logoutBtn.style.display = 'none';
-}
+        function updateUIForGuest() {
+            const nameEl = document.getElementById('userName');
+            const avatarEl = document.getElementById('userAvatar');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (nameEl) nameEl.textContent = 'Guest';
+            if (avatarEl) avatarEl.textContent = '👤';
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (logoutBtn) logoutBtn.style.display = 'none';
+        }
 
         function updateUIForUser() {
             const nameEl = document.getElementById('userName');
@@ -1028,7 +1009,7 @@ function updateUIForGuest() {
         // TRANSLATIONS
         // ============================================================
         const LANGUAGES = {
-          sw: {
+            sw: {
                 search: '🔍 Search DApps...',
                 selectCountry: '🌍 Select Country',
                 featured: '⭐ Featured DApps',
@@ -1359,7 +1340,7 @@ function updateUIForGuest() {
                 notifyApproved: 'سنخطرك عند الموافقة.',
                 shareText: 'اطلع على {name} على MSALINA HUB!',
                 results: '📱 النتائج',
-              resultsFor: '🔍 نتائج لـ "{query}"',
+                resultsFor: '🔍 نتائج لـ "{query}"',
                 appNotFound: 'رابط التطبيق غير متوفر.',
                 totalDApps: 'إجمالي التطبيقات',
                 mainnetCount: 'Mainnet',
@@ -1571,28 +1552,29 @@ function updateUIForGuest() {
         }
 
         function renderFeatured() {
-    const container = document.getElementById('featuredContainer');
-    if (!container) {
-        console.error('❌ featuredContainer not found!');
-        return;
-    }
+            const container = document.getElementById('featuredContainer');
+            if (!container) return;
 
-    const filtered = getFilteredDapps(false);
-    console.log('📊 Filtered DApps:', filtered.length);
+            const filtered = getFilteredDapps(false);
+            console.log('📊 Filtered DApps:', filtered.length);
 
-    if (filtered.length === 0) {
-        container.innerHTML = `
-            <div style="text-align:center;padding:30px 0;background:#fff;border-radius:16px;border:2px dashed #ede9fe;">
-                <div style="font-size:48px;margin-bottom:8px;">🚀</div>
-                <p style="font-size:16px;font-weight:600;color:#4c1d95;">No DApps Available</p>
-                <p style="font-size:14px;color:#6b657e;margin-top:4px;">Add your first DApp!</p>
-            </div>
-        `;
-        return;
-    }
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align:center;padding:30px 0;background:#fff;border-radius:16px;border:2px dashed #ede9fe;">
+                        <div style="font-size:48px;margin-bottom:8px;">🚀</div>
+                        <p style="font-size:16px;font-weight:600;color:#4c1d95;">No DApps Available</p>
+                        <p style="font-size:14px;color:#6b657e;margin-top:4px;">Add your first DApp!</p>
+                        <button onclick="navigateTo('submit')" style="margin-top:12px;background:#6d28d9;color:#fff;border:none;padding:10px 24px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;">
+                            ➕ Submit DApp
+                        </button>
+                    </div>
+                `;
+                return;
+            }
 
-    container.innerHTML = filtered.map(d => buildDappCard(d, false)).join('');
-}
+            container.innerHTML = filtered.map(d => buildDappCard(d, false)).join('');
+        }
+
         function renderCategories() {
             const container = document.getElementById('categoryGrid');
             if (!container) return;
@@ -1628,7 +1610,7 @@ function updateUIForGuest() {
                 root.innerHTML = `
                     <div class="hero">
                         <div class="hero-top"><h1>📍 MSALINA HUB</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
+                        <p>Discover Pi Browser DApps</p>
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
@@ -1671,7 +1653,7 @@ function updateUIForGuest() {
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
                         <div class="hero-top"><h1>📂 ${t('categories')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
+                        <p>Discover Pi Browser DApps</p>
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
@@ -1709,7 +1691,7 @@ function updateUIForGuest() {
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
                         <div class="hero-top"><h1>🔵 ${t('mainnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
+                        <p>Discover Pi Browser DApps</p>
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
@@ -1735,12 +1717,12 @@ function updateUIForGuest() {
                 return;
             }
 
-                if (page === 'testnet') {
+            if (page === 'testnet') {
                 const filtered = getFilteredDapps(false).filter(d => d.status === 'Testnet' || d.status === 'App Studio');
                 root.innerHTML = `
                     <div class="hero" style="border-radius:0 0 28px 28px;">
                         <div class="hero-top"><h1>🧪 ${t('testnet')}</h1><button class="menu-btn" onclick="openSidebar()">☰</button></div>
-                        <p>${t('subtitle')}</p>
+                        <p>Discover Pi Browser DApps</p>
                         <div class="user-section" id="userSection">
                             <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                             <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
@@ -1878,7 +1860,7 @@ function updateUIForGuest() {
 
         // ============================================================
         // ADMIN HELPERS
-         // ============================================================
+        // ============================================================
         function setAdminFilter(filter) {
             adminFilter = filter;
             navigateTo('admin');
@@ -1913,7 +1895,7 @@ function updateUIForGuest() {
                 <div class="hero" style="border-radius:0 0 28px 28px;">
                     <div class="hero-top"><button class="back-btn" onclick="navigateTo('home')">${t('back')}</button><button class="menu-btn" onclick="openSidebar()">☰</button></div>
                     <h1>📂 ${category}</h1>
-                    <p>${t('subtitle')}</p>
+                    <p>Discover Pi Browser DApps</p>
                     <div class="user-section" id="userSection">
                         <div class="avatar" id="userAvatar">${piUser ? (piUser.username ? piUser.username[0].toUpperCase() : '👤') : '👤'}</div>
                         <span class="user-name" id="userName">${piUser ? (piUser.username || 'User') : 'Guest'}</span>
@@ -2018,7 +2000,7 @@ function updateUIForGuest() {
             if (dapp) {
                 dapp.approved = false;
                 alert(`❌ "${dapp.name}" has been rejected.`);
-              navigateTo(currentPage);
+                navigateTo(currentPage);
             }
         }
 
