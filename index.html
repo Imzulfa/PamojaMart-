@@ -5,188 +5,226 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MSALINA HUB</title>
   <style>
-    /* ... Maandishi yako ya CSS ... */
     body { font-family: system-ui, sans-serif; background: #f5f3ff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     .card { background: white; padding: 2rem; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; }
-    button { background: #6d28d9; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-size: 1rem; font-weight: bold; width: 100%; margin-top: 16px; cursor: pointer; }
-    button:active { transform: scale(0.97); }
-    #status { margin-top: 16px; padding: 10px; border-radius: 12px; background: #f3f4f6; color: #4b5563; }
+    h1 { color: #6d28d9; margin-bottom: 4px; }
+    .sub { color: #6b7280; font-size: 14px; margin-bottom: 20px; }
+    .user-box { background: #f5f3ff; padding: 16px; border-radius: 16px; margin-bottom: 16px; }
+    .user-box .avatar { font-size: 40px; }
+    .user-box .name { font-size: 18px; font-weight: 600; color: #1e1b2e; margin-top: 4px; }
+    .btn { background: #6d28d9; color: white; border: none; padding: 14px; border-radius: 40px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; }
+    .btn:active { transform: scale(0.96); }
+    .btn-logout { background: #e5e1ef; color: #1e1b2e; }
+    #status { margin-top: 16px; padding: 12px; border-radius: 12px; font-size: 14px; min-height: 50px; }
+    .status-info { background: #dbeafe; color: #1e40af; }
+    .status-success { background: #d1fae5; color: #065f46; }
+    .status-error { background: #fee2e2; color: #991b1b; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
 
 <div class="card">
   <h1>📍 MSALINA HUB</h1>
-  <p style="color: #6b7280;">Pi Browser DApp Directory</p>
-  <div id="userDisplay" style="margin: 20px 0; font-size: 1.2rem;">👤 Guest</div>
-  <button id="loginButton">🔑 Login with Pi</button>
-  <button id="logoutButton" style="display: none; background: #9ca3af;">🚪 Logout</button>
-  <div id="status">⏳ Loading Pi SDK...</div>
+  <p class="sub">Pi Browser DApp Directory</p>
+
+  <div class="user-box">
+    <div class="avatar" id="userAvatar">👤</div>
+    <div class="name" id="userName">Guest</div>
+  </div>
+
+  <button class="btn" id="loginBtn" onclick="handleLogin()">🔑 Login with Pi</button>
+  <button class="btn btn-logout hidden" id="logoutBtn" onclick="handleLogout()">🚪 Logout</button>
+
+  <div id="status" class="status-info">⏳ Loading...</div>
 </div>
+
+<!-- Pi SDK -->
+<script src="https://sdk.minepi.com/pi-sdk.js">
+</script>
 
 <script>
   // ============================================================
-  // 1. FUNGA SDK KWA NJIA IMARA
-  // ============================================================
-  function loadPiSDK() {
-    return new Promise((resolve, reject) => {
-      // Ikiwa tayari ipo, endelea
-      if (typeof Pi !== 'undefined') {
-        resolve(Pi);
-        return;
-      }
-
-      // Unda kipengele cha script
-      const script = document.createElement('script');
-      script.src = 'https://sdk.minepi.com/pi-sdk.js';
-      script.async = true;
-
-      // Ikiwa imepakiwa
-      script.onload = () => {
-        // Subiri kidogo ili iwe tayari
-        setTimeout(() => {
-          if (typeof Pi !== 'undefined') {
-            resolve(Pi);
-          } else {
-            reject(new Error('Pi SDK still undefined after load'));
-          }
-        }, 500);
-      };
-
-      // Ikiwa imeshindwa
-      script.onerror = () => {
-        reject(new Error('Failed to load Pi SDK'));
-      };
-
-      document.head.appendChild(script);
-    });
-  }
-
-  // ============================================================
-  // 2. APP
+  // STATE
   // ============================================================
   let piUser = null;
   let piAccessToken = null;
+  let isInitialized = false;
 
   const statusEl = document.getElementById('status');
-  const userDisplay = document.getElementById('userDisplay');
-  const loginBtn = document.getElementById('loginButton');
-  const logoutBtn = document.getElementById('logoutButton');
+  const userNameEl = document.getElementById('userName');
+  const userAvatarEl = document.getElementById('userAvatar');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
 
-  function updateStatus(message, type = 'info') {
-    statusEl.textContent = message;
-    statusEl.style.background = type === 'error' ? '#fee2e2' : '#f3f4f6';
-    statusEl.style.color = type === 'error' ? '#991b1b' : '#4b5563';
+  // ============================================================
+  // UI HELPERS
+  // ============================================================
+  function setStatus(msg, type = 'info') {
+    statusEl.textContent = msg;
+    statusEl.className = 'status-' + type;
   }
 
   function updateUI() {
     if (piUser) {
-      userDisplay.textContent = `👤 ${piUser.username || 'User'}`;
-      loginBtn.style.display = 'none';
-      logoutBtn.style.display = 'block';
-      updateStatus(`✅ Logged in as ${piUser.username}`, 'success');
+      userNameEl.textContent = piUser.username || 'User';
+      userAvatarEl.textContent = piUser.username ? piUser.username[0].toUpperCase() : '👤';
+      loginBtn.classList.add('hidden');
+      logoutBtn.classList.remove('hidden');
+      setStatus('✅ Logged in as ' + (piUser.username || 'User'), 'success');
     } else {
-      userDisplay.textContent = '👤 Guest';
-      loginBtn.style.display = 'block';
-      logoutBtn.style.display = 'none';
-      updateStatus('🔑 Please login to continue', 'info');
+      userNameEl.textContent = 'Guest';
+      userAvatarEl.textContent = '👤';
+      loginBtn.classList.remove('hidden');
+      logoutBtn.classList.add('hidden');
+      setStatus('🔑 Please login to continue', 'info');
     }
   }
 
   // ============================================================
-  // 3. KAZI ZA PI
+  // PI SDK - NJIA RAHISI
   // ============================================================
-  async function initApp() {
+  async function initPiSDK() {
     try {
-      updateStatus('⏳ Loading Pi SDK...', 'info');
-      await loadPiSDK();
-      updateStatus('✅ Pi SDK loaded!', 'info');
+      setStatus('⏳ Initializing Pi SDK...', 'info');
 
-      // Anzisha Pi
-      await Pi.init();
-      updateStatus('✅ Pi SDK initialized!', 'info');
+      // Subiri hadi SDK ipatikane
+      let attempts = 0;
+      while (typeof Pi === 'undefined' && attempts < 30) {
+        await new Promise(r => setTimeout(r, 500));
+        attempts++;
+        console.log(`⏳ Waiting for Pi... attempt ${attempts}`);
+      }
 
-      // Jaribu kuingia kiotomatiki
+      if (typeof Pi === 'undefined') {
+        setStatus('❌ Pi SDK not loaded. Please use Pi Browser.', 'error');
+        return false;
+      }
+
+      console.log('✅ Pi SDK found!');
+
+      // HAKIKISHA Pi.init() INAITWA
       try {
-        const auth = await Pi.authenticate(['username']);
-        piUser = auth.user;
-        piAccessToken = auth.accessToken;
-        updateUI();
-      } catch (error) {
-        updateStatus('🔑 Please click Login button', 'info');
-        updateUI();
+        await Pi.init();
+        console.log('✅ Pi.init() successful!');
+        isInitialized = true;
+        setStatus('✅ Pi SDK initialized!', 'info');
+        return true;
+      } catch (initError) {
+        console.error('❌ Pi.init() error:', initError);
+        setStatus('❌ Pi.init() failed: ' + initError.message, 'error');
+        return false;
       }
 
     } catch (error) {
       console.error('❌ Init error:', error);
-      updateStatus(`❌ ${error.message}`, 'error');
+      setStatus('❌ Error: ' + error.message, 'error');
+      return false;
     }
   }
 
+  // ============================================================
+  // LOGIN / LOGOUT
+  // ============================================================
   async function handleLogin() {
     try {
-      updateStatus('⏳ Logging in...', 'info');
+      setStatus('⏳ Logging in...', 'info');
 
-      // Hakikisha SDK imepakiwa
-      if (typeof Pi === 'undefined') {
-        await loadPiSDK();
+      // Hakikisha SDK imeanzishwa
+      if (!isInitialized) {
+        const ok = await initPiSDK();
+        if (!ok) {
+          setStatus('❌ SDK not ready. Please refresh.', 'error');
+          return;
+        }
       }
 
-      // Hakikisha imeanzishwa
-      try { await Pi.init(); } catch (e) {}
+      // Hakikisha Pi.init() imeitwa
+      if (typeof Pi !== 'undefined' && !isInitialized) {
+        await Pi.init();
+        isInitialized = true;
+      }
 
+      console.log('🔑 Calling Pi.authenticate...');
       const auth = await Pi.authenticate(['username']);
+      console.log('✅ Auth successful!', auth);
+
       piUser = auth.user;
       piAccessToken = auth.accessToken;
       updateUI();
 
-      // (Hiari) Tuma kwa backend
+      // Tuma kwa backend (hiari)
       try {
-        await fetch('https://PamojaMart-railway.com/api/auth/pi', {
+        const res = await fetch('https://PamojaMart-railway.com/api/auth/pi', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ accessToken: piAccessToken })
         });
-      } catch (e) { /* pumzika */ }
+        if (res.ok) console.log('✅ Backend OK');
+      } catch (e) { console.log('ℹ️ Backend not available'); }
 
     } catch (error) {
       console.error('❌ Login error:', error);
-      updateStatus(`❌ Login failed: ${error.message}`, 'error');
+      setStatus('❌ Login failed: ' + error.message, 'error');
     }
   }
 
   function handleLogout() {
     piUser = null;
     piAccessToken = null;
+    isInitialized = false;
     updateUI();
-    updateStatus('🔑 Logged out', 'info');
+    setStatus('🔑 Logged out', 'info');
   }
 
   // ============================================================
-  // 4. ANZA
+  // AUTO-LOGIN
   // ============================================================
-  loginBtn.onclick = handleLogin;
-  logoutBtn.onclick = handleLogout;
-
-  // Anza app mara tu DOM inapopakiwa
-  if (document.readyState === 'complete') {
-    initApp();
-  } else {
-    document.addEventListener('DOMContentLoaded', initApp);
-  }
-
-  // Hifadhi: jaribu tena baada ya sekunde 5
-  setTimeout(() => {
-    if (typeof Pi === 'undefined') {
-      updateStatus('⚠️ Trying to reload SDK...', 'info');
-      loadPiSDK().then(() => {
-        updateStatus('✅ SDK reloaded!', 'info');
-        initApp();
-      }).catch(() => {
-        updateStatus('❌ Failed to reload SDK. Please refresh.', 'error');
-      });
+  async function autoLogin() {
+    try {
+      console.log('🔑 Attempting auto-login...');
+      if (!isInitialized) {
+        const ok = await initPiSDK();
+        if (!ok) return;
+      }
+      const auth = await Pi.authenticate(['username']);
+      piUser = auth.user;
+      piAccessToken = auth.accessToken;
+      updateUI();
+      console.log('✅ Auto-login successful!');
+    } catch (error) {
+      console.log('ℹ️ Auto-login skipped:', error.message);
+      updateUI();
     }
-  }, 5000);
+  }
+
+  // ============================================================
+  // START
+  // ============================================================
+  async function startApp() {
+    setStatus('⏳ Starting app...', 'info');
+    await initPiSDK();
+    await autoLogin();
+  }
+
+  // Anza app
+  if (document.readyState === 'complete') {
+    startApp();
+  } else {
+    document.addEventListener('DOMContentLoaded', startApp);
+  }
+
+  // Fallback: jaribu tena baada ya 3s
+  setTimeout(() => {
+    if (!isInitialized && typeof Pi !== 'undefined') {
+      console.log('🔄 Retrying Pi.init()...');
+      Pi.init().then(() => {
+        isInitialized = true;
+        setStatus('✅ Pi SDK initialized!', 'info');
+        autoLogin();
+      }).catch(e => console.error('Retry failed:', e));
+    }
+  }, 3000);
 </script>
 
 </body>
